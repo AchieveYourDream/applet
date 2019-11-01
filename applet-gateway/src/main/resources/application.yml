@@ -1,0 +1,60 @@
+server:
+  port: 9527
+#swagger:
+#  enable: true
+spring:
+  application:
+    name: applet-gateway
+  autoconfigure.exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      url: jdbc:mysql://172.16.77.26:3306/applet?useUnicode=true&characterEncoding=utf-8
+      username: root
+      password: 123456
+  security:
+   basic:
+     enabled: false
+   user:
+     name: wb
+     password: 123456
+  cloud:
+      gateway:
+        discovery:
+          locator:
+            enabled: false
+            lowerCaseServiceId: true
+#        routes:
+#        - id: applet-goods
+#          uri: lb://applet-goods
+#          predicates:
+#            - Path=/api/*
+#          filters:
+#            - SwaggerHeaderFilter
+#        - id: applet-goods2
+#          uri: lb://applet-goods
+#          predicates:
+#            - Path=/apo/wangb
+#          filters:
+#            - IgnoreTestGlobalFilter  #在本路由启用跳过全局过滤器
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:7001/eureka/
+  instance:
+  #注册名称
+    instance-id: applet-gateway
+  #注册显示ip
+    prefer-ip-address: true
+info:
+ app.name: applet-gateway
+ company.name: wangbin
+
+jwt:
+  secret: JWT_SECRET
+  expiration: 86400
+#logging:
+#  level:
+#    root : info
+
+
