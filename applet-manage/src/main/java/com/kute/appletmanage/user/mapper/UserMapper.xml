@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.user.dao.UserMapper">
+
+    <!-- 获取用户列表 -->
+    <select id="getUserList" resultType="com.kute.appletcore.vo.SysUserVO">
+        select su.user_id
+              ,su.username
+              ,su.password
+              ,su.lastname
+              ,su.email
+              ,su.mobilephone
+              ,su.description
+              ,su.skin
+              ,su.user_type
+              ,case when su.user_status ='Y' then '有效' else '无效' end as user_status
+              ,to_char(su.start_date, 'yyyy-mm-dd') start_date
+              ,to_char(su.end_date, 'yyyy-mm-dd') end_date
+              ,to_char(su.password_change_date, 'yyyy-mm-dd hh24:mi:ss') password_change_date
+              ,su.default_role_id
+              ,to_char(su.create_date, 'yyyy-mm-dd hh24:mi:ss') create_date
+              ,to_char(su.last_update_date, 'yyyy-mm-dd hh24:mi:ss') last_update_date
+              ,su.attribute1
+              ,su.attribute2
+              ,su.attribute3
+              ,su.attribute4
+              ,su.attribute5
+              ,su.attribute6
+              ,su.attribute7
+              ,su.attribute8
+              ,su.attribute9
+              ,su.attribute10
+              ,ddi1.item_name user_type_dis
+              ,ddi2.item_name user_status_dis
+              ,ddi3.item_name skin_dis
+              ,sr.role_name default_role_name
+          from sys_user su
+            LEFT JOIN sys_data_dict_item ddi1
+                ON (
+                    ddi1.type_code = 'user_type'
+                    AND su.user_type = ddi1.item_code
+                )
+            LEFT JOIN sys_data_dict_item ddi2
+                ON (
+                    ddi2.type_code = 'user_status'
+                    AND su.user_status = ddi2.item_code
+                )
+            LEFT JOIN sys_data_dict_item ddi3
+                ON (
+                    ddi3.type_code = 'skin'
+                    AND su.skin = ddi3.item_code
+                )
+            LEFT JOIN sys_role sr
+                ON (
+                    su.default_role_id = sr.role_id
+                )
+         order by su.username
+    </select>
+
+    <!-- 根据用户名获取用户信息 -->
+    <select id="getUserInfoByUserName" parameterType="string" resultType="com.kute.appletcore.entity.SysUser">
+        select user_id
+              ,username
+              ,password
+              ,lastname
+              ,email
+              ,mobilephone
+              ,skin
+              ,user_type
+              ,user_status
+              ,to_char(start_date,'yyyy-mm-dd') start_date
+              ,to_char(end_date,'yyyy-mm-dd') end_date
+              ,to_char(password_change_date,'yyyy-mm-dd hh24:mi:ss') password_change_date
+              ,to_char(create_date,'yyyy-mm-dd hh24:mi:ss') create_date
+              ,to_char(last_update_date,'yyyy-mm-dd hh24:mi:ss') last_update_date
+              ,attribute1
+              ,attribute2
+              ,attribute3
+              ,attribute4
+              ,attribute5
+              ,attribute6
+              ,attribute7
+              ,attribute8
+              ,attribute9
+              ,attribute10
+          from sys_user
+         where 1 = 1
+           and username = #{username}
+    </select>
+
+    <!-- 获取用户角色列表 -->
+    <select id="getUserRoleList" parameterType="string" resultType="com.kute.appletcore.vo.SysUserRoleVO">
+        select sur.user_id,
+               sur.role_id,
+               sr.role_name,
+               sr.description
+          from sys_user_role sur, sys_role sr
+        where 1 = 1
+          and sur.user_id = #{user_id}
+          and sur.role_id = sr.role_id
+        order by sr.role_name
+    </select>
+
+
+    <delete id="deleteByUserId" parameterType="string">
+	    delete from sys_user_role
+	    where user_id = #{user_id}
+  </delete>
+</mapper>

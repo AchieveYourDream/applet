@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.lov.dao.LovMapper">
+
+    <!-- 获取值列表定义列表 -->
+    <select id="getLovDefineList" resultType="com.kute.appletcore.entity.SysLovDefine">
+        select lov_code
+              ,lov_name
+              ,view_name
+              ,dynamic_condition
+              ,description
+          from sys_lov_define
+         order by lov_code
+    </select>
+
+    <!-- 获取值列表视图列表 -->
+    <select id="getLovViewList" parameterType="string" resultType="string">
+         select view_name  from user_views v
+    where  v.VIEW_NAME like 'LOV%'
+    order by view_name
+    </select>
+
+    <!-- 获取值列表视图字段列表 -->
+    <select id="getLovViewColumnList" parameterType="string" resultType="hashmap">  
+        select * from ${viewName}
+    </select>
+
+    <!-- 获取值列表字段列表 -->
+    <select id="getLovColumnList" parameterType="map" resultType="com.kute.appletcore.entity.SysLovColumn">
+        select lov_code,column_name,column_title,display_flag,return_value_flag,return_text_flag from sys_lov_column
+         where 1=1
+          and lov_code = #{lovCode}
+    </select>
+
+    <!-- 删除当前值列表的字段列表 -->
+    <delete id="removeLovColumnList" parameterType="string">
+        delete
+          from sys_lov_column
+         where lov_code = #{lovCode}
+    </delete>
+
+    <!-- 获取值列表视图字段列表 -->
+    <select id="getLovViewColumnListBigData" parameterType="map" resultType="hashmap">
+        select t2.* from (
+        select rownum as m,t.* from (
+        select * from ${viewName}
+        where 1=1
+        <if test="search != null and search !=''">
+            ${search}
+        </if>
+        <if test="appSearch != null and appSearch !=''">
+            ${appSearch}
+        </if>
+        )t where rownum &lt;= ${limit}
+        )t2 where m&gt;${offset}
+
+    </select>
+
+    <!-- 获取值列表视图字段列表数量 -->
+    <select id="getLovViewColumnCount" parameterType="map" resultType="int">
+        select count(*) from ${viewName} where 1=1
+        <if test="search != null and search !=''">
+            ${search}
+        </if>
+        <if test="appSearch != null and appSearch !=''">
+            ${appSearch}
+        </if>
+    </select>
+</mapper>

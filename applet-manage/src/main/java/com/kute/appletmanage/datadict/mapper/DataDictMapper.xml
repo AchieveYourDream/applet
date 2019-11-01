@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.datadict.dao.DataDictMapper">
+
+    <!-- 获取数据字典类型列表 -->
+    <select id="getDataDictTypeList" resultType="com.kute.appletcore.entity.SysDataDictType">
+        select type_code
+              ,type_name
+              ,description
+          from sys_data_dict_type
+         order by type_code
+    </select>
+
+    <!-- 获取数据字典项列表 -->
+    <select id="getDataDictItemList" parameterType="string" resultType="com.kute.appletcore.entity.SysDataDictItem">
+        select item_code
+              ,type_code
+              ,item_name
+              ,display_order
+              ,enabled_flag
+          from sys_data_dict_item
+         where type_code = #{typeCode}
+         and enabled_flag = 'Y'
+         order by display_order, item_code
+    </select>
+
+
+    <!-- 删除当前数据字典类型的扩展属性列表 -->
+    <delete id="removeDataDictTypeAttributeList" parameterType="string">
+    	delete
+    	  from sys_data_dict_type_attribute
+    	 where type_code = #{typeCode}
+    </delete>
+
+    <!-- 删除当前数据字典类型的数据字典项列表 -->
+    <delete id="removeDataDictItemList" parameterType="string">
+    	delete
+    	  from sys_data_dict_item
+    	 where type_code = #{typeCode}
+    </delete>
+
+    <!-- 删除当前数据字典类型的数据字典项扩展属性列表 -->
+    <delete id="removeDataDictItemAttributeListByTypeCode" parameterType="string">
+    	delete
+    	  from sys_data_dict_item_attribute
+    	 where type_code = #{typeCode}
+    </delete>
+
+    <!-- 删除当前数据字典项的扩展属性列表 -->
+    <delete id="removeDataDictItemAttributeListByItemCode" parameterType="map">
+    	delete
+    	  from sys_data_dict_item_attribute
+    	 where type_code = #{typeCode}
+    	   and item_code = #{itemCode}
+    </delete>
+
+    <!-- 获取单个数据字典列表 -->
+    <select id="getSingleDataDictItemList" parameterType="map" resultType="com.kute.appletcore.entity.SysDataDictItem">
+        select item_code
+        ,type_code
+        ,item_name
+        ,display_order
+        ,enabled_flag
+        from sys_data_dict_item
+        where type_code in (${typeCode})
+
+        <if test="enabledFlag != null and enabledFlag != ''">
+            and enabled_flag = #{enabledFlag}
+        </if>
+
+        order by display_order, item_code
+    </select>
+
+</mapper>

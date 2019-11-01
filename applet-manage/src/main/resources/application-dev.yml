@@ -1,0 +1,44 @@
+server:
+  port: 8082
+swagger:
+  enable: true
+mybatis:
+  mapper-locations: classpath*:com/kute/**/mapper/*Mapper.xml
+  configuration:
+      map-underscore-to-camel-case: true
+spring:
+  application:
+    name: applet-manage
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://172.16.77.26:3306/applet?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+  security:
+   basic:
+      enabled: false
+   user:
+     name: wb
+     password: 123456
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:7001/eureka/
+  instance:
+  #注册名称
+    instance-id: applet-manage
+  #注册显示ip
+    prefer-ip-address: true
+info:
+ app.name: applet-manage
+ company.name: wangbin
+jwt:
+  secret: JWT_SECRET
+  expiration: 86400
+logging:
+  config: classpath:logback/logback-config.xml
+
+key:
+  public: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDZC+pRMifr6We5jAzS6zfs4LFG7EAtQvTkxm+ePe20HCTs4a85B4V7kAuZgTH4vGyXhQ8aESbTJQNeqOuV8cSrUsr2qzVJweoo+GPIGkuoV9lSNF4J8MaNGJEcSwxxIfxgenaFNuXZn0JtpxbD3fVPBkPIEQPnWOf7A1uQmIux4QIDAQAB
+  private: MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBANkL6lEyJ+vpZ7mMDNLrN+zgsUbsQC1C9OTGb5497bQcJOzhrzkHhXuQC5mBMfi8bJeFDxoRJtMlA16o65XxxKtSyvarNUnB6ij4Y8gaS6hX2VI0Xgnwxo0YkRxLDHEh/GB6doU25dmfQm2nFsPd9U8GQ8gRA+dY5/sDW5CYi7HhAgMBAAECgYAvUbm0Ggs6E5jZiv8AvOdkbVg47ijPtVlOxzRue3HnYntqaYmaFVm0pqLgxJnwcKP8JLY2KKceQWOKr6ks95i4mjCfIjwdZ+0UcszJRvCne3udDSLfAWr6NpX2fps+sVB9x8s9Tn+SUHbVJNoe9Wibs1k6Zc10PJ3Z0HHhd2AXAQJBAP5BDv83snP9X3VvJQyug12LAPBrTNJ4mPnxbJB1PU/La5Q8H3zp9eXCPyGF49hZUaaQfL+Yu+OBE4quwqx57VUCQQDaiXOEg8LOdCmMri907N49C6f4jeYJMsw+cQLIUeAsghoEvZpM0SkZX2aAId0p4aG15qY2Cz2gFDoQZxu7TpJdAkBcleJZK7YPKM/vGpcaRB5QHQMtiVVDO2kxcym+fQLjoMa/BxnMSgIiNZb5pSDwMq5aAjl7J6ob0XAFS1hWqFu1AkEA0yd6KXESWl8dAmQPUJ/KABvyGZQpz3t4o2CYequ5ueefcjMtEsoKNwzZwjZ2NpBfqp2IvbFQwwqoK88kmW/KtQJBAKM37esb40Tx5i21L4EUO2nQs7h+caYp1LAL3QrrtJJM/xBC3tATZLIoqqPwywJ18Atu8CF7A6ZKjMCTztjdkYc=

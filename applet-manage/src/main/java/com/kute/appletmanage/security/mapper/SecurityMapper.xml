@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.security.dao.SecurityMapper">
+    <select id="getAccordionMenuList" resultType="com.kute.appletcore.util.tree.TreeNodeVO">
+         select dsn.node_code ,
+ 		dsn.node_name ,
+ 		dsn.parent_node_code,
+ 		dsna.attribute_value as  node_url,
+ 		dsna2.attribute_value as node_icon,
+ 		(select
+ 		CASE when count(*)=0 then 'Y'
+ 		else 'N' end
+ 		from sys_data_struct_node subdsn
+ 		where subdsn.struct_code = dsn.struct_code
+ 		and subdsn.parent_node_code = dsn.node_code) as is_leaf_node
+ 		from sys_data_struct_node dsn
+ 		left join    sys_data_struct_define dsd  on  dsn.struct_code = dsd.struct_code
+
+ 		left join    sys_data_struct_node_attribute dsna
+ 		on  dsna.struct_code = dsn.struct_code
+ 		and dsna.node_code = dsn.node_code
+ 		and dsna.attribute_code = 'page_url'
+
+ 	    left join    sys_data_struct_node_attribute dsna2
+ 		on  dsna2.struct_code = dsn.struct_code
+ 		and dsna2.node_code = dsn.node_code
+ 		and dsna2.attribute_code = 'font_icon_code'
+ 		where  dsn.struct_code ='menu_resource'
+
+ 		and exists (select 1
+ 		from sys_role_menu_relation srms
+ 		where srms.role_id in
+ 		(select sru.role_id
+ 		from sys_role_user sru
+ 		where sru.user_name = #{username})
+ 		and srms.menu_code = dsn.node_code)
+ 		order by dsn.node_code, dsn.display_order
+
+    </select>
+
+
+
+</mapper>

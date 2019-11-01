@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.parameter.dao.ParameterMapper">
+
+    <!-- 获取参数类型列表 -->
+    <select id="getParameterTypeList" resultType="com.kute.appletcore.entity.SysParameterType">
+        select type_code
+              ,type_name
+              ,description
+         from sys_parameter_type
+    </select>
+
+    <!-- 删除当前参数类型的参数定义列表 -->
+    <delete id="removeParameterDefineList" parameterType="string">
+        delete
+          from sys_parameter_define
+         where parameter_type = #{typeCode}
+    </delete>
+
+    <!-- 删除当前参数类型的参数配置列表 -->
+    <delete id="removeParameterConfigList" parameterType="string">
+        delete
+          from sys_parameter_config
+          where parameter_code in
+        (select parameter_code from sys_parameter_define where parameter_type = #{typeCode})
+    </delete>
+
+    <!-- 获取参数定义列表 -->
+    <select id="getParameterDefineList" parameterType="string" resultType="com.kute.appletcore.vo.SysParameterDefineVO">
+        select
+            pd.parameter_code,
+            pd.parameter_type,
+            pd.parameter_name,
+            pd.element_type,
+            pd.ddt_code,
+            pd.lov_code,
+            pd.ds_code,
+            pd.display_order,
+            pd.description,
+            ddi.item_name element_type_name,
+            ddt.type_name ddt_text,
+            sld.lov_name lov_text,
+            dsd.struct_name ds_text
+          from
+            sys_parameter_define pd
+            left join sys_data_dict_item ddi
+                on (
+                ddi.type_code = 'element_type'
+                and ddi.item_code = pd.element_type
+                )
+            left join sys_data_dict_type ddt
+                on (pd.ddt_code = ddt.type_code)
+            left join sys_lov_define sld
+                on (pd.lov_code = sld.lov_code)
+            left join sys_data_struct_define dsd
+                on (pd.ds_code = dsd.struct_code)
+         where pd.parameter_type = #{typeCode}
+         order by pd.display_order
+    </select>
+
+    <!-- 获取参数定义信息 -->
+    <select id="getParameterDefineInfo" parameterType="string" resultType="com.kute.appletcore.vo.SysParameterDefineVO">
+        select
+            pd.parameter_code,
+            pd.parameter_type,
+            pd.parameter_name,
+            pd.element_type,
+            pd.ddt_code,
+            pd.lov_code,
+            pd.ds_code,
+            pd.display_order,
+            pd.description,
+            ddi.item_name element_type_name,
+            ddt.type_name ddt_text,
+            sld.lov_name lov_text,
+            dsd.struct_name ds_text
+          from
+            sys_parameter_define pd
+            left join sys_data_dict_item ddi
+                on (
+                    ddi.type_code = 'element_type'
+                    and ddi.item_code = pd.element_type
+                )
+            left join sys_data_dict_type ddt
+                on (pd.ddt_code = ddt.type_code)
+            left join sys_lov_define sld
+                on (pd.lov_code = sld.lov_code)
+            left join sys_data_struct_define dsd
+                on (pd.ds_code = dsd.struct_code)
+        where pd.parameter_code = #{parameterCode}
+    </select>
+
+    <!-- 获取参数配置列表 -->
+    <select id="getParameterConfigList" parameterType="string" resultType="com.kute.appletcore.vo.SysParameterDefineVO">
+        select
+            pd.parameter_code,
+            pd.parameter_type,
+            pd.parameter_name,
+            pd.element_type,
+            pd.ddt_code,
+            pd.lov_code,
+            pd.ds_code,
+            pd.display_order,
+            pd.description,
+            ddi.item_name element_type_name,
+            ddt.type_name ddt_text,
+            sld.lov_name lov_text,
+            dsd.struct_name ds_text,
+            pc.parameter_value
+          from
+            sys_parameter_define pd
+            left join sys_parameter_config pc
+                on (pd.parameter_code = pc.parameter_code)
+            left join sys_data_dict_item ddi
+                on (
+                    ddi.type_code = 'element_type'
+                    and ddi.item_code = pd.element_type
+                )
+            left join sys_data_dict_type ddt
+                on (pd.ddt_code = ddt.type_code)
+            left join sys_lov_define sld
+                on (pd.lov_code = sld.lov_code)
+            left join sys_data_struct_define dsd
+                on (pd.ds_code = dsd.struct_code)
+         where pd.parameter_type = #{typeCode}
+         order by pd.display_order
+    </select>
+
+</mapper>
