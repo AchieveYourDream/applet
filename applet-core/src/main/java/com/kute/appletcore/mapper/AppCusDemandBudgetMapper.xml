@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppCusDemandBudgetMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppCusDemandBudget" >
+    <id column="BUDGET_ID" property="budgetId" jdbcType="VARCHAR" />
+    <result column="CATEID" property="cateid" jdbcType="VARCHAR" />
+    <result column="CATENAME" property="catename" jdbcType="VARCHAR" />
+    <result column="NUMBERS" property="numbers" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="VARCHAR" />
+    <result column="DEMAND_ID" property="demandId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_CUS_DEMAND_BUDGET
+    where BUDGET_ID = #{budgetId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppCusDemandBudget" >
+    insert into APP_CUS_DEMAND_BUDGET (BUDGET_ID, CATEID, CATENAME, 
+      NUMBERS, PRICE, DEMAND_ID, 
+      CREATE_TIME, UPDATE_TIME)
+    values (#{budgetId,jdbcType=VARCHAR}, #{cateid,jdbcType=VARCHAR}, #{catename,jdbcType=VARCHAR}, 
+      #{numbers,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{demandId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppCusDemandBudget" >
+    update APP_CUS_DEMAND_BUDGET
+    set CATEID = #{cateid,jdbcType=VARCHAR},
+      CATENAME = #{catename,jdbcType=VARCHAR},
+      NUMBERS = #{numbers,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=VARCHAR},
+      DEMAND_ID = #{demandId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP}
+    where BUDGET_ID = #{budgetId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select BUDGET_ID, CATEID, CATENAME, NUMBERS, PRICE, DEMAND_ID, CREATE_TIME, UPDATE_TIME
+    from APP_CUS_DEMAND_BUDGET
+    where BUDGET_ID = #{budgetId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select BUDGET_ID, CATEID, CATENAME, NUMBERS, PRICE, DEMAND_ID, CREATE_TIME, UPDATE_TIME
+    from APP_CUS_DEMAND_BUDGET
+  </select>
+</mapper>

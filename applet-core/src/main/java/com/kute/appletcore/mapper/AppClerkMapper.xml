@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppClerkMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppClerk" >
+    <id column="STORE_CODE" property="storeCode" jdbcType="VARCHAR" />
+    <id column="CLERK_ID" property="clerkId" jdbcType="VARCHAR" />
+    <result column="CLERK_NAME" property="clerkName" jdbcType="VARCHAR" />
+    <result column="CLERK_TEL" property="clerkTel" jdbcType="VARCHAR" />
+    <result column="CLERK_SEX" property="clerkSex" jdbcType="VARCHAR" />
+    <result column="CLERK_CITY" property="clerkCity" jdbcType="VARCHAR" />
+    <result column="CLERK_IMAGE" property="clerkImage" jdbcType="VARCHAR" />
+    <result column="INSTRUCTION" property="instruction" jdbcType="VARCHAR" />
+    <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR" />
+    <result column="IS_DIMISSION" property="isDimission" jdbcType="VARCHAR" />
+    <result column="WX_NUMBER" property="wxNumber" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="ATTRIBUTE1" property="attribute1" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE2" property="attribute2" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE3" property="attribute3" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE4" property="attribute4" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE5" property="attribute5" jdbcType="VARCHAR" />
+    <result column="DIMISSION_DATE" property="dimissionDate" jdbcType="TIMESTAMP" />
+    <result column="STORE_NAME" property="storeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from APP_CLERK
+    where STORE_CODE = #{storeCode,jdbcType=VARCHAR}
+      and CLERK_ID = #{clerkId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppClerk" >
+    insert into APP_CLERK (STORE_CODE, CLERK_ID, CLERK_NAME, 
+      CLERK_TEL, CLERK_SEX, CLERK_CITY, 
+      CLERK_IMAGE, INSTRUCTION, CREATED_BY, 
+      IS_DIMISSION, WX_NUMBER, CREATE_DATE, 
+      ATTRIBUTE1, ATTRIBUTE2, ATTRIBUTE3, 
+      ATTRIBUTE4, ATTRIBUTE5, DIMISSION_DATE, 
+      STORE_NAME)
+    values (#{storeCode,jdbcType=VARCHAR}, #{clerkId,jdbcType=VARCHAR}, #{clerkName,jdbcType=VARCHAR}, 
+      #{clerkTel,jdbcType=VARCHAR}, #{clerkSex,jdbcType=VARCHAR}, #{clerkCity,jdbcType=VARCHAR}, 
+      #{clerkImage,jdbcType=VARCHAR}, #{instruction,jdbcType=VARCHAR}, #{createdBy,jdbcType=VARCHAR}, 
+      #{isDimission,jdbcType=VARCHAR}, #{wxNumber,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{attribute1,jdbcType=VARCHAR}, #{attribute2,jdbcType=VARCHAR}, #{attribute3,jdbcType=VARCHAR}, 
+      #{attribute4,jdbcType=VARCHAR}, #{attribute5,jdbcType=VARCHAR}, #{dimissionDate,jdbcType=TIMESTAMP}, 
+      #{storeName,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppClerk" >
+    update APP_CLERK
+    set CLERK_NAME = #{clerkName,jdbcType=VARCHAR},
+      CLERK_TEL = #{clerkTel,jdbcType=VARCHAR},
+      CLERK_SEX = #{clerkSex,jdbcType=VARCHAR},
+      CLERK_CITY = #{clerkCity,jdbcType=VARCHAR},
+      CLERK_IMAGE = #{clerkImage,jdbcType=VARCHAR},
+      INSTRUCTION = #{instruction,jdbcType=VARCHAR},
+      CREATED_BY = #{createdBy,jdbcType=VARCHAR},
+      IS_DIMISSION = #{isDimission,jdbcType=VARCHAR},
+      WX_NUMBER = #{wxNumber,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      ATTRIBUTE1 = #{attribute1,jdbcType=VARCHAR},
+      ATTRIBUTE2 = #{attribute2,jdbcType=VARCHAR},
+      ATTRIBUTE3 = #{attribute3,jdbcType=VARCHAR},
+      ATTRIBUTE4 = #{attribute4,jdbcType=VARCHAR},
+      ATTRIBUTE5 = #{attribute5,jdbcType=VARCHAR},
+      DIMISSION_DATE = #{dimissionDate,jdbcType=TIMESTAMP},
+      STORE_NAME = #{storeName,jdbcType=VARCHAR}
+    where STORE_CODE = #{storeCode,jdbcType=VARCHAR}
+      and CLERK_ID = #{clerkId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select STORE_CODE, CLERK_ID, CLERK_NAME, CLERK_TEL, CLERK_SEX, CLERK_CITY, CLERK_IMAGE, 
+    INSTRUCTION, CREATED_BY, IS_DIMISSION, WX_NUMBER, CREATE_DATE, ATTRIBUTE1, ATTRIBUTE2, 
+    ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5, DIMISSION_DATE, STORE_NAME
+    from APP_CLERK
+    where STORE_CODE = #{storeCode,jdbcType=VARCHAR}
+      and CLERK_ID = #{clerkId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select STORE_CODE, CLERK_ID, CLERK_NAME, CLERK_TEL, CLERK_SEX, CLERK_CITY, CLERK_IMAGE, 
+    INSTRUCTION, CREATED_BY, IS_DIMISSION, WX_NUMBER, CREATE_DATE, ATTRIBUTE1, ATTRIBUTE2, 
+    ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5, DIMISSION_DATE, STORE_NAME
+    from APP_CLERK
+  </select>
+</mapper>

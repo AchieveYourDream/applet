@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.SysLovColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysLovColumn" >
+    <id column="LOV_CODE" property="lovCode" jdbcType="VARCHAR" />
+    <id column="COLUMN_NAME" property="columnName" jdbcType="VARCHAR" />
+    <result column="COLUMN_TITLE" property="columnTitle" jdbcType="VARCHAR" />
+    <result column="DISPLAY_FLAG" property="displayFlag" jdbcType="CHAR" />
+    <result column="RETURN_VALUE_FLAG" property="returnValueFlag" jdbcType="CHAR" />
+    <result column="RETURN_TEXT_FLAG" property="returnTextFlag" jdbcType="CHAR" />
+    <result column="DISPLAY" property="display" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from SYS_LOV_COLUMN
+    where LOV_CODE = #{lovCode,jdbcType=VARCHAR}
+      and COLUMN_NAME = #{columnName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysLovColumn" >
+    insert into SYS_LOV_COLUMN (LOV_CODE, COLUMN_NAME, COLUMN_TITLE, 
+      DISPLAY_FLAG, RETURN_VALUE_FLAG, RETURN_TEXT_FLAG, 
+      DISPLAY)
+    values (#{lovCode,jdbcType=VARCHAR}, #{columnName,jdbcType=VARCHAR}, #{columnTitle,jdbcType=VARCHAR}, 
+      #{displayFlag,jdbcType=CHAR}, #{returnValueFlag,jdbcType=CHAR}, #{returnTextFlag,jdbcType=CHAR}, 
+      #{display,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysLovColumn" >
+    update SYS_LOV_COLUMN
+    set COLUMN_TITLE = #{columnTitle,jdbcType=VARCHAR},
+      DISPLAY_FLAG = #{displayFlag,jdbcType=CHAR},
+      RETURN_VALUE_FLAG = #{returnValueFlag,jdbcType=CHAR},
+      RETURN_TEXT_FLAG = #{returnTextFlag,jdbcType=CHAR},
+      DISPLAY = #{display,jdbcType=VARCHAR}
+    where LOV_CODE = #{lovCode,jdbcType=VARCHAR}
+      and COLUMN_NAME = #{columnName,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select LOV_CODE, COLUMN_NAME, COLUMN_TITLE, DISPLAY_FLAG, RETURN_VALUE_FLAG, RETURN_TEXT_FLAG, 
+    DISPLAY
+    from SYS_LOV_COLUMN
+    where LOV_CODE = #{lovCode,jdbcType=VARCHAR}
+      and COLUMN_NAME = #{columnName,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select LOV_CODE, COLUMN_NAME, COLUMN_TITLE, DISPLAY_FLAG, RETURN_VALUE_FLAG, RETURN_TEXT_FLAG, 
+    DISPLAY
+    from SYS_LOV_COLUMN
+  </select>
+</mapper>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.SysDataDictTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysDataDictType" >
+    <id column="TYPE_CODE" property="typeCode" jdbcType="VARCHAR" />
+    <result column="TYPE_NAME" property="typeName" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_DATA_DICT_TYPE
+    where TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysDataDictType" >
+    insert into SYS_DATA_DICT_TYPE (TYPE_CODE, TYPE_NAME, DESCRIPTION
+      )
+    values (#{typeCode,jdbcType=VARCHAR}, #{typeName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysDataDictType" >
+    update SYS_DATA_DICT_TYPE
+    set TYPE_NAME = #{typeName,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select TYPE_CODE, TYPE_NAME, DESCRIPTION
+    from SYS_DATA_DICT_TYPE
+    where TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select TYPE_CODE, TYPE_NAME, DESCRIPTION
+    from SYS_DATA_DICT_TYPE
+  </select>
+</mapper>

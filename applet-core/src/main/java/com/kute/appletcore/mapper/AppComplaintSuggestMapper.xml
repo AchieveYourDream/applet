@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppComplaintSuggestMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppComplaintSuggest" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <id column="MEMBER_TEL" property="memberTel" jdbcType="VARCHAR" />
+    <result column="MESSAGE" property="message" jdbcType="VARCHAR" />
+    <result column="IMAGES_URL" property="imagesUrl" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="ATTRIBUTE1" property="attribute1" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE2" property="attribute2" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE3" property="attribute3" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE4" property="attribute4" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE5" property="attribute5" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from APP_COMPLAINT_SUGGEST
+    where ID = #{id,jdbcType=VARCHAR}
+      and MEMBER_TEL = #{memberTel,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppComplaintSuggest" >
+    insert into APP_COMPLAINT_SUGGEST (ID, MEMBER_TEL, MESSAGE, 
+      IMAGES_URL, CREATE_DATE, ATTRIBUTE1, 
+      ATTRIBUTE2, ATTRIBUTE3, ATTRIBUTE4, 
+      ATTRIBUTE5)
+    values (#{id,jdbcType=VARCHAR}, #{memberTel,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, 
+      #{imagesUrl,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{attribute1,jdbcType=VARCHAR}, 
+      #{attribute2,jdbcType=VARCHAR}, #{attribute3,jdbcType=VARCHAR}, #{attribute4,jdbcType=VARCHAR}, 
+      #{attribute5,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppComplaintSuggest" >
+    update APP_COMPLAINT_SUGGEST
+    set MESSAGE = #{message,jdbcType=VARCHAR},
+      IMAGES_URL = #{imagesUrl,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      ATTRIBUTE1 = #{attribute1,jdbcType=VARCHAR},
+      ATTRIBUTE2 = #{attribute2,jdbcType=VARCHAR},
+      ATTRIBUTE3 = #{attribute3,jdbcType=VARCHAR},
+      ATTRIBUTE4 = #{attribute4,jdbcType=VARCHAR},
+      ATTRIBUTE5 = #{attribute5,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+      and MEMBER_TEL = #{memberTel,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select ID, MEMBER_TEL, MESSAGE, IMAGES_URL, CREATE_DATE, ATTRIBUTE1, ATTRIBUTE2, 
+    ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5
+    from APP_COMPLAINT_SUGGEST
+    where ID = #{id,jdbcType=VARCHAR}
+      and MEMBER_TEL = #{memberTel,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, MEMBER_TEL, MESSAGE, IMAGES_URL, CREATE_DATE, ATTRIBUTE1, ATTRIBUTE2, 
+    ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5
+    from APP_COMPLAINT_SUGGEST
+  </select>
+</mapper>

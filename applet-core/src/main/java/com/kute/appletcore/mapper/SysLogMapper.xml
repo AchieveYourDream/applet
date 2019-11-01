@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.SysLogMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysLog" >
+    <id column="LOG_ID" property="logId" jdbcType="DECIMAL" />
+    <result column="LOG_SOURCE" property="logSource" jdbcType="VARCHAR" />
+    <result column="LOG_DATE" property="logDate" jdbcType="TIMESTAMP" />
+    <result column="LOG_CONTENT" property="logContent" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE1" property="attribute1" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE2" property="attribute2" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE3" property="attribute3" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE4" property="attribute4" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE5" property="attribute5" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE6" property="attribute6" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE7" property="attribute7" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE8" property="attribute8" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE9" property="attribute9" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE10" property="attribute10" jdbcType="VARCHAR" />
+    <result column="LOG_TYPE" property="logType" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from SYS_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysLog" >
+    insert into SYS_LOG (LOG_ID, LOG_SOURCE, LOG_DATE, 
+      LOG_CONTENT, USER_ID, ATTRIBUTE1, 
+      ATTRIBUTE2, ATTRIBUTE3, ATTRIBUTE4, 
+      ATTRIBUTE5, ATTRIBUTE6, ATTRIBUTE7, 
+      ATTRIBUTE8, ATTRIBUTE9, ATTRIBUTE10, 
+      LOG_TYPE)
+    values (#{logId,jdbcType=DECIMAL}, #{logSource,jdbcType=VARCHAR}, #{logDate,jdbcType=TIMESTAMP}, 
+      #{logContent,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{attribute1,jdbcType=VARCHAR}, 
+      #{attribute2,jdbcType=VARCHAR}, #{attribute3,jdbcType=VARCHAR}, #{attribute4,jdbcType=VARCHAR}, 
+      #{attribute5,jdbcType=VARCHAR}, #{attribute6,jdbcType=VARCHAR}, #{attribute7,jdbcType=VARCHAR}, 
+      #{attribute8,jdbcType=VARCHAR}, #{attribute9,jdbcType=VARCHAR}, #{attribute10,jdbcType=VARCHAR}, 
+      #{logType,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysLog" >
+    update SYS_LOG
+    set LOG_SOURCE = #{logSource,jdbcType=VARCHAR},
+      LOG_DATE = #{logDate,jdbcType=TIMESTAMP},
+      LOG_CONTENT = #{logContent,jdbcType=VARCHAR},
+      USER_ID = #{userId,jdbcType=VARCHAR},
+      ATTRIBUTE1 = #{attribute1,jdbcType=VARCHAR},
+      ATTRIBUTE2 = #{attribute2,jdbcType=VARCHAR},
+      ATTRIBUTE3 = #{attribute3,jdbcType=VARCHAR},
+      ATTRIBUTE4 = #{attribute4,jdbcType=VARCHAR},
+      ATTRIBUTE5 = #{attribute5,jdbcType=VARCHAR},
+      ATTRIBUTE6 = #{attribute6,jdbcType=VARCHAR},
+      ATTRIBUTE7 = #{attribute7,jdbcType=VARCHAR},
+      ATTRIBUTE8 = #{attribute8,jdbcType=VARCHAR},
+      ATTRIBUTE9 = #{attribute9,jdbcType=VARCHAR},
+      ATTRIBUTE10 = #{attribute10,jdbcType=VARCHAR},
+      LOG_TYPE = #{logType,jdbcType=VARCHAR}
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select LOG_ID, LOG_SOURCE, LOG_DATE, LOG_CONTENT, USER_ID, ATTRIBUTE1, ATTRIBUTE2, 
+    ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5, ATTRIBUTE6, ATTRIBUTE7, ATTRIBUTE8, ATTRIBUTE9, 
+    ATTRIBUTE10, LOG_TYPE
+    from SYS_LOG
+    where LOG_ID = #{logId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select LOG_ID, LOG_SOURCE, LOG_DATE, LOG_CONTENT, USER_ID, ATTRIBUTE1, ATTRIBUTE2, 
+    ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5, ATTRIBUTE6, ATTRIBUTE7, ATTRIBUTE8, ATTRIBUTE9, 
+    ATTRIBUTE10, LOG_TYPE
+    from SYS_LOG
+  </select>
+</mapper>

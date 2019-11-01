@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.SysLovDefineMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysLovDefine" >
+    <id column="LOV_CODE" property="lovCode" jdbcType="VARCHAR" />
+    <result column="LOV_NAME" property="lovName" jdbcType="VARCHAR" />
+    <result column="VIEW_NAME" property="viewName" jdbcType="VARCHAR" />
+    <result column="SQL_CONDITION" property="sqlCondition" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_LOV_DEFINE
+    where LOV_CODE = #{lovCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysLovDefine" >
+    insert into SYS_LOV_DEFINE (LOV_CODE, LOV_NAME, VIEW_NAME, 
+      SQL_CONDITION, DESCRIPTION)
+    values (#{lovCode,jdbcType=VARCHAR}, #{lovName,jdbcType=VARCHAR}, #{viewName,jdbcType=VARCHAR}, 
+      #{sqlCondition,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysLovDefine" >
+    update SYS_LOV_DEFINE
+    set LOV_NAME = #{lovName,jdbcType=VARCHAR},
+      VIEW_NAME = #{viewName,jdbcType=VARCHAR},
+      SQL_CONDITION = #{sqlCondition,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where LOV_CODE = #{lovCode,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select LOV_CODE, LOV_NAME, VIEW_NAME, SQL_CONDITION, DESCRIPTION
+    from SYS_LOV_DEFINE
+    where LOV_CODE = #{lovCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select LOV_CODE, LOV_NAME, VIEW_NAME, SQL_CONDITION, DESCRIPTION
+    from SYS_LOV_DEFINE
+  </select>
+</mapper>

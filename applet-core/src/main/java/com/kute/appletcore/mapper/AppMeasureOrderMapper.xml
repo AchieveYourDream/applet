@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppMeasureOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppMeasureOrder" >
+    <id column="MEASURE_ID" property="measureId" jdbcType="DECIMAL" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="MEMBER_NAME" property="memberName" jdbcType="VARCHAR" />
+    <result column="MEMBER_TEL" property="memberTel" jdbcType="VARCHAR" />
+    <result column="MEMBER_CITY" property="memberCity" jdbcType="VARCHAR" />
+    <result column="ADDRESS_DETAILED" property="addressDetailed" jdbcType="VARCHAR" />
+    <result column="CLERK_NAME" property="clerkName" jdbcType="VARCHAR" />
+    <result column="CLERK_NO" property="clerkNo" jdbcType="VARCHAR" />
+    <result column="ORDER_STATE" property="orderState" jdbcType="VARCHAR" />
+    <result column="ORDER_NO" property="orderNo" jdbcType="VARCHAR" />
+    <result column="ORDER_TIME" property="orderTime" jdbcType="TIMESTAMP" />
+    <result column="CLERK_TEL" property="clerkTel" jdbcType="VARCHAR" />
+    <result column="CLERK_CITY" property="clerkCity" jdbcType="VARCHAR" />
+    <result column="STORE_ID" property="storeId" jdbcType="VARCHAR" />
+    <result column="APPOINTMENT_DATE" property="appointmentDate" jdbcType="TIMESTAMP" />
+    <result column="CLERK_RRIVE_TIME" property="clerkRriveTime" jdbcType="TIMESTAMP" />
+    <result column="CLERK_DEPART_TIME" property="clerkDepartTime" jdbcType="TIMESTAMP" />
+    <result column="MEA_FINISH_TIME" property="meaFinishTime" jdbcType="TIMESTAMP" />
+    <result column="ORDER_LOGS" property="orderLogs" jdbcType="VARCHAR" />
+    <result column="MEASURE_EVALUATION_ID" property="measureEvaluationId" jdbcType="VARCHAR" />
+    <result column="ORDER_CANCLE_DICT_ID" property="orderCancleDictId" jdbcType="VARCHAR" />
+    <result column="ORDER_CANCLE_EXTRA_CONTENT" property="orderCancleExtraContent" jdbcType="VARCHAR" />
+    <result column="ORDER_CANCEL_TIME" property="orderCancelTime" jdbcType="TIMESTAMP" />
+    <result column="MEASURES_METHOD" property="measuresMethod" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE1" property="attribute1" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE2" property="attribute2" jdbcType="VARCHAR" />
+    <result column="IS_DELETE" property="isDelete" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from APP_MEASURE_ORDER
+    where MEASURE_ID = #{measureId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppMeasureOrder" >
+    insert into APP_MEASURE_ORDER (MEASURE_ID, CREATE_DATE, MEMBER_NAME, 
+      MEMBER_TEL, MEMBER_CITY, ADDRESS_DETAILED, 
+      CLERK_NAME, CLERK_NO, ORDER_STATE, 
+      ORDER_NO, ORDER_TIME, CLERK_TEL, 
+      CLERK_CITY, STORE_ID, APPOINTMENT_DATE, 
+      CLERK_RRIVE_TIME, CLERK_DEPART_TIME, MEA_FINISH_TIME, 
+      ORDER_LOGS, MEASURE_EVALUATION_ID, ORDER_CANCLE_DICT_ID, 
+      ORDER_CANCLE_EXTRA_CONTENT, ORDER_CANCEL_TIME, 
+      MEASURES_METHOD, ATTRIBUTE1, ATTRIBUTE2, 
+      IS_DELETE)
+    values (#{measureId,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, #{memberName,jdbcType=VARCHAR}, 
+      #{memberTel,jdbcType=VARCHAR}, #{memberCity,jdbcType=VARCHAR}, #{addressDetailed,jdbcType=VARCHAR}, 
+      #{clerkName,jdbcType=VARCHAR}, #{clerkNo,jdbcType=VARCHAR}, #{orderState,jdbcType=VARCHAR}, 
+      #{orderNo,jdbcType=VARCHAR}, #{orderTime,jdbcType=TIMESTAMP}, #{clerkTel,jdbcType=VARCHAR}, 
+      #{clerkCity,jdbcType=VARCHAR}, #{storeId,jdbcType=VARCHAR}, #{appointmentDate,jdbcType=TIMESTAMP}, 
+      #{clerkRriveTime,jdbcType=TIMESTAMP}, #{clerkDepartTime,jdbcType=TIMESTAMP}, #{meaFinishTime,jdbcType=TIMESTAMP}, 
+      #{orderLogs,jdbcType=VARCHAR}, #{measureEvaluationId,jdbcType=VARCHAR}, #{orderCancleDictId,jdbcType=VARCHAR}, 
+      #{orderCancleExtraContent,jdbcType=VARCHAR}, #{orderCancelTime,jdbcType=TIMESTAMP}, 
+      #{measuresMethod,jdbcType=VARCHAR}, #{attribute1,jdbcType=VARCHAR}, #{attribute2,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppMeasureOrder" >
+    update APP_MEASURE_ORDER
+    set CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      MEMBER_NAME = #{memberName,jdbcType=VARCHAR},
+      MEMBER_TEL = #{memberTel,jdbcType=VARCHAR},
+      MEMBER_CITY = #{memberCity,jdbcType=VARCHAR},
+      ADDRESS_DETAILED = #{addressDetailed,jdbcType=VARCHAR},
+      CLERK_NAME = #{clerkName,jdbcType=VARCHAR},
+      CLERK_NO = #{clerkNo,jdbcType=VARCHAR},
+      ORDER_STATE = #{orderState,jdbcType=VARCHAR},
+      ORDER_NO = #{orderNo,jdbcType=VARCHAR},
+      ORDER_TIME = #{orderTime,jdbcType=TIMESTAMP},
+      CLERK_TEL = #{clerkTel,jdbcType=VARCHAR},
+      CLERK_CITY = #{clerkCity,jdbcType=VARCHAR},
+      STORE_ID = #{storeId,jdbcType=VARCHAR},
+      APPOINTMENT_DATE = #{appointmentDate,jdbcType=TIMESTAMP},
+      CLERK_RRIVE_TIME = #{clerkRriveTime,jdbcType=TIMESTAMP},
+      CLERK_DEPART_TIME = #{clerkDepartTime,jdbcType=TIMESTAMP},
+      MEA_FINISH_TIME = #{meaFinishTime,jdbcType=TIMESTAMP},
+      ORDER_LOGS = #{orderLogs,jdbcType=VARCHAR},
+      MEASURE_EVALUATION_ID = #{measureEvaluationId,jdbcType=VARCHAR},
+      ORDER_CANCLE_DICT_ID = #{orderCancleDictId,jdbcType=VARCHAR},
+      ORDER_CANCLE_EXTRA_CONTENT = #{orderCancleExtraContent,jdbcType=VARCHAR},
+      ORDER_CANCEL_TIME = #{orderCancelTime,jdbcType=TIMESTAMP},
+      MEASURES_METHOD = #{measuresMethod,jdbcType=VARCHAR},
+      ATTRIBUTE1 = #{attribute1,jdbcType=VARCHAR},
+      ATTRIBUTE2 = #{attribute2,jdbcType=VARCHAR},
+      IS_DELETE = #{isDelete,jdbcType=VARCHAR}
+    where MEASURE_ID = #{measureId,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select MEASURE_ID, CREATE_DATE, MEMBER_NAME, MEMBER_TEL, MEMBER_CITY, ADDRESS_DETAILED, 
+    CLERK_NAME, CLERK_NO, ORDER_STATE, ORDER_NO, ORDER_TIME, CLERK_TEL, CLERK_CITY, STORE_ID, 
+    APPOINTMENT_DATE, CLERK_RRIVE_TIME, CLERK_DEPART_TIME, MEA_FINISH_TIME, ORDER_LOGS, 
+    MEASURE_EVALUATION_ID, ORDER_CANCLE_DICT_ID, ORDER_CANCLE_EXTRA_CONTENT, ORDER_CANCEL_TIME, 
+    MEASURES_METHOD, ATTRIBUTE1, ATTRIBUTE2, IS_DELETE
+    from APP_MEASURE_ORDER
+    where MEASURE_ID = #{measureId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select MEASURE_ID, CREATE_DATE, MEMBER_NAME, MEMBER_TEL, MEMBER_CITY, ADDRESS_DETAILED, 
+    CLERK_NAME, CLERK_NO, ORDER_STATE, ORDER_NO, ORDER_TIME, CLERK_TEL, CLERK_CITY, STORE_ID, 
+    APPOINTMENT_DATE, CLERK_RRIVE_TIME, CLERK_DEPART_TIME, MEA_FINISH_TIME, ORDER_LOGS, 
+    MEASURE_EVALUATION_ID, ORDER_CANCLE_DICT_ID, ORDER_CANCLE_EXTRA_CONTENT, ORDER_CANCEL_TIME, 
+    MEASURES_METHOD, ATTRIBUTE1, ATTRIBUTE2, IS_DELETE
+    from APP_MEASURE_ORDER
+  </select>
+</mapper>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletcore.dao.SysUserMapper">
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysUser">
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="lastname" jdbcType="VARCHAR" property="lastname" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="mobilephone" jdbcType="VARCHAR" property="mobilephone" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="skin" jdbcType="VARCHAR" property="skin" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="user_status" jdbcType="VARCHAR" property="userStatus" />
+    <result column="start_date" jdbcType="DATE" property="startDate" />
+    <result column="end_date" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="password_change_date" jdbcType="TIMESTAMP" property="passwordChangeDate" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="last_update_date" jdbcType="DATE" property="lastUpdateDate" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+  </resultMap>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysUser">
+    insert into sys_user (user_id, username, password, 
+      lastname, email, mobilephone, 
+      description, skin, user_type, 
+      user_status, start_date, end_date, 
+      password_change_date, create_date, last_update_date, 
+      realname)
+    values (#{userId,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{lastname,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{mobilephone,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{skin,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, 
+      #{userStatus,jdbcType=VARCHAR}, #{startDate,jdbcType=DATE}, #{endDate,jdbcType=TIMESTAMP}, 
+      #{passwordChangeDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=DATE}, #{lastUpdateDate,jdbcType=DATE}, 
+      #{realname,jdbcType=VARCHAR})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select user_id, username, password, lastname, email, mobilephone, description, skin, 
+    user_type, user_status, start_date, end_date, password_change_date, create_date, 
+    last_update_date, realname
+    from sys_user
+  </select>
+
+  <select id="selectUserByUserName" parameterType="string" resultType="com.kute.appletcore.entity.SysUser">
+
+     select user_id, username, password, lastname, email, mobilephone, description, skin,
+    user_type, user_status, start_date, end_date, password_change_date, create_date,
+    last_update_date, realname
+    from sys_user
+    where username=#{username}
+  </select>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.SysParameterDefineMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysParameterDefine" >
+    <id column="PARAMETER_CODE" property="parameterCode" jdbcType="VARCHAR" />
+    <result column="PARAMETER_NAME" property="parameterName" jdbcType="VARCHAR" />
+    <result column="PARAMETER_TYPE" property="parameterType" jdbcType="VARCHAR" />
+    <result column="ELEMENT_TYPE" property="elementType" jdbcType="VARCHAR" />
+    <result column="DDT_CODE" property="ddtCode" jdbcType="VARCHAR" />
+    <result column="LOV_CODE" property="lovCode" jdbcType="VARCHAR" />
+    <result column="DS_CODE" property="dsCode" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="SHOW_ORDER" property="showOrder" jdbcType="DECIMAL" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_PARAMETER_DEFINE
+    where PARAMETER_CODE = #{parameterCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysParameterDefine" >
+    insert into SYS_PARAMETER_DEFINE (PARAMETER_CODE, PARAMETER_NAME, PARAMETER_TYPE, 
+      ELEMENT_TYPE, DDT_CODE, LOV_CODE, 
+      DS_CODE, DESCRIPTION, SHOW_ORDER
+      )
+    values (#{parameterCode,jdbcType=VARCHAR}, #{parameterName,jdbcType=VARCHAR}, #{parameterType,jdbcType=VARCHAR}, 
+      #{elementType,jdbcType=VARCHAR}, #{ddtCode,jdbcType=VARCHAR}, #{lovCode,jdbcType=VARCHAR}, 
+      #{dsCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{showOrder,jdbcType=DECIMAL}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysParameterDefine" >
+    update SYS_PARAMETER_DEFINE
+    set PARAMETER_NAME = #{parameterName,jdbcType=VARCHAR},
+      PARAMETER_TYPE = #{parameterType,jdbcType=VARCHAR},
+      ELEMENT_TYPE = #{elementType,jdbcType=VARCHAR},
+      DDT_CODE = #{ddtCode,jdbcType=VARCHAR},
+      LOV_CODE = #{lovCode,jdbcType=VARCHAR},
+      DS_CODE = #{dsCode,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR},
+      SHOW_ORDER = #{showOrder,jdbcType=DECIMAL}
+    where PARAMETER_CODE = #{parameterCode,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select PARAMETER_CODE, PARAMETER_NAME, PARAMETER_TYPE, ELEMENT_TYPE, DDT_CODE, LOV_CODE, 
+    DS_CODE, DESCRIPTION, SHOW_ORDER
+    from SYS_PARAMETER_DEFINE
+    where PARAMETER_CODE = #{parameterCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select PARAMETER_CODE, PARAMETER_NAME, PARAMETER_TYPE, ELEMENT_TYPE, DDT_CODE, LOV_CODE, 
+    DS_CODE, DESCRIPTION, SHOW_ORDER
+    from SYS_PARAMETER_DEFINE
+  </select>
+</mapper>

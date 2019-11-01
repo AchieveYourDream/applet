@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.SysRoleMapper" >
+
+    <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysRole">
+      <id column="role_id" property="roleId" jdbcType="VARCHAR"/>
+      <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+      <result column="description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_role
+    where role_id = #{role_id,jdbcType=VARCHAR}
+  </delete>
+
+    <insert id="insert" parameterType="com.kute.appletcore.entity.SysRole">
+    insert into sys_role (role_id, role_name, description
+      )
+    values (#{role_id,jdbcType=VARCHAR}, #{role_name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysRole">
+    update sys_role
+    set role_name = #{role_name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where role_id = #{role_id,jdbcType=VARCHAR}
+  </update>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select role_id, role_name, description
+    from sys_role
+    where role_id = #{role_id,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectAll" resultType="com.kute.appletcore.entity.SysRole">
+    select role_id, role_name, description
+    from sys_role
+  </select>
+
+    <!-- 获取角色列表 -->
+    <select id="getRoleList" resultType="com.kute.appletcore.entity.SysRole">
+         select role_id, role_name, description
+          from sys_role
+         order by role_id
+    </select>
+
+    <!-- 获取角色信息 -->
+    <select id="getRoleInfoByRoleName" parameterType="string" resultType="com.kute.appletcore.entity.SysRole">
+        select role_id, role_name, description
+          from sys_role sr
+         where sr.role_name = #{roleName}
+    </select>
+
+    <!-- 获取角色信息 -->
+    <select id="getRoleInfoByRoleIdName" parameterType="map" resultType="com.kute.appletcore.entity.SysRole">
+        select role_id, role_name, description
+          from sys_role sr
+         where sr.role_id != #{roleId}
+           and sr.role_name = #{roleName}
+    </select>
+
+    <!-- 获取菜单权限树结构-->
+    <select id="getMenuAuthTreeStruct" parameterType="string" resultType="string">
+      select srr.resource_id || ',' || sdsd.struct_name as resource_name
+        from sys_role_resource srr join sys_data_struct_define sdsd on srr.resource_id = sdsd.struct_code
+      where 1=1
+        and srr.resource_type = 'menu_struct'
+        and srr.role_id = #{roleId}
+    </select>
+
+    <!-- 获取菜单权限树列表-->
+    <select id="getMenuAuthTree" parameterType="map" resultType="com.kute.appletcore.util.tree.TreeNodeData">
+        select
+            dsn.node_code,
+            dsn.parent_node_code,
+            dsn.node_name,
+            'menu' node_type,
+            case when nvl(srr.resource_id, 'false') = dsn.node_code then 'true' else 'false' end as is_checked,
+            (select case when count(*) = 0 then 'Y' else 'N' end
+               from sys_data_struct_node subdsn
+              where subdsn.struct_code = dsn.struct_code
+                and subdsn.parent_node_code = dsn.node_code) is_leaf_node
+          from
+            sys_data_struct_node dsn
+            left join sys_role_resource srr
+                on (
+                    srr.role_id = #{roleId}
+                    and dsn.node_code = srr.resource_id
+                )
+         where dsn.struct_code = #{structCode}
+           and dsn.parent_node_code = #{parentCode}
+           and dsn.enabled_flag = 'Y'
+        ORDER BY dsn.display_order
+    </select>
+
+    <!-- 获取操作权限列表-->
+    <select id="getOperationAuthList" parameterType="map" resultType="com.kute.appletcore.util.tree.TreeNodeData">
+        select
+            so.operation_code node_code,
+            so.function_code parent_node_code,
+            so.operation_name node_name,
+            'operation' node_type,
+            case when  nvl(srr.resource_id, 'false') = so.operation_code then 'true' else 'false' end as is_checked
+          from
+            sys_data_struct_node_attribute dsna,
+            sys_operation so
+            LEFT JOIN sys_role_resource srr
+                on (
+                    srr.role_id = #{roleId}
+                    and srr.resource_type = 'operation'
+                    and so.operation_code = srr.resource_id
+                )
+         where dsna.struct_code = #{structCode}
+           and dsna.node_code = #{nodeCode}
+           and dsna.attribute_code = 'function_code'
+           and dsna.attribute_value = so.function_code
+         order by so.operation_code
+    </select>
+
+    <!-- 删除当前角色的菜单权限列表 -->
+    <delete id="removeRoleMenuAuthList" parameterType="string">
+        delete
+          from sys_role_resource
+         where resource_type in ('menu_struct', 'menu', 'operation')
+           and role_id = #{roleId}
+    </delete>
+
+</mapper>

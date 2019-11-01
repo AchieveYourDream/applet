@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppJoinInvestmentMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppJoinInvestment" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="CONPANY" property="conpany" jdbcType="VARCHAR" />
+    <result column="PROFESSION" property="profession" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="DETAIL_ADDRESS" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE1" property="attribute1" jdbcType="VARCHAR" />
+    <result column="ATTRIBUTE2" property="attribute2" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from APP_JOIN_INVESTMENT
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppJoinInvestment" >
+    insert into APP_JOIN_INVESTMENT (ID, NAME, TEL, 
+      CONPANY, PROFESSION, ADDRESS, 
+      DETAIL_ADDRESS, ATTRIBUTE1, ATTRIBUTE2, 
+      CREATE_DATE)
+    values (#{id,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, 
+      #{conpany,jdbcType=VARCHAR}, #{profession,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{detailAddress,jdbcType=VARCHAR}, #{attribute1,jdbcType=VARCHAR}, #{attribute2,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppJoinInvestment" >
+    update APP_JOIN_INVESTMENT
+    set NAME = #{name,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      CONPANY = #{conpany,jdbcType=VARCHAR},
+      PROFESSION = #{profession,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      DETAIL_ADDRESS = #{detailAddress,jdbcType=VARCHAR},
+      ATTRIBUTE1 = #{attribute1,jdbcType=VARCHAR},
+      ATTRIBUTE2 = #{attribute2,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select ID, NAME, TEL, CONPANY, PROFESSION, ADDRESS, DETAIL_ADDRESS, ATTRIBUTE1, ATTRIBUTE2, 
+    CREATE_DATE
+    from APP_JOIN_INVESTMENT
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ID, NAME, TEL, CONPANY, PROFESSION, ADDRESS, DETAIL_ADDRESS, ATTRIBUTE1, ATTRIBUTE2, 
+    CREATE_DATE
+    from APP_JOIN_INVESTMENT
+  </select>
+</mapper>

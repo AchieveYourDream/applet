@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppCusDemandMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppCusDemand" >
+    <id column="DEMAND_ID" property="demandId" jdbcType="VARCHAR" />
+    <result column="USER_CATEGORY" property="userCategory" jdbcType="VARCHAR" />
+    <result column="CATEGORY_ID" property="categoryId" jdbcType="VARCHAR" />
+    <result column="DRESS_OCCASION" property="dressOccasion" jdbcType="VARCHAR" />
+    <result column="TOTAL_BUDGET" property="totalBudget" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="MEMBER_ID" property="memberId" jdbcType="VARCHAR" />
+    <result column="RECOMMENDER_ID" property="recommenderId" jdbcType="VARCHAR" />
+    <result column="DESIGNER_ID" property="designerId" jdbcType="VARCHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="STATUS" property="status" jdbcType="VARCHAR" />
+    <result column="ATTRBUTE1" property="attrbute1" jdbcType="VARCHAR" />
+    <result column="ATTRBUTE2" property="attrbute2" jdbcType="VARCHAR" />
+    <result column="ATTRBUTE3" property="attrbute3" jdbcType="VARCHAR" />
+    <result column="ATTRBUTE4" property="attrbute4" jdbcType="VARCHAR" />
+    <result column="ATTRBUTE5" property="attrbute5" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from APP_CUS_DEMAND
+    where DEMAND_ID = #{demandId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppCusDemand" >
+    insert into APP_CUS_DEMAND (DEMAND_ID, USER_CATEGORY, CATEGORY_ID, 
+      DRESS_OCCASION, TOTAL_BUDGET, REMARK, 
+      MEMBER_ID, RECOMMENDER_ID, DESIGNER_ID, 
+      CREATE_TIME, UPDATE_TIME, STATUS, 
+      ATTRBUTE1, ATTRBUTE2, ATTRBUTE3, 
+      ATTRBUTE4, ATTRBUTE5)
+    values (#{demandId,jdbcType=VARCHAR}, #{userCategory,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}, 
+      #{dressOccasion,jdbcType=VARCHAR}, #{totalBudget,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{memberId,jdbcType=VARCHAR}, #{recommenderId,jdbcType=VARCHAR}, #{designerId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{attrbute1,jdbcType=VARCHAR}, #{attrbute2,jdbcType=VARCHAR}, #{attrbute3,jdbcType=VARCHAR}, 
+      #{attrbute4,jdbcType=VARCHAR}, #{attrbute5,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppCusDemand" >
+    update APP_CUS_DEMAND
+    set USER_CATEGORY = #{userCategory,jdbcType=VARCHAR},
+      CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+      DRESS_OCCASION = #{dressOccasion,jdbcType=VARCHAR},
+      TOTAL_BUDGET = #{totalBudget,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      MEMBER_ID = #{memberId,jdbcType=VARCHAR},
+      RECOMMENDER_ID = #{recommenderId,jdbcType=VARCHAR},
+      DESIGNER_ID = #{designerId,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      ATTRBUTE1 = #{attrbute1,jdbcType=VARCHAR},
+      ATTRBUTE2 = #{attrbute2,jdbcType=VARCHAR},
+      ATTRBUTE3 = #{attrbute3,jdbcType=VARCHAR},
+      ATTRBUTE4 = #{attrbute4,jdbcType=VARCHAR},
+      ATTRBUTE5 = #{attrbute5,jdbcType=VARCHAR}
+    where DEMAND_ID = #{demandId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select DEMAND_ID, USER_CATEGORY, CATEGORY_ID, DRESS_OCCASION, TOTAL_BUDGET, REMARK, 
+    MEMBER_ID, RECOMMENDER_ID, DESIGNER_ID, CREATE_TIME, UPDATE_TIME, STATUS, ATTRBUTE1, 
+    ATTRBUTE2, ATTRBUTE3, ATTRBUTE4, ATTRBUTE5
+    from APP_CUS_DEMAND
+    where DEMAND_ID = #{demandId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select DEMAND_ID, USER_CATEGORY, CATEGORY_ID, DRESS_OCCASION, TOTAL_BUDGET, REMARK, 
+    MEMBER_ID, RECOMMENDER_ID, DESIGNER_ID, CREATE_TIME, UPDATE_TIME, STATUS, ATTRBUTE1, 
+    ATTRBUTE2, ATTRBUTE3, ATTRBUTE4, ATTRBUTE5
+    from APP_CUS_DEMAND
+  </select>
+</mapper>

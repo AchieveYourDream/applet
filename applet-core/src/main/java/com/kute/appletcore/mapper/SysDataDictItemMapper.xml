@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.SysDataDictItemMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysDataDictItem" >
+    <id column="ITEM_CODE" property="itemCode" jdbcType="VARCHAR" />
+    <id column="TYPE_CODE" property="typeCode" jdbcType="VARCHAR" />
+    <result column="ITEM_NAME" property="itemName" jdbcType="VARCHAR" />
+    <result column="ENABLED_FLAG" property="enabledFlag" jdbcType="CHAR" />
+    <result column="DISPLAY_ORDER" property="displayOrder" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from SYS_DATA_DICT_ITEM
+    where ITEM_CODE = #{itemCode,jdbcType=VARCHAR}
+      and TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysDataDictItem" >
+    insert into SYS_DATA_DICT_ITEM (ITEM_CODE, TYPE_CODE, ITEM_NAME, 
+      ENABLED_FLAG, DISPLAY_ORDER)
+    values (#{itemCode,jdbcType=VARCHAR}, #{typeCode,jdbcType=VARCHAR}, #{itemName,jdbcType=VARCHAR}, 
+      #{enabledFlag,jdbcType=CHAR}, #{displayOrder,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysDataDictItem" >
+    update SYS_DATA_DICT_ITEM
+    set ITEM_NAME = #{itemName,jdbcType=VARCHAR},
+      ENABLED_FLAG = #{enabledFlag,jdbcType=CHAR},
+      DISPLAY_ORDER = #{displayOrder,jdbcType=VARCHAR}
+    where ITEM_CODE = #{itemCode,jdbcType=VARCHAR}
+      and TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select ITEM_CODE, TYPE_CODE, ITEM_NAME, ENABLED_FLAG, DISPLAY_ORDER
+    from SYS_DATA_DICT_ITEM
+    where ITEM_CODE = #{itemCode,jdbcType=VARCHAR}
+      and TYPE_CODE = #{typeCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select ITEM_CODE, TYPE_CODE, ITEM_NAME, ENABLED_FLAG, DISPLAY_ORDER
+    from SYS_DATA_DICT_ITEM
+  </select>
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.SysDataStructDefineMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysDataStructDefine" >
+    <id column="STRUCT_CODE" property="structCode" jdbcType="VARCHAR" />
+    <result column="STRUCT_NAME" property="structName" jdbcType="VARCHAR" />
+    <result column="NODE_CODE_RULE" property="nodeCodeRule" jdbcType="VARCHAR" />
+    <result column="RULE_PREFIX" property="rulePrefix" jdbcType="VARCHAR" />
+    <result column="RULE_LENGTH" property="ruleLength" jdbcType="VARCHAR" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_DATA_STRUCT_DEFINE
+    where STRUCT_CODE = #{structCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysDataStructDefine" >
+    insert into SYS_DATA_STRUCT_DEFINE (STRUCT_CODE, STRUCT_NAME, NODE_CODE_RULE, 
+      RULE_PREFIX, RULE_LENGTH, DESCRIPTION
+      )
+    values (#{structCode,jdbcType=VARCHAR}, #{structName,jdbcType=VARCHAR}, #{nodeCodeRule,jdbcType=VARCHAR}, 
+      #{rulePrefix,jdbcType=VARCHAR}, #{ruleLength,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysDataStructDefine" >
+    update SYS_DATA_STRUCT_DEFINE
+    set STRUCT_NAME = #{structName,jdbcType=VARCHAR},
+      NODE_CODE_RULE = #{nodeCodeRule,jdbcType=VARCHAR},
+      RULE_PREFIX = #{rulePrefix,jdbcType=VARCHAR},
+      RULE_LENGTH = #{ruleLength,jdbcType=VARCHAR},
+      DESCRIPTION = #{description,jdbcType=VARCHAR}
+    where STRUCT_CODE = #{structCode,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select STRUCT_CODE, STRUCT_NAME, NODE_CODE_RULE, RULE_PREFIX, RULE_LENGTH, DESCRIPTION
+    from SYS_DATA_STRUCT_DEFINE
+    where STRUCT_CODE = #{structCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select STRUCT_CODE, STRUCT_NAME, NODE_CODE_RULE, RULE_PREFIX, RULE_LENGTH, DESCRIPTION
+    from SYS_DATA_STRUCT_DEFINE
+  </select>
+</mapper>
