@@ -62,9 +62,8 @@ public interface DataDictMapper {
     /**
      * 根据一个数据字典类型获取数据字典项列表
      *
-     * @param parameterMap 参数MAP
      */
-    List<SysDataDictItem> getSingleDataDictItemList(Map<String, Object> parameterMap) throws Exception;
+    List<SysDataDictItem> getSingleDataDictItemList(String  typeCode) throws Exception;
 
 
 }

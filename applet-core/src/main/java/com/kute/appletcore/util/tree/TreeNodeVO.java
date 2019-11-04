@@ -131,16 +131,16 @@ public class TreeNodeVO {
 		return tnd;
 	}
 
-	/**
-	 * 获取树节点状态对象
-	 */
-	public TreeNodeState getTreeNodeState() throws Exception {
-		TreeNodeState tns = new TreeNodeState();
-		tns.setSelected(this.getIsSelected() == null ? "false" : this.getIsSelected());
-		tns.setChecked(this.getIsChecked() == null ? "false" : this.getIsChecked());
-		tns.setExpanded(this.getIsExpanded() == null ? "false" : this.getIsExpanded());
-		tns.setDisabled(this.getIsDisabled() == null ? "false" : this.getIsDisabled());
-		return tns;
-	}
+//	/**
+//	 * 获取树节点状态对象
+//	 */
+//	public TreeNodeState getTreeNodeState() throws Exception {
+//		TreeNodeState tns = new TreeNodeState();
+//		tns.setSelected(this.getIsSelected() == null ? false : this.getIsSelected());
+//		tns.setChecked(this.getIsChecked() == null ? false : this.getIsChecked());
+//		tns.setExpanded(this.getIsExpanded() == null ? false : this.getIsExpanded());
+//		tns.setDisabled(this.getIsDisabled() == null ? false : this.getIsDisabled());
+//		return tns;
+//	}
 
 }

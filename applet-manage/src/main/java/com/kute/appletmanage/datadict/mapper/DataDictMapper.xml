@@ -20,7 +20,6 @@
               ,enabled_flag
           from sys_data_dict_item
          where type_code = #{typeCode}
-         and enabled_flag = 'Y'
          order by display_order, item_code
     </select>
 
@@ -55,19 +54,12 @@
     </delete>
 
     <!-- 获取单个数据字典列表 -->
-    <select id="getSingleDataDictItemList" parameterType="map" resultType="com.kute.appletcore.entity.SysDataDictItem">
+    <select id="getSingleDataDictItemList"  resultType="com.kute.appletcore.entity.SysDataDictItem">
         select item_code
-        ,type_code
         ,item_name
-        ,display_order
-        ,enabled_flag
         from sys_data_dict_item
-        where type_code in (${typeCode})
-
-        <if test="enabledFlag != null and enabledFlag != ''">
-            and enabled_flag = #{enabledFlag}
-        </if>
-
+        where type_code = #{value}
+        and enabled_flag ='Y'
         order by display_order, item_code
     </select>
 

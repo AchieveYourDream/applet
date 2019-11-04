@@ -84,13 +84,13 @@ public class DataDictServiceImpl implements DataDictService {
    
     public void removeDataDictType(String typeCode) throws Exception {
         // 1.删除当前数据字典类型的数据字典项扩展属性列表
-        dataDictMapper.removeDataDictItemAttributeListByTypeCode(typeCode);
+//        dataDictMapper.removeDataDictItemAttributeListByTypeCode(typeCode);
 
         // 2.删除当前数据字典类型的数据字典项列表
         dataDictMapper.removeDataDictItemList(typeCode);
 
         // 3.删除当前数据字典类型的扩展属性列表
-        dataDictMapper.removeDataDictTypeAttributeList(typeCode);
+//        dataDictMapper.removeDataDictTypeAttributeList(typeCode);
 
         // 4.删除当前数据字典类型
         sysDataDictTypeMapper.deleteByPrimaryKey(typeCode);
@@ -155,7 +155,7 @@ public class DataDictServiceImpl implements DataDictService {
         parameterMap.put("itemCode", itemCode);
 
         // 1.删除当前数据字典项的扩展属性列表
-        dataDictMapper.removeDataDictItemAttributeListByItemCode(parameterMap);
+//        dataDictMapper.removeDataDictItemAttributeListByItemCode(parameterMap);
 
         // 2.删除当前数据字典项
         sysDataDictItemMapper.deleteByPrimaryKey(itemCode, typeCode);
@@ -165,11 +165,8 @@ public class DataDictServiceImpl implements DataDictService {
     }
 
 
-    public List<SysDataDictItem> getSingleDataDictItemList(String typeCode, String enabledFlag) throws Exception {
-        Map<String, Object> parameterMap = new HashMap<>();
-        parameterMap.put("typeCode", typeCode);
-        parameterMap.put("enabledFlag", enabledFlag);
-        return dataDictMapper.getSingleDataDictItemList(parameterMap);
+    public List<SysDataDictItem> getSingleDataDictItemList(String typeCode) throws Exception {
+        return dataDictMapper.getSingleDataDictItemList(typeCode);
     }
 
 }

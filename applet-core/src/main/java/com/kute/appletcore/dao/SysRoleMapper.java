@@ -1,7 +1,10 @@
 package com.kute.appletcore.dao;
 
 import com.kute.appletcore.entity.SysRole;
+import com.kute.appletcore.entity.SysUser;
 import com.kute.appletcore.util.tree.TreeNodeData;
+import com.kute.appletcore.util.tree.TreeNodeVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -17,6 +20,12 @@ public interface SysRoleMapper {
 
     int updateByPrimaryKey(SysRole record);
 
+    /**
+     * 获取角色用户信息
+     *
+     * @param roleId 角色ID
+     */
+    List<SysUser>  getRoleUserList(String roleId) throws Exception;
     /**
      * 获取角色信息
      *
@@ -41,9 +50,8 @@ public interface SysRoleMapper {
     /**
      * 查询当前节点 角色拥有权限的所有子节点
      *
-     * @param parameterMap 参数MAP
      */
-    List<TreeNodeData> getMenuAuthTree(Map<String, Object> parameterMap) throws Exception;
+    List<TreeNodeVO> getMenuAuthTree(@Param("structCode") String  structCode, @Param("roleId") String roleId) throws Exception;
 
     /**
      * 获取操作权限列表
@@ -52,10 +60,5 @@ public interface SysRoleMapper {
      */
     List<TreeNodeData> getOperationAuthList(Map<String, Object> parameterMap) throws Exception;
 
-    /**
-     * 删除当前角色的菜单权限列表
-     *
-     * @param roleId 角色ID
-     */
-    void removeRoleMenuAuthList(String roleId) throws Exception;
+    void delRoleUserRelation(@Param("roleId") String roleId,@Param("userList")  String userList)throws Exception;
 }

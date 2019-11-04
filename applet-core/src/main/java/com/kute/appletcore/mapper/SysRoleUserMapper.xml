@@ -3,19 +3,19 @@
 <mapper namespace="com.kute.appletcore.dao.SysRoleUserMapper" >
   <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysRoleUser" >
     <id column="ROLE_ID" property="roleId" jdbcType="DECIMAL" />
-    <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <id column="USER_NAME" property="userName" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="map" >
     delete from SYS_ROLE_USER
     where ROLE_ID = #{roleId,jdbcType=DECIMAL}
-      and USER_ID = #{userId,jdbcType=VARCHAR}
+      and USER_NAME = #{userName,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.kute.appletcore.entity.SysRoleUser" >
-    insert into SYS_ROLE_USER (ROLE_ID, USER_ID)
-    values (#{roleId,jdbcType=DECIMAL}, #{userId,jdbcType=VARCHAR})
+    insert into SYS_ROLE_USER (ROLE_ID, USER_NAME)
+    values (#{roleId,jdbcType=DECIMAL}, #{userName,jdbcType=VARCHAR})
   </insert>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select ROLE_ID, USER_ID
+    select ROLE_ID, USER_NAME
     from SYS_ROLE_USER
   </select>
 </mapper>

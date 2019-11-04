@@ -1,6 +1,6 @@
 package com.kute.appletmanage.datastruct.dao;
 
-import com.kute.appletcore.util.tree.TreeNodeData;
+import com.kute.appletcore.util.tree.TreeNodeVO;
 import com.kute.appletcore.vo.SysDataStructAttributeVO;
 import com.kute.appletcore.vo.SysDataStructDefineVO;
 import com.kute.appletcore.vo.SysDataStructNodeAttributeVO;
@@ -42,13 +42,13 @@ public interface DataStructMapper {
      *
      * @param structCode 参数MAP
      */
-    List<TreeNodeData> getDataStructNodeTree(String structCode) throws Exception;
+    List<TreeNodeVO> getDataStructNodeTree(String structCode) throws Exception;
 
     /**
      * 获取数据结构节点树根据父节点
      *
      */
-    List<TreeNodeData> getDataStructNodeTreeByParent(Map map) throws Exception;
+    List<TreeNodeVO> getDataStructNodeTreeByParent(Map map) throws Exception;
 
     /**
      * 获取数据结构节点编码

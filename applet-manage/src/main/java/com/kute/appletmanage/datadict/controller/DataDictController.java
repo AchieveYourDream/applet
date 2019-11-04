@@ -29,7 +29,22 @@ import java.util.List;
 public class DataDictController {
 
     @Autowired
-    private DataDictService dataDictService;
+    DataDictService dataDictService;
+    /**
+     * 根据一个数据字典类型获取数据字典项列表
+     */
+    @ApiOperation(value = "根据一个数据字典类型获取数据字典项列表")
+    @ApiImplicitParam(name = "typeCode", value = "数据字典类型编码", paramType = "query", required = true)
+    @GetMapping(value = "getSingleDataDictItemList")
+    public ResponseResult getSingleDataDictItemList(@RequestParam(value = "typeCode") String typeCode)throws Exception {
+        List<SysDataDictItem> list = dataDictService.getSingleDataDictItemList(typeCode);
+
+        ResponseResult result = new ResponseResult();
+        result.setCode(EnumResultType.SUCCESS.toString());
+        result.setData(list);
+
+        return result;
+    }
 
     /**
      * 获取数据字典类型列表
@@ -88,7 +103,7 @@ public class DataDictController {
     @ApiOperation(value = "新建数据字典类型")
     @ApiImplicitParams({@ApiImplicitParam(name = "ddt", value = "数据字典类型对象[SysDataDictType]", paramType = "body", dataType = "SysDataDictType", required = true)})
     @RequestMapping(value = "addDataDictType", method = RequestMethod.POST)
-    public ResponseResult addDataDictType(@RequestBody SysDataDictType ddt) throws Exception {
+    public ResponseResult addDataDictType( SysDataDictType ddt) throws Exception {
         dataDictService.addDataDictType(ddt);
 
         ResponseResult result = new ResponseResult();
@@ -104,7 +119,7 @@ public class DataDictController {
     @ApiOperation(value = "编辑数据字典类型")
     @ApiImplicitParams({@ApiImplicitParam(name = "ddt", value = "数据字典类型对象[SysDataDictType]", paramType = "body", dataType = "SysDataDictType", required = true)})
     @RequestMapping(value = "editDataDictType", method = RequestMethod.POST)
-    public ResponseResult editDataDictType(@RequestBody SysDataDictType ddt) throws Exception {
+    public ResponseResult editDataDictType( SysDataDictType ddt) throws Exception {
         dataDictService.editDataDictType(ddt);
 
         ResponseResult result = new ResponseResult();
@@ -119,8 +134,8 @@ public class DataDictController {
      */
     @ApiOperation(value = "删除数据字典类型")
     @ApiImplicitParams({@ApiImplicitParam(name = "typeCode", value = "数据字典类型编码", paramType = "body", required = true)})
-    @RequestMapping(value = "removeDataDictType", method = RequestMethod.POST, consumes = "text/plain")
-    public ResponseResult removeDataDictType(@RequestBody String typeCode) throws Exception {
+    @RequestMapping(value = "removeDataDictType", method = RequestMethod.POST)
+    public ResponseResult removeDataDictType( String typeCode) throws Exception {
         dataDictService.removeDataDictType(typeCode);
 
         ResponseResult result = new ResponseResult();
@@ -169,7 +184,7 @@ public class DataDictController {
     @ApiOperation(value = "新建数据字典项")
     @ApiImplicitParams({@ApiImplicitParam(name = "ddi", value = "数据字典项对象[SysDataDictItem]", paramType = "body", dataType = "SysDataDictItem", required = true)})
     @RequestMapping(value = "addDataDictItem", method = RequestMethod.POST)
-    public ResponseResult addDataDictItem(@RequestBody SysDataDictItem ddi) throws Exception {
+    public ResponseResult addDataDictItem( SysDataDictItem ddi) throws Exception {
         dataDictService.addDataDictItem(ddi);
 
         ResponseResult result = new ResponseResult();
@@ -179,13 +194,38 @@ public class DataDictController {
         return result;
     }
 
+
+    /**
+     * 检查数据字典类型項是否存在
+     */
+    @ApiOperation(value = "检查数据字典类型項是否存在")
+    @ApiImplicitParams(
+            {@ApiImplicitParam(name = "typeCode", value = "数据字典类型编码", paramType = "query", required = true),
+            @ApiImplicitParam(name = "itemCode", value = "数据字典項编码", paramType = "query", required = true)}
+    )
+    @RequestMapping(value = "checkDataDictItemCode", method = RequestMethod.GET)
+    public boolean checkDataDictItemCode( String typeCode,String itemCode) throws Exception {
+        boolean result;
+
+        SysDataDictItem ddt = dataDictService.getDataDictItemInfo(itemCode,typeCode);
+
+        if (ddt == null) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        return result;
+    }
+
+
     /**
      * 编辑数据字典项
      */
     @ApiOperation(value = "编辑数据字典项")
     @ApiImplicitParams({@ApiImplicitParam(name = "ddi", value = "数据字典项对象[SysDataDictItem]", paramType = "body", dataType = "SysDataDictItem", required = true)})
     @RequestMapping(value = "editDataDictItem", method = RequestMethod.POST)
-    public ResponseResult editDataDictItem(@RequestBody SysDataDictItem ddi) throws Exception {
+    public ResponseResult editDataDictItem( SysDataDictItem ddi) throws Exception {
         dataDictService.editDataDictItem(ddi);
 
         ResponseResult result = new ResponseResult();
@@ -199,10 +239,9 @@ public class DataDictController {
      * 删除数据字典项
      */
     @ApiOperation(value = "删除数据字典项")
-    @ApiImplicitParams({@ApiImplicitParam(name = "ddi", value = "数据字典项对象[SysDataDictItem]", paramType = "body", dataType = "SysDataDictItem", required = true)})
     @RequestMapping(value = "removeDataDictItem", method = RequestMethod.POST)
-    public ResponseResult removeDataDictItem(@RequestBody SysDataDictItem ddi) throws Exception {
-        dataDictService.removeDataDictItem(ddi.getTypeCode(), ddi.getItemCode());
+    public ResponseResult removeDataDictItem(String typeCode,String  itemCode) throws Exception {
+        dataDictService.removeDataDictItem(typeCode, itemCode);
 
         ResponseResult result = new ResponseResult();
         result.setCode(EnumResultType.SUCCESS.toString());

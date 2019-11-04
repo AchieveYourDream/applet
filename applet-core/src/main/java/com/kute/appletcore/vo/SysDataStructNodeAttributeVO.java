@@ -2,98 +2,96 @@ package com.kute.appletcore.vo;
 
 public class SysDataStructNodeAttributeVO {
 
-    private String struct_code;
-    private String node_code;
-    private String attribute_code;
-    private String attribute_name;
-    private String attribute_value;
+    private String structCode;
+    private String nodeCode;
+    private String attributeCode;
+    private String attributeName;
+    private String attributeValue;
 
-    private String attribute_text;
+    private String attributeText;
 
-    private String element_type;
-    private String ddt_code;
-    private String lov_code;
-    private String ds_code;
+    private String elementType;
+    private String ddtCode;
+    private String lovCode;
+    private String dsCode;
 
-    public String getStruct_code() {
-        return struct_code;
+    public String getNodeCode() {
+        return nodeCode;
     }
 
-    public void setStruct_code(String struct_code) {
-        this.struct_code = struct_code;
+    public void setNodeCode(String nodeCode) {
+        this.nodeCode = nodeCode;
     }
 
-    public String getNode_code() {
-        return node_code;
+    public String getAttributeCode() {
+        return attributeCode;
     }
 
-    public void setNode_code(String node_code) {
-        this.node_code = node_code;
+    public void setAttributeCode(String attributeCode) {
+        this.attributeCode = attributeCode;
     }
 
-    public String getAttribute_code() {
-        return attribute_code;
+    public String getAttributeName() {
+        return attributeName;
     }
 
-    public void setAttribute_code(String attribute_code) {
-        this.attribute_code = attribute_code;
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName;
     }
 
-    public String getAttribute_name() {
-        return attribute_name;
+    public String getStructCode() {
+        return structCode;
     }
 
-    public void setAttribute_name(String attribute_name) {
-        this.attribute_name = attribute_name;
+    public void setStructCode(String structCode) {
+        this.structCode = structCode;
     }
 
-    public String getAttribute_value() {
-        return attribute_value;
+    public String getAttributeValue() {
+        return attributeValue;
     }
 
-    public void setAttribute_value(String attribute_value) {
-        this.attribute_value = attribute_value;
+    public void setAttributeValue(String attributeValue) {
+        this.attributeValue = attributeValue;
     }
 
-    public String getAttribute_text() {
-        return attribute_text;
+    public String getAttributeText() {
+        return attributeText;
     }
 
-    public void setAttribute_text(String attribute_text) {
-        this.attribute_text = attribute_text;
+    public void setAttributeText(String attributeText) {
+        this.attributeText = attributeText;
     }
 
-    public String getElement_type() {
-        return element_type;
+    public String getElementType() {
+        return elementType;
     }
 
-    public void setElement_type(String element_type) {
-        this.element_type = element_type;
+    public void setElementType(String elementType) {
+        this.elementType = elementType;
     }
 
-    public String getDdt_code() {
-        return ddt_code;
+    public String getDdtCode() {
+        return ddtCode;
     }
 
-    public void setDdt_code(String ddt_code) {
-        this.ddt_code = ddt_code;
+    public void setDdtCode(String ddtCode) {
+        this.ddtCode = ddtCode;
     }
 
-    public String getLov_code() {
-        return lov_code;
+    public String getLovCode() {
+        return lovCode;
     }
 
-    public void setLov_code(String lov_code) {
-        this.lov_code = lov_code;
+    public void setLovCode(String lovCode) {
+        this.lovCode = lovCode;
     }
 
-    public String getDs_code() {
-        return ds_code;
+    public String getDsCode() {
+        return dsCode;
     }
 
-    public void setDs_code(String ds_code) {
-        this.ds_code = ds_code;
+    public void setDsCode(String dsCode) {
+        this.dsCode = dsCode;
     }
-
-
 }

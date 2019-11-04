@@ -59,6 +59,6 @@ public interface DataDictService {
      */
     void removeDataDictItem(String typeCode, String itemCode) throws Exception;
 
-    List<SysDataDictItem> getSingleDataDictItemList(String typeCode, String enabledFlag) throws Exception;
+    List<SysDataDictItem> getSingleDataDictItemList(String typeCode) throws Exception;
 
 }

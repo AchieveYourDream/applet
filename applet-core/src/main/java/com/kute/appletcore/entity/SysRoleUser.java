@@ -3,7 +3,7 @@ package com.kute.appletcore.entity;
 public class SysRoleUser {
     private Integer roleId;
 
-    private String userId;
+    private String userName;
 
     public Integer getRoleId() {
         return roleId;
@@ -13,11 +13,11 @@ public class SysRoleUser {
         this.roleId = roleId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -106,7 +106,7 @@
 					connect by prior node_code = parent_node_code
 					order by dsn.display_order
 		)t where  parent_node_code =  #{parentCode}-->
-    <select id="getDataStructNodeTree" parameterType="string" resultType="com.kute.appletcore.util.tree.TreeNodeData">
+    <select id="getDataStructNodeTree" parameterType="string" resultType="com.kute.appletcore.util.tree.TreeNodeVO">
 
 			select
 		  dsn.node_code,
@@ -141,7 +141,7 @@
     order by dsn.display_order
     )t where  parent_node_code =  #{parentCode}*/
 -->
-    <select id="getDataStructNodeTreeByParent" parameterType="string" resultType="com.kute.appletcore.util.tree.TreeNodeData">
+    <select id="getDataStructNodeTreeByParent" parameterType="string" resultType="com.kute.appletcore.util.tree.TreeNodeVO">
 
      select
     dsn.node_code,
@@ -170,31 +170,18 @@
 
     <!-- 获取数据结构节点编码-->
     <select id="getDataStructNodeCode" parameterType="map" resultType="string">
-        select
-            lpad(
-            to_number(
-            nvl(
-            substr(
-            nvl(max(dsn.node_code), #{parentCode}),
-            instr(nvl(max(dsn.node_code), #{parentCode}), #{parentCode}) + length(#{parentCode})
-            ),
-            0
-            ) 
-            ) + 1,
-            #{length},
-            '0'
-            ) node_code
-          from
-            sys_data_struct_node dsn
-         where dsn.struct_code = #{structCode}
+
+           select LPAD((replace(IFNULL(max(dsn.node_code),0), #{parentCode},'') +1), #{length},0) as nodeCode from  sys_data_struct_node dsn
+            where dsn.struct_code = #{structCode}
            and dsn.parent_node_code = #{parentCode}
+
     </select>
 
     <!-- 获取数据结构节点属性列表 -->
     <select id="getDataStructNodeAttributeList" parameterType="map" resultType="com.kute.appletcore.vo.SysDataStructNodeAttributeVO">
         select
             dsa.struct_code,
-            #{parentCode} node_code,
+            #{parentCode} nodeCode,
             dsa.attribute_code,
             dsa.attribute_name,
             dsna.attribute_value,

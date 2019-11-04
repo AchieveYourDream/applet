@@ -8,9 +8,9 @@
       This element was generated on Tue Apr 10 16:09:16 CST 2018.
     -->
     delete from sys_data_struct_node_attribute
-    where struct_code = #{struct_code,jdbcType=VARCHAR}
-    and node_code = #{node_code,jdbcType=VARCHAR}
-    and attribute_code = #{attribute_code,jdbcType=VARCHAR}
+    where struct_code = #{structCode,jdbcType=VARCHAR}
+    and node_code =#{nodeCode,jdbcType=VARCHAR}
+    and attribute_code = #{attributeCode,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.kute.appletcore.entity.SysDataStructNodeAttribute">
     <!--
@@ -20,8 +20,8 @@
     -->
     insert into sys_data_struct_node_attribute (struct_code, node_code, attribute_code,
     attribute_value)
-    values (#{struct_code,jdbcType=VARCHAR}, #{node_code,jdbcType=VARCHAR}, #{attribute_code,jdbcType=VARCHAR},
-    #{attribute_value,jdbcType=VARCHAR})
+    values (#{structCode,jdbcType=VARCHAR},#{nodeCode,jdbcType=VARCHAR}, #{attributeCode,jdbcType=VARCHAR},
+   #{attributeValue,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysDataStructNodeAttribute">
     <!--
@@ -30,10 +30,10 @@
       This element was generated on Tue Apr 10 16:09:16 CST 2018.
     -->
     update sys_data_struct_node_attribute
-    set attribute_value = #{attribute_value,jdbcType=VARCHAR}
-    where struct_code = #{struct_code,jdbcType=VARCHAR}
-    and node_code = #{node_code,jdbcType=VARCHAR}
-    and attribute_code = #{attribute_code,jdbcType=VARCHAR}
+    set attribute_value =#{attributeValue,jdbcType=VARCHAR}
+    where struct_code = #{structCode,jdbcType=VARCHAR}
+    and node_code =#{nodeCode,jdbcType=VARCHAR}
+    and attribute_code = #{attributeCode,jdbcType=VARCHAR}
   </update>
   <select id="selectByPrimaryKey" resultType="com.kute.appletcore.entity.SysDataStructNodeAttribute" parameterType="map">
     <!--
@@ -43,9 +43,9 @@
     -->
     select struct_code, node_code, attribute_code, attribute_value
     from sys_data_struct_node_attribute
-    where struct_code = #{struct_code,jdbcType=VARCHAR}
-    and node_code = #{node_code,jdbcType=VARCHAR}
-    and attribute_code = #{attribute_code,jdbcType=VARCHAR}
+    where struct_code = #{structCode,jdbcType=VARCHAR}
+    and node_code =#{nodeCode,jdbcType=VARCHAR}
+    and attribute_code = #{attributeCode,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultType="com.kute.appletcore.entity.SysDataStructNodeAttribute">
     <!--

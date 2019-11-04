@@ -31,7 +31,7 @@ public class MemberController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "Authorization", value = "令牌", required = true, dataType = "String", paramType = "header")
     })
-    public ResponseResult updateByPrimaryKey(@RequestBody AppMember appMember) throws Exception {
+    public ResponseResult updateByPrimaryKey( AppMember appMember) throws Exception {
         ResponseResult result = new  ResponseResult();
         memberService.updateByPrimaryKey(appMember);
         result.setCode(EnumResultType.SUCCESS.toString());

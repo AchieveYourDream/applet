@@ -2,74 +2,74 @@ package com.kute.appletcore.vo;
 
 public class SysDataStructAttributeVO {
 
-    private String attribute_code;
-    private String struct_code;
-    private String attribute_name;
-    private String element_type;
-    private String ddt_code;
-    private String ds_code;
-    private String lov_code;
+    private String attributeCode;
+    private String structCode;
+    private String attributeName;
+    private String elementType;
+    private String ddtCode;
+    private String dsCode;
+    private String lovCode;
     private String description;
 
-    private String element_type_name;
-    private String ddt_text;
-    private String ds_text;
-    private String lov_text;
+    private String elementTypeName;
+    private String ddtText;
+    private String dsText;
+    private String lovText;
 
-    public String getAttribute_code() {
-        return attribute_code;
+    public String getAttributeCode() {
+        return attributeCode;
     }
 
-    public void setAttribute_code(String attribute_code) {
-        this.attribute_code = attribute_code;
+    public void setAttributeCode(String attributeCode) {
+        this.attributeCode = attributeCode;
     }
 
-    public String getStruct_code() {
-        return struct_code;
+    public String getStructCode() {
+        return structCode;
     }
 
-    public void setStruct_code(String struct_code) {
-        this.struct_code = struct_code;
+    public void setStructCode(String structCode) {
+        this.structCode = structCode;
     }
 
-    public String getAttribute_name() {
-        return attribute_name;
+    public String getAttributeName() {
+        return attributeName;
     }
 
-    public void setAttribute_name(String attribute_name) {
-        this.attribute_name = attribute_name;
+    public void setAttributeName(String attributeName) {
+        this.attributeName = attributeName;
     }
 
-    public String getElement_type() {
-        return element_type;
+    public String getElementType() {
+        return elementType;
     }
 
-    public void setElement_type(String element_type) {
-        this.element_type = element_type;
+    public void setElementType(String elementType) {
+        this.elementType = elementType;
     }
 
-    public String getDdt_code() {
-        return ddt_code;
+    public String getDdtCode() {
+        return ddtCode;
     }
 
-    public void setDdt_code(String ddt_code) {
-        this.ddt_code = ddt_code;
+    public void setDdtCode(String ddtCode) {
+        this.ddtCode = ddtCode;
     }
 
-    public String getDs_code() {
-        return ds_code;
+    public String getDsCode() {
+        return dsCode;
     }
 
-    public void setDs_code(String ds_code) {
-        this.ds_code = ds_code;
+    public void setDsCode(String dsCode) {
+        this.dsCode = dsCode;
     }
 
-    public String getLov_code() {
-        return lov_code;
+    public String getLovCode() {
+        return lovCode;
     }
 
-    public void setLov_code(String lov_code) {
-        this.lov_code = lov_code;
+    public void setLovCode(String lovCode) {
+        this.lovCode = lovCode;
     }
 
     public String getDescription() {
@@ -80,36 +80,35 @@ public class SysDataStructAttributeVO {
         this.description = description;
     }
 
-    public String getElement_type_name() {
-        return element_type_name;
+    public String getElementTypeName() {
+        return elementTypeName;
     }
 
-    public void setElement_type_name(String element_type_name) {
-        this.element_type_name = element_type_name;
+    public void setElementTypeName(String elementTypeName) {
+        this.elementTypeName = elementTypeName;
     }
 
-    public String getDdt_text() {
-        return ddt_text;
+    public String getDdtText() {
+        return ddtText;
     }
 
-    public void setDdt_text(String ddt_text) {
-        this.ddt_text = ddt_text;
+    public void setDdtText(String ddtText) {
+        this.ddtText = ddtText;
     }
 
-    public String getDs_text() {
-        return ds_text;
+    public String getDsText() {
+        return dsText;
     }
 
-    public void setDs_text(String ds_text) {
-        this.ds_text = ds_text;
+    public void setDsText(String dsText) {
+        this.dsText = dsText;
     }
 
-    public String getLov_text() {
-        return lov_text;
+    public String getLovText() {
+        return lovText;
     }
 
-    public void setLov_text(String lov_text) {
-        this.lov_text = lov_text;
+    public void setLovText(String lovText) {
+        this.lovText = lovText;
     }
-
 }

@@ -90,7 +90,7 @@ public class ParameterController {
     @ApiOperation(value = "新建参数类型")
     @ApiImplicitParams({@ApiImplicitParam(name = "spt", value = "参数类型对象[SysParameterType]", paramType = "body", dataType = "SysParameterType", required = true)})
     @RequestMapping(value = "addParameterType", method = RequestMethod.POST)
-    public ResponseResult addParameterType(@RequestBody SysParameterType spt) throws Exception {
+    public ResponseResult addParameterType( SysParameterType spt) throws Exception {
         parameterService.addParameterType(spt);
 
         ResponseResult result = new ResponseResult();
@@ -106,7 +106,7 @@ public class ParameterController {
     @ApiOperation(value = "编辑参数类型")
     @ApiImplicitParams({@ApiImplicitParam(name = "spt", value = "参数类型对象[SysParameterType]", paramType = "body", dataType = "SysParameterType", required = true)})
     @RequestMapping(value = "editParameterType", method = RequestMethod.POST)
-    public ResponseResult editParameterType(@RequestBody SysParameterType spt) throws Exception {
+    public ResponseResult editParameterType( SysParameterType spt) throws Exception {
         parameterService.editParameterType(spt);
 
         ResponseResult result = new ResponseResult();
@@ -121,8 +121,8 @@ public class ParameterController {
      */
     @ApiOperation(value = "删除参数类型")
     @ApiImplicitParams({@ApiImplicitParam(name = "typeCode", value = "参数类型编码", paramType = "body", required = true)})
-    @RequestMapping(value = "removeParameterType", method = RequestMethod.POST, consumes = "text/plain")
-    public ResponseResult removeParameterType(@RequestBody String typeCode) throws Exception {
+    @RequestMapping(value = "removeParameterType", method = RequestMethod.POST)
+    public ResponseResult removeParameterType( String typeCode) throws Exception {
         parameterService.removeParameterType(typeCode);
 
         ResponseResult result = new ResponseResult();
@@ -190,7 +190,7 @@ public class ParameterController {
     @ApiOperation(value = "新建参数")
     @ApiImplicitParams({@ApiImplicitParam(name = "spd", value = "参数对象[SysParameterDefine]", paramType = "body", dataType = "SysParameterDefine", required = true)})
     @RequestMapping(value = "addParameterDefine", method = RequestMethod.POST)
-    public ResponseResult addParameterDefine(@RequestBody SysParameterDefine spd) throws Exception {
+    public ResponseResult addParameterDefine( SysParameterDefine spd) throws Exception {
         parameterService.addParameterDefine(spd);
 
         ResponseResult result = new ResponseResult();
@@ -206,7 +206,7 @@ public class ParameterController {
     @ApiOperation(value = "编辑参数")
     @ApiImplicitParams({@ApiImplicitParam(name = "spd", value = "参数对象[SysParameterDefine]", paramType = "body", dataType = "SysParameterDefine", required = true)})
     @RequestMapping(value = "editParameterDefine", method = RequestMethod.POST)
-    public ResponseResult editParameterDefine(@RequestBody SysParameterDefine spd) throws Exception {
+    public ResponseResult editParameterDefine( SysParameterDefine spd) throws Exception {
         parameterService.editParameterDefine(spd);
 
         ResponseResult result = new ResponseResult();
@@ -221,8 +221,8 @@ public class ParameterController {
      */
     @ApiOperation(value = "删除参数")
     @ApiImplicitParams({@ApiImplicitParam(name = "parameterCode", value = "参数编码", paramType = "body", required = true)})
-    @RequestMapping(value = "removeParameterDefine", method = RequestMethod.POST, consumes = "text/plain")
-    public ResponseResult removeParameterDefine(@RequestBody String parameterCode) throws Exception {
+    @RequestMapping(value = "removeParameterDefine", method = RequestMethod.POST)
+    public ResponseResult removeParameterDefine( String parameterCode) throws Exception {
         parameterService.removeParameterDefine(parameterCode);
 
         ResponseResult result = new ResponseResult();
@@ -254,7 +254,7 @@ public class ParameterController {
     @ApiOperation(value = "保存参数设置")
     @ApiImplicitParams({@ApiImplicitParam(name = "spcList", value = "参数列表[SysParameterConfig]", paramType = "body", dataType = "List<SysParameterConfig>", required = true)})
     @RequestMapping(value = "saveParameterConfig", method = RequestMethod.POST)
-    public ResponseResult saveParameterConfig(@RequestBody List<SysParameterConfig> spcList) throws Exception {
+    public ResponseResult saveParameterConfig(@RequestBody  List<SysParameterConfig> spcList) throws Exception {
         parameterService.saveParameterConfig(spcList);
 
         ResponseResult result = new ResponseResult();

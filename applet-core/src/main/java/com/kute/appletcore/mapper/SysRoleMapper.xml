@@ -10,27 +10,27 @@
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
     delete from sys_role
-    where role_id = #{role_id,jdbcType=VARCHAR}
+    where role_id = #{roleId}
   </delete>
 
     <insert id="insert" parameterType="com.kute.appletcore.entity.SysRole">
-    insert into sys_role (role_id, role_name, description
+    insert into sys_role ( role_name, description
       )
-    values (#{role_id,jdbcType=VARCHAR}, #{role_name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+    values ( #{roleName}, #{description}
       )
   </insert>
 
     <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysRole">
     update sys_role
-    set role_name = #{role_name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
-    where role_id = #{role_id,jdbcType=VARCHAR}
+    set role_name = #{roleName},
+      description = #{description}
+    where role_id = #{roleId}
   </update>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
     select role_id, role_name, description
     from sys_role
-    where role_id = #{role_id,jdbcType=VARCHAR}
+    where role_id = #{roleId}
   </select>
 
     <select id="selectAll" resultType="com.kute.appletcore.entity.SysRole">
@@ -38,11 +38,12 @@
     from sys_role
   </select>
 
-    <!-- 获取角色列表 -->
-    <select id="getRoleList" resultType="com.kute.appletcore.entity.SysRole">
-         select role_id, role_name, description
-          from sys_role
-         order by role_id
+    <!-- 获取角色用户列表 -->
+    <select id="getRoleUserList" resultType="com.kute.appletcore.entity.SysUser">
+        select  username, lastname,realname
+            from  sys_role_user sru
+            LEFT JOIN sys_user su on  sru.user_name=su.username
+            where  sru.role_id=#{value}
     </select>
 
     <!-- 获取角色信息 -->
@@ -70,26 +71,25 @@
     </select>
 
     <!-- 获取菜单权限树列表-->
-    <select id="getMenuAuthTree" parameterType="map" resultType="com.kute.appletcore.util.tree.TreeNodeData">
+    <select id="getMenuAuthTree" parameterType="map" resultType="com.kute.appletcore.util.tree.TreeNodeVO">
         select
             dsn.node_code,
             dsn.parent_node_code,
             dsn.node_name,
             'menu' node_type,
-            case when nvl(srr.resource_id, 'false') = dsn.node_code then 'true' else 'false' end as is_checked,
+            case when IFNULL(srr.menu_code, 'false') = dsn.node_code then 'true' else 'false' end as is_checked,
             (select case when count(*) = 0 then 'Y' else 'N' end
                from sys_data_struct_node subdsn
               where subdsn.struct_code = dsn.struct_code
                 and subdsn.parent_node_code = dsn.node_code) is_leaf_node
           from
             sys_data_struct_node dsn
-            left join sys_role_resource srr
+            left join sys_role_menu_relation srr
                 on (
                     srr.role_id = #{roleId}
-                    and dsn.node_code = srr.resource_id
+                    and dsn.node_code = srr.menu_code
                 )
          where dsn.struct_code = #{structCode}
-           and dsn.parent_node_code = #{parentCode}
            and dsn.enabled_flag = 'Y'
         ORDER BY dsn.display_order
     </select>
@@ -118,12 +118,13 @@
          order by so.operation_code
     </select>
 
+
+
     <!-- 删除当前角色的菜单权限列表 -->
-    <delete id="removeRoleMenuAuthList" parameterType="string">
-        delete
-          from sys_role_resource
-         where resource_type in ('menu_struct', 'menu', 'operation')
-           and role_id = #{roleId}
+    <delete id="delRoleUserRelation" parameterType="string">
+       delete  from  sys_role_user
+        where  role_id=#{roleId}
+        and  user_name in (${userList})
     </delete>
 
 </mapper>

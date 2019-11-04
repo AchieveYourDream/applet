@@ -66,7 +66,7 @@ public class SecurityController {
 
 //    @ApiOperation(value = "验证token并返回新token")
 //    @RequestMapping(value = "/verifyToken", method = RequestMethod.POST)
-//    public ResponseResult verifyToken(@RequestBody Map<String, String> map) throws Exception {
+//    public ResponseResult verifyToken( Map<String, String> map) throws Exception {
 //        String username = map.get("username").toString();
 //        String token = map.get("token").toString();
 //        token = token.replaceAll(" ", "+");

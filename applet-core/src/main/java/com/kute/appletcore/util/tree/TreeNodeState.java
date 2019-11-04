@@ -7,41 +7,40 @@ package com.kute.appletcore.util.tree;
  */
 public class TreeNodeState {
 
-	private String selected = "false"; // 是否被选中
-	private String checked = "false"; // 是否被选中-复选框
-	private String expanded = "false"; // 是否展开
-	private String disabled = "false"; // 是否可用
+	private Boolean selected = false; // 是否被选中
+	private Boolean checked = false; // 是否被选中-复选框
+	private Boolean expanded = false; // 是否展开
+	private Boolean disabled = false; // 是否可用
 
-	public String getSelected() {
+	public Boolean getSelected() {
 		return selected;
 	}
 
-	public void setSelected(String selected) {
+	public void setSelected(Boolean selected) {
 		this.selected = selected;
 	}
 
-	public String getChecked() {
+	public Boolean getChecked() {
 		return checked;
 	}
 
-	public void setChecked(String checked) {
+	public void setChecked(Boolean checked) {
 		this.checked = checked;
 	}
 
-	public String getExpanded() {
+	public Boolean getExpanded() {
 		return expanded;
 	}
 
-	public void setExpanded(String expanded) {
+	public void setExpanded(Boolean expanded) {
 		this.expanded = expanded;
 	}
 
-	public String getDisabled() {
+	public Boolean getDisabled() {
 		return disabled;
 	}
 
-	public void setDisabled(String disabled) {
+	public void setDisabled(Boolean disabled) {
 		this.disabled = disabled;
 	}
-
 }

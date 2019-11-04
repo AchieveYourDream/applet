@@ -10,12 +10,21 @@
     where ROLE_ID = #{roleId,jdbcType=DECIMAL}
       and MENU_CODE = #{menuCode,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.kute.appletcore.entity.SysRoleMenuRelation" >
+  <insert id="insert"  parameterType="java.util.List" >
     insert into SYS_ROLE_MENU_RELATION (ROLE_ID, MENU_CODE)
-    values (#{roleId,jdbcType=DECIMAL}, #{menuCode,jdbcType=VARCHAR})
+    <foreach collection="menuList" item="line" open="" separator="union all" close="">
+      select
+      #{line.roleId}, #{line.menuCode}
+      from dual
+    </foreach>
   </insert>
   <select id="selectAll" resultMap="BaseResultMap" >
     select ROLE_ID, MENU_CODE
     from SYS_ROLE_MENU_RELATION
   </select>
+
+  <delete id="removeRoleMenuAuthList" parameterType="integer" >
+    delete from SYS_ROLE_MENU_RELATION
+    where ROLE_ID = #{roleId}
+  </delete>
 </mapper>

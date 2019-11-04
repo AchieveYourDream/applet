@@ -27,6 +27,7 @@ import java.util.List;
  * @LastUpdateDate 2018-04-06
  */
 @Service
+@Transactional(rollbackFor = Exception.class)
 public class ParameterServiceImpl implements ParameterService {
 
     @Autowired

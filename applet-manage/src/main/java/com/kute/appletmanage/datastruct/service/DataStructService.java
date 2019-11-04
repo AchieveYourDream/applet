@@ -1,4 +1,4 @@
-package com.kute.appletmanage.datastruct.impl;
+package com.kute.appletmanage.datastruct.service;
 
 import com.kute.appletcore.entity.SysDataStructAttribute;
 import com.kute.appletcore.entity.SysDataStructDefine;

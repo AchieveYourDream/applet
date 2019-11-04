@@ -27,7 +27,7 @@ public class MeasureOrderController {
     @PostMapping("/insertMeasureOrder")
     @ApiOperation(value = " 插入预约量体订单信息")
     public @ResponseBody
-    ResponseResult updateClerkImage(@RequestBody AppMeasureOrder amo) throws Exception {
+    ResponseResult updateClerkImage( AppMeasureOrder amo) throws Exception {
         ResponseResult result = new ResponseResult();
         measureOrderService.insert(amo);
             result.setCode(EnumResultType.SUCCESS.toString());

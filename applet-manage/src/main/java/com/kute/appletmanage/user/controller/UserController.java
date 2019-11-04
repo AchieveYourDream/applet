@@ -89,7 +89,7 @@
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "su", value = "用户对象[SysUser]", paramType = "body", dataType = "SysUser", required = true)})
 //    @RequestMapping(value = "addUser", method = RequestMethod.POST)
-//    public ResponseResult addUser(@RequestBody SysUser su) throws Exception {
+//    public ResponseResult addUser( SysUser su) throws Exception {
 //        su.setPassword(MD5Util.MD5("123456"));
 ////        su.setUser_type("1");
 //        userService.addUser(su);
@@ -107,7 +107,7 @@
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "su", value = "用户对象[SysUser]", paramType = "body", dataType = "SysUser", required = true)})
 //    @RequestMapping(value = "editUser", method = RequestMethod.POST)
-//    public ResponseResult editUser(@RequestBody SysUser su) throws Exception {
+//    public ResponseResult editUser( SysUser su) throws Exception {
 //
 //        userService.editUser(su);
 //        ResponseResult result = new ResponseResult();
@@ -123,7 +123,7 @@
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "body", value = "用户ID和用户状态[{\"userId\":\"\",\"userStatus\":\"\"}]", paramType = "body", required = true)})
 //    @RequestMapping(value = "updateUserStatus", method = RequestMethod.POST)
-//    public ResponseResult updateUserStatus(@RequestBody Map<String, String> body) throws Exception {
+//    public ResponseResult updateUserStatus( Map<String, String> body) throws Exception {
 //        userService.updateUserStatus(body.get("userId"), body.get("userStatus"));
 //
 //        ResponseResult result = new ResponseResult();
@@ -140,7 +140,7 @@
 //    @ApiImplicitParams({
 //            @ApiImplicitParam(name = "body", value = "用户ID和皮肤[{\"userId\":\"\",\"skin\":\"\"}]", paramType = "body", required = true)})
 //    @RequestMapping(value = "updateUserSkin", method = RequestMethod.POST)
-//    public ResponseResult updateUserSkin(@RequestBody Map<String, String> body) throws Exception {
+//    public ResponseResult updateUserSkin( Map<String, String> body) throws Exception {
 //        userService.updateUserSkin(body.get("userId"), body.get("skin"));
 //
 //        ResponseResult result = new ResponseResult();

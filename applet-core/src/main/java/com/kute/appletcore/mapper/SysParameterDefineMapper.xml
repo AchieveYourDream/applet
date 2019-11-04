@@ -37,6 +37,7 @@
       DESCRIPTION = #{description,jdbcType=VARCHAR},
       SHOW_ORDER = #{showOrder,jdbcType=DECIMAL}
     where PARAMETER_CODE = #{parameterCode,jdbcType=VARCHAR}
+    and  PARAMETER_TYPE=#{parameterType}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select PARAMETER_CODE, PARAMETER_NAME, PARAMETER_TYPE, ELEMENT_TYPE, DDT_CODE, LOV_CODE, 

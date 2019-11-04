@@ -127,7 +127,7 @@ public class LovController {
     @ApiOperation(value = "保存LOV信息")
     @ApiImplicitParams({@ApiImplicitParam(name = "slVO", value = "值列表对象[SysLovVO]", paramType = "body", dataType = "SysLovVO", required = true)})
     @RequestMapping(value = "saveLovInfo", method = RequestMethod.POST)
-    public ResponseResult saveLovInfo(@RequestBody SysLovVO slVO) throws Exception {
+    public ResponseResult saveLovInfo( SysLovVO slVO) throws Exception {
         lovService.saveLovInfo(slVO.getSld(), slVO.getSlcList());
 
         ResponseResult result = new ResponseResult();

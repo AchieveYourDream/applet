@@ -35,12 +35,11 @@
             pd.ddt_code,
             pd.lov_code,
             pd.ds_code,
-            pd.display_order,
             pd.description,
-            ddi.item_name element_type_name,
-            ddt.type_name ddt_text,
-            sld.lov_name lov_text,
-            dsd.struct_name ds_text
+            ddi.item_name elementTypeName,
+            ddt.type_name ddtText,
+            sld.lov_name lovText,
+            dsd.struct_name dsText
           from
             sys_parameter_define pd
             left join sys_data_dict_item ddi
@@ -55,7 +54,7 @@
             left join sys_data_struct_define dsd
                 on (pd.ds_code = dsd.struct_code)
          where pd.parameter_type = #{typeCode}
-         order by pd.display_order
+
     </select>
 
     <!-- 获取参数定义信息 -->
@@ -68,12 +67,11 @@
             pd.ddt_code,
             pd.lov_code,
             pd.ds_code,
-            pd.display_order,
             pd.description,
-            ddi.item_name element_type_name,
-            ddt.type_name ddt_text,
-            sld.lov_name lov_text,
-            dsd.struct_name ds_text
+            ddi.item_name elementTypeName,
+            ddt.type_name ddtText,
+            sld.lov_name lovText,
+            dsd.struct_name dsText
           from
             sys_parameter_define pd
             left join sys_data_dict_item ddi
@@ -100,12 +98,11 @@
             pd.ddt_code,
             pd.lov_code,
             pd.ds_code,
-            pd.display_order,
             pd.description,
-            ddi.item_name element_type_name,
-            ddt.type_name ddt_text,
-            sld.lov_name lov_text,
-            dsd.struct_name ds_text,
+            ddi.item_name elementTypeName,
+            ddt.type_name ddtText,
+            sld.lov_name lovText,
+            dsd.struct_name dsText,
             pc.parameter_value
           from
             sys_parameter_define pd
@@ -123,7 +120,6 @@
             left join sys_data_struct_define dsd
                 on (pd.ds_code = dsd.struct_code)
          where pd.parameter_type = #{typeCode}
-         order by pd.display_order
     </select>
 
 </mapper>
