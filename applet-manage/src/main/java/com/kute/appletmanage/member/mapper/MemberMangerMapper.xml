@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.member.dao.MemberMangerMapper">
+
+    <!-- 获取会员列表 -->
+    <select id="getMemberList" resultType="com.kute.appletcore.entity.AppMember">
+        select MEMBER_TEL, MEMBER_SOURCE, MEMBER_TYPE, MEMBER_LEVEL, USER_NAME, REAL_NAME,
+        SEX, HEIGHT, WEIGHT, EMAIL, ADDRESS, REFERRER_NAME, REFERRER_MOBILEPHONE, DELETE_STATUS,
+        STORE_CODE, CREATE_DATE, LAST_UPDATE_DATE, BIRTHDAY, ATTRIBUTE2, ATTRIBUTE3, ATTRIBUTE4,
+        ATTRIBUTE5
+        from APP_MEMBER
+        <if test="_parameter != null and _parameter !=''">
+            <![CDATA[${_parameter}]]>
+        </if>
+        order by create_date desc
+    </select>
+
+
+
+</mapper>

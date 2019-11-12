@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.goods.dao.GoodsManageMapper">
+
+		<!--获取商品主品类下拉选 -->
+		<select id="getMainSelectInfo"  resultType="com.kute.appletcore.vo.SelectVO">
+		select s.node_code code ,s.node_name name from sys_data_struct_node s
+		where s.struct_code='app_goods'
+		and s.parent_node_code='G'
+		and s.enabled_flag='Y'
+		order by  s.display_order
+		</select>
+		
+		<!--获取商品子品类下拉选 -->
+		<select id="getSubSelectInfo" parameterType="string" resultType="com.kute.appletcore.vo.SelectVO">
+		select s.node_code code ,s.node_name name from sys_data_struct_node s
+		where s.struct_code='app_goods'
+		and s.parent_node_code=#{value}
+		and s.enabled_flag='Y'
+		order by  s.display_order
+		</select>
+		
+		
+
+   <!-- 获取小程序商品列表 -->
+     <select id="selectAppGoodsList" parameterType="string" resultType="com.kute.appletcore.entity.AppGoods">
+		 select goods_id
+		 ,delete_flag
+		 ,create_date
+		 ,goods_description
+		 ,goods_name
+		 ,is_hot
+		 ,is_new_product
+		 ,up_off_shelf
+		 ,goods_name_en
+		 ,ddi.item_name styleType
+		 ,dsn2.node_name subStyle
+		 ,goods_sell_price
+		 ,designer_id
+		 ,is_suit
+		 ,custom_flag
+		 ,app_index_show
+		 ,app_index_order
+		 ,details_intro_url
+		 ,need_detail_generate
+		 ,delete_date
+		 ,dsn1.node_name main_style
+		 ,fabric_name
+		 from app_goods ag
+		 LEFT JOIN sys_data_struct_node dsn1  on ag.main_style=dsn1.node_code and dsn1.struct_code='app_goods'
+		 LEFT JOIN sys_data_struct_node dsn2  on  ag.sub_style=dsn2.node_code and dsn2.struct_code='app_goods'
+		 LEFT JOIN sys_data_dict_item ddi     on  ag.style_type=ddi.item_code and  ddi.type_code='app_goos_style'
+		 where 1=1
+		 and delete_flag='N'
+	         <if test="_parameter != null and _parameter !=''">  
+	           <![CDATA[${_parameter}]]>
+			</if>
+       	 order by create_date desc
+    </select>
+
+   
+   <!-- 删除商品 -->
+	 <update id="deleteGoodsById" parameterType="string">
+	        update app_Goods
+	           set delete_flag = 'Y'
+	               ,delete_date=now()
+	         where 1 = 1
+	           and goods_id = #{goodsId}
+	 </update>
+	 
+	 <!-- 上架下架商品 -->
+	 <update id="updateGoodsStatus" parameterType="Map">
+	        update app_Goods
+	           set up_off_shelf = #{upOffShelf}
+	         where 1 = 1
+	           and goods_id = #{goodsId}
+	 </update>
+	
+</mapper>

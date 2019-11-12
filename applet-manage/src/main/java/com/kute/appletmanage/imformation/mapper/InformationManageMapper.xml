@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.imformation.dao.InformationManageMapper">
+
+	  <!-- 获取小程序资讯管理菜单信息 -->
+	  <select  id="getAppInformationMenuInfo" resultType="com.kute.appletcore.entity.SysDataStructNode">
+		SELECT
+            sdsn.node_code,
+            dsna1.attribute_value nodeName,
+            dsna2.attribute_value attribute1
+        FROM
+            sys_data_struct_node sdsn
+            LEFT JOIN sys_data_struct_node_attribute dsna1 ON sdsn.struct_code = dsna1.struct_code
+            AND dsna1.attribute_code = 'chinese_name'
+            AND sdsn.node_code = dsna1.node_code
+            LEFT JOIN sys_data_struct_node_attribute dsna2 ON sdsn.struct_code = dsna2.struct_code
+            AND dsna2.attribute_code = 'english_name'
+            AND sdsn.node_code = dsna2.node_code
+        WHERE
+            sdsn.struct_code = 'app_information'
+            AND enabled_flag = 'Y'
+        ORDER BY
+            sdsn.display_order
+	  
+	  </select>
+
+   <!-- 获取小程序资讯管理列表 -->
+     <select id="selectAppInformationList" parameterType="string" resultType="com.kute.appletcore.entity.AppInformation">
+       select information_id
+              ,show_pic
+              ,title
+              ,content
+              ,isvisible
+              ,create_date
+              ,update_date
+              ,create_by
+              ,detail_url
+              ,use_module
+              ,share_image_url
+              ,is_banner_show
+              ,show_order
+          from app_information
+          where 1=1
+          and use_module=#{useModule}
+        order by show_order 
+    </select>
+   
+    <!-- 修改资讯管理是否展示 -->
+	 <update id="updateInformationVisible" parameterType="Map">
+	        update app_information
+           set isvisible=#{isvisible}
+              ,update_date = now()
+         where 1 = 1
+           and information_id = #{informationId}
+	 </update>
+	 
+	 
+	  <!-- 修改资讯管理照片 -->
+<!-- 	 <update id="updateInformationImage" parameterType="Map"> -->
+<!-- 	        update app_information -->
+<!-- 	           set show_pic=#{show_pic} -->
+<!-- 	         where 1 = 1 -->
+<!-- 	           and information_id = #{information_id} -->
+<!-- 	 </update> -->
+	
+</mapper>

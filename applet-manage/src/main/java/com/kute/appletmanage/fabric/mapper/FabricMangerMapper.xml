@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.fabric.dao.FabricMangerMapper">
+
+    <!-- 获取面料列表 -->
+    <select id="getFabricList" resultType="com.kute.appletcore.entity.SysFabric">
+        SELECT
+        id,
+        CODE,
+        category,
+        color,
+        component,
+        brand,
+        yarn,
+        flower,
+        CASE
+        WHEN STATUS = 'Y' THEN
+        '启用'
+        WHEN STATUS = 'N' THEN
+        '禁用' ELSE '删除'
+        END AS STATUS,
+        similar,
+        proportion,
+        image_name,
+        image_path,
+        replacecode,
+        repertory,
+        stockcode
+        FROM
+        sys_fabric
+        where status !='R'
+        <if test="_parameter != null and _parameter !=''">
+            <![CDATA[${_parameter}]]>
+        </if>
+        order by create_date desc
+    </select>
+
+    <!-- 根据面料名获取面料信息 -->
+    <select id="getFabricInfoByFabricCode" parameterType="string" resultType="com.kute.appletcore.entity.SysFabric">
+            select id, code, category, color, component, brand, yarn, flower, status, similar,
+    proportion, image_name, image_path, replacecode, repertory, stockcode
+            from sys_fabric
+            where 1 = 1
+           and code = #{code}
+    </select>
+
+
+    <!--修改面料状态-->
+    <update id="updateFabricStatus">
+        update sys_fabric
+        set
+          status = #{fabricState},
+          last_update_date=now()
+        where code = #{fabricCode}
+
+        </update>
+
+
+</mapper>

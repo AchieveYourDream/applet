@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.size.dao.SizeMangerMapper">
+
+    <!-- 获取尺码列表 -->
+    <select id="getSizeList" resultType="com.kute.appletcore.entity.AppSize">
+        SELECT
+        size_Id,
+        body_type,
+        chest_circle,
+        combo_code,
+        delete_flag,
+        h_yi_chang,
+        hip_circle,
+        jian_width,
+        waist_circle,
+        eur_code,
+        q_yi_chang,
+        xiu_chang,
+        xiu_fei,
+        xiu_kou,
+        sdsn.node_name AS categoryId,
+        height,
+        cn_code
+        FROM
+        app_size az
+        INNER JOIN sys_data_struct_node sdsn ON az.category_id = sdsn.node_code
+        AND sdsn.struct_code = 'app_goods'
+        <if test="_parameter != null and _parameter !=''">
+            <![CDATA[${_parameter}]]>
+        </if>
+        order by create_date desc
+    </select>
+
+    <!-- 根据欧码和体型获取尺码信息 -->
+    <select id="getSizeInfoBySizeBodyAndEur" resultType="com.kute.appletcore.entity.AppSize">
+              select size_Id, body_type, chest_circle, combo_code, delete_flag, h_yi_chang
+              from app_size
+              where 1=1
+               and body_type = #{bodyType}
+               and eur_code=#{eurCode}
+    </select>
+
+
+
+
+</mapper>
