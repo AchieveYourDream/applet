@@ -26,16 +26,17 @@
     where INFORMATION_ID = #{informationId,jdbcType=DECIMAL}
   </delete>
   <insert id="insert" parameterType="com.kute.appletcore.entity.AppInformation" >
-    insert into APP_INFORMATION (INFORMATION_ID, SHOW_PIC, TITLE, 
+    insert into APP_INFORMATION (
+      SHOW_PIC, TITLE,
       CONTENT, ISVISIBLE, CREATE_DATE, 
       UPDATE_DATE, CREATE_BY, DETAIL_URL, 
       USE_MODULE, SHARE_IMAGE_URL, IS_BANNER_SHOW, 
       ATTRIBUTE1, ATTRIBUTE2, ATTRIBUTE3, 
       ATTRIBUTE4, ATTRIBUTE5, SHOW_ORDER
       )
-    values (#{informationId,jdbcType=DECIMAL}, #{showPic,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{isvisible,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{detailUrl,jdbcType=VARCHAR}, 
+    values ( #{showPic,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+      #{content,jdbcType=VARCHAR}, #{isvisible,jdbcType=VARCHAR},now(),
+      now(), #{createBy,jdbcType=VARCHAR}, #{detailUrl,jdbcType=VARCHAR},
       #{useModule,jdbcType=VARCHAR}, #{shareImageUrl,jdbcType=VARCHAR}, #{isBannerShow,jdbcType=VARCHAR}, 
       #{attribute1,jdbcType=VARCHAR}, #{attribute2,jdbcType=VARCHAR}, #{attribute3,jdbcType=VARCHAR}, 
       #{attribute4,jdbcType=VARCHAR}, #{attribute5,jdbcType=VARCHAR}, #{showOrder,jdbcType=DECIMAL}
@@ -47,11 +48,9 @@
       TITLE = #{title,jdbcType=VARCHAR},
       CONTENT = #{content,jdbcType=VARCHAR},
       ISVISIBLE = #{isvisible,jdbcType=VARCHAR},
-      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = now(),
       CREATE_BY = #{createBy,jdbcType=VARCHAR},
       DETAIL_URL = #{detailUrl,jdbcType=VARCHAR},
-      USE_MODULE = #{useModule,jdbcType=VARCHAR},
       SHARE_IMAGE_URL = #{shareImageUrl,jdbcType=VARCHAR},
       IS_BANNER_SHOW = #{isBannerShow,jdbcType=VARCHAR},
       ATTRIBUTE1 = #{attribute1,jdbcType=VARCHAR},

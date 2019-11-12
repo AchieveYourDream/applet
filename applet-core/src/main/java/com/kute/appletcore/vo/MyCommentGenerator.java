@@ -18,7 +18,6 @@ import static org.mybatis.generator.internal.util.StringUtility.isTrue;
  * mybatis generator 自定义comment生成器.
  * 基于MBG 1.3.2.
  *
- * @author ZhangAY 2016-02-19
  * *
  */
 public class MyCommentGenerator implements CommentGenerator {

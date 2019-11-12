@@ -1,7 +1,5 @@
 package com.kute.appletcore.entity;
 
-import java.util.Date;
-
 public class AppInformation {
     private Integer informationId;
 
@@ -13,9 +11,9 @@ public class AppInformation {
 
     private String isvisible;
 
-    private Date createDate;
+    private String createDate;
 
-    private Date updateDate;
+    private String updateDate;
 
     private String createBy;
 
@@ -79,19 +77,19 @@ public class AppInformation {
         this.isvisible = isvisible;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
-    public Date getUpdateDate() {
+    public String getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(String updateDate) {
         this.updateDate = updateDate;
     }
 

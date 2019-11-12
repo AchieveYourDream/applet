@@ -50,6 +50,12 @@ public interface RoleService  {
     void roleDelete(String roleId) throws Exception;
 
     void saveRoleMenuAuth(Integer roleId, String menu_code) throws Exception;
+    /**
+     * @Description:  添加角色用户关系
+     * @Author: 王斌
+     * @Date: 2019/11/4
+     */
+    void addRoleUserRelation(Integer roleId, String userList) throws Exception;
 
     /**
     * @Description:  删除角色用户关系

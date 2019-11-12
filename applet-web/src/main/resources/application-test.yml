@@ -1,0 +1,43 @@
+server:
+  port: 8082
+swagger:
+  enable: true
+mybatis:
+  mapper-locations: classpath*:com/kute/**/mapper/*Mapper.xml
+  configuration:
+      map-underscore-to-camel-case: true
+spring:
+  application:
+    name: applet-manage
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://172.16.77.26:3306/applet?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+  security:
+   basic:
+      enabled: false
+   user:
+     name: wb
+     password: 123456
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:7001/eureka/
+  instance:
+  #注册名称
+    instance-id: applet-manage
+  #注册显示ip
+    prefer-ip-address: true
+info:
+ app.name: applet-manage
+ company.name: wangbin
+jwt:
+  secret: JWT_SECRET
+  expiration: 86400
+
+#logging:
+#  level:
+#    root : debug
+

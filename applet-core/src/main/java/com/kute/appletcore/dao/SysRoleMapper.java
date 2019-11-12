@@ -1,6 +1,7 @@
 package com.kute.appletcore.dao;
 
 import com.kute.appletcore.entity.SysRole;
+import com.kute.appletcore.entity.SysRoleUser;
 import com.kute.appletcore.entity.SysUser;
 import com.kute.appletcore.util.tree.TreeNodeData;
 import com.kute.appletcore.util.tree.TreeNodeVO;
@@ -60,5 +61,16 @@ public interface SysRoleMapper {
      */
     List<TreeNodeData> getOperationAuthList(Map<String, Object> parameterMap) throws Exception;
 
+    /**
+    * @Description: 添加用户角色关系
+    * @Author: 王斌
+    * @Date: 2019/11/5
+    */
+    int addRoleUserRelation(@Param("userList") List<SysRoleUser> userList);
+    /**
+     * @Description: 删除用户角色关系
+     * @Author: 王斌
+     * @Date: 2019/11/5
+     */
     void delRoleUserRelation(@Param("roleId") String roleId,@Param("userList")  String userList)throws Exception;
 }

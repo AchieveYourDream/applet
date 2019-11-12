@@ -7,7 +7,6 @@
         select lov_code
               ,lov_name
               ,view_name
-              ,dynamic_condition
               ,description
           from sys_lov_define
          order by lov_code
@@ -15,9 +14,7 @@
 
     <!-- 获取值列表视图列表 -->
     <select id="getLovViewList" parameterType="string" resultType="string">
-         select view_name  from user_views v
-    where  v.VIEW_NAME like 'LOV%'
-    order by view_name
+         select table_name from information_schema.tables where table_schema='applet' and  table_name LIKE 'LOV_%'
     </select>
 
     <!-- 获取值列表视图字段列表 -->
@@ -26,10 +23,21 @@
     </select>
 
     <!-- 获取值列表字段列表 -->
-    <select id="getLovColumnList" parameterType="map" resultType="com.kute.appletcore.entity.SysLovColumn">
-        select lov_code,column_name,column_title,display_flag,return_value_flag,return_text_flag from sys_lov_column
-         where 1=1
-          and lov_code = #{lovCode}
+    <select id="getLovColumnList" resultType="com.kute.appletcore.entity.SysLovColumn">
+        SELECT DISTINCT
+            c.column_name columnName,
+            IFNULL(
+                lc.column_title,
+            IFNULL( lc.column_name, '' )) columnTitle,
+            IFNULL( lc.display_flag, 'Y' ) displayFlag,
+            IFNULL( lc.return_value_flag, 'N' ) returnValueFlag,
+            IFNULL( lc.return_text_flag, 'N' ) returnTextFlag
+        FROM
+            ( SELECT column_name, table_name FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = 'applet' ) c
+            LEFT JOIN sys_lov_column lc ON c.column_name = lc.column_name and  c.table_name=lc.lov_code
+        WHERE
+            1 = 1
+            AND c.table_name =#{lovView}
     </select>
 
     <!-- 删除当前值列表的字段列表 -->

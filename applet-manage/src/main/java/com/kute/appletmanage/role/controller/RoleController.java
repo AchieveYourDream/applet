@@ -182,6 +182,25 @@ public class RoleController {
 
         return result;
     }
+    /**
+     * 添加角色用户关系
+     */
+    @ApiOperation(value = "删除角色用户关系")
+    @ApiImplicitParams({@ApiImplicitParam(name = "roleId", value = "角色ID", paramType = "query", required = true)})
+    @RequestMapping(value = "addRoleUserRelation", method = RequestMethod.GET)
+    public ResponseResult addRoleUserRelation(@RequestParam(value = "roleId") Integer roleId,String  userList) throws Exception {
+
+        roleService.addRoleUserRelation(roleId,userList);
+
+        ResponseResult result = new ResponseResult();
+        result.setCode(EnumResultType.SUCCESS.toString());
+        result.setData("");
+
+        return result;
+    }
+
+
+
 
     /**
      * 删除角色用户关系

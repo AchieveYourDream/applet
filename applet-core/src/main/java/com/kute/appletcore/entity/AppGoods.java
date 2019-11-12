@@ -1,13 +1,12 @@
 package com.kute.appletcore.entity;
 
-import java.util.Date;
 
 public class AppGoods {
     private Integer goodsId;
 
     private String deleteFlag;
 
-    private Date createDate;
+    private String createDate;
 
     private String goodsDescription;
 
@@ -17,7 +16,7 @@ public class AppGoods {
 
     private String isNewProduct;
 
-    private String upOffShielf;
+    private String upOffShelf;
 
     private String goodsNameEn;
 
@@ -75,7 +74,7 @@ public class AppGoods {
 
     private String needDetailGenerate;
 
-    private Date deleteDate;
+    private String deleteDate;
 
     private String mainStyle;
 
@@ -97,11 +96,11 @@ public class AppGoods {
         this.deleteFlag = deleteFlag;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
@@ -137,12 +136,12 @@ public class AppGoods {
         this.isNewProduct = isNewProduct;
     }
 
-    public String getUpOffShielf() {
-        return upOffShielf;
+    public String getUpOffShelf() {
+        return upOffShelf;
     }
 
-    public void setUpOffShielf(String upOffShielf) {
-        this.upOffShielf = upOffShielf;
+    public void setUpOffShelf(String upOffShelf) {
+        this.upOffShelf = upOffShelf;
     }
 
     public String getGoodsNameEn() {
@@ -369,11 +368,11 @@ public class AppGoods {
         this.needDetailGenerate = needDetailGenerate;
     }
 
-    public Date getDeleteDate() {
+    public String getDeleteDate() {
         return deleteDate;
     }
 
-    public void setDeleteDate(Date deleteDate) {
+    public void setDeleteDate(String deleteDate) {
         this.deleteDate = deleteDate;
     }
 

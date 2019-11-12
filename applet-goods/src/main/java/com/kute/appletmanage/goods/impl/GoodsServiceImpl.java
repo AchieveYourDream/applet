@@ -52,7 +52,7 @@ public  class GoodsServiceImpl implements GoodsService {
      *
      * @throws Exception
      */
-    @Cacheable(cacheNames="appletAlways",key="methodName")
+//    @Cacheable(cacheNames="appletAlways",key="methodName")
     public ResponseResult getMainSelectInfo() throws Exception{
         ResponseResult result =new ResponseResult();
         List<GoodsMenu> list=goodsMapper.getMainSelectInfo();

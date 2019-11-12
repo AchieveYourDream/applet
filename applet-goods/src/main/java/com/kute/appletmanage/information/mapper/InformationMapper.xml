@@ -5,16 +5,23 @@
 
     <!-- 获取资讯信息品类格局列表 -->
     <select id="selectAppInformationList"  resultType="com.kute.appletcore.vo.InformationVO">
-        select  sdsn.node_code, dsna1.attribute_value chinese_name,dsna2.attribute_value english_name from  sys_data_struct_node sdsn,sys_data_struct_node_attribute dsna1,sys_data_struct_node_attribute dsna2
-		where sdsn.struct_code='app_information'
-		and sdsn.struct_code=dsna1.struct_code(+)
-		and dsna1.attribute_code(+)='chinese_name'
-		and sdsn.node_code=dsna1.node_code(+)
-		and sdsn.struct_code=dsna2.struct_code(+)
-		and dsna2.attribute_code(+)='english_name'
-		and sdsn.node_code=dsna2.node_code(+)
-		and enabled_flag='Y'
-		order by sdsn.display_order
+      SELECT
+            sdsn.node_code,
+            dsna1.attribute_value chinese_name,
+            dsna2.attribute_value english_name
+        FROM
+            sys_data_struct_node sdsn
+            LEFT JOIN sys_data_struct_node_attribute dsna1 ON sdsn.struct_code = dsna1.struct_code
+            AND dsna1.attribute_code = 'chinese_name'
+            AND sdsn.node_code = dsna1.node_code
+            LEFT JOIN sys_data_struct_node_attribute dsna2 ON sdsn.struct_code = dsna2.struct_code
+            AND dsna2.attribute_code = 'english_name'
+            AND sdsn.node_code = dsna2.node_code
+        WHERE
+            sdsn.struct_code = 'app_information'
+            AND enabled_flag = 'Y'
+        ORDER BY
+            sdsn.display_order
     </select>
 
     <!-- 根据所传递品类返回改品类下面所有资讯详情-->

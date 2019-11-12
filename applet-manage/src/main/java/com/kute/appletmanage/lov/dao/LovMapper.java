@@ -26,16 +26,11 @@ public interface LovMapper {
     List<String> getLovViewList(String schema) throws Exception;
 
     /**
-     * 获取值列表视图字段列表
-     * @param parameterMap 参数MAP
-     */
-
-    /**
      * 获取值列表字段列表
      *
      * @param parameterMap 参数MAP
      */
-    List<SysLovColumn> getLovColumnList(Map<String, Object> parameterMap) throws Exception;
+    List<SysLovColumn> getLovColumnList(String  lovView) throws Exception;
 
     /**
      * 删除当前值列表的字段列表
@@ -43,6 +38,8 @@ public interface LovMapper {
      * @param lovCode 值列表编码
      */
     void removeLovColumnList(String lovCode) throws Exception;
+
+
 
     List<Map<String, Object>> getLovViewColumnList(Map<String, Object> parameterMap);
     //List<Map<String, Object>> getLovViewColumnList();

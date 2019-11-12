@@ -1,7 +1,5 @@
 package com.kute.appletcore.entity;
 
-import java.util.Date;
-
 public class SysUser {
     private Integer userId;
 
@@ -23,7 +21,7 @@ public class SysUser {
 
     private String userStatus;
 
-    private Date startDate;
+    private String startDate;
 
     private String endDate;
 
@@ -34,6 +32,16 @@ public class SysUser {
     private String lastUpdateDate;
 
     private String realname;
+
+    private String headPortrait;
+
+    public String getHeadPortrait() {
+        return headPortrait;
+    }
+
+    public void setHeadPortrait(String headPortrait) {
+        this.headPortrait = headPortrait;
+    }
 
     public Integer getUserId() {
         return userId;
@@ -115,11 +123,11 @@ public class SysUser {
         this.userStatus = userStatus;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 

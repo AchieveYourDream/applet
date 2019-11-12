@@ -4,10 +4,7 @@ package com.kute.appletmanage.role.impl;
 import com.kute.appletcore.dao.SysDataStructDefineMapper;
 import com.kute.appletcore.dao.SysRoleMapper;
 import com.kute.appletcore.dao.SysRoleMenuRelationMapper;
-import com.kute.appletcore.entity.SysDataStructDefine;
-import com.kute.appletcore.entity.SysRole;
-import com.kute.appletcore.entity.SysRoleMenuRelation;
-import com.kute.appletcore.entity.SysUser;
+import com.kute.appletcore.entity.*;
 import com.kute.appletcore.util.JsonUtil;
 import com.kute.appletcore.util.tree.TreeNode;
 import com.kute.appletcore.util.tree.TreeNodeState;
@@ -38,6 +35,7 @@ public class RoleServiceImpl  implements RoleService {
 
     @Autowired
     private SysDataStructDefineMapper sysDataStructDefineMapper;
+
 
     /**
      * 获取角色列表
@@ -202,15 +200,42 @@ public class RoleServiceImpl  implements RoleService {
 
     }
 
+
+    /**
+     * @Description:  添加用户关系
+     * @Author: 王斌
+     * @Date: 2019/11/4
+     */
+    public void addRoleUserRelation(Integer roleId, String userList) throws Exception {
+        String[] usernameList = userList.split(",");
+
+
+        List<SysRoleUser> list=new ArrayList<>();
+        //再把所有权限新增一遍
+        for (String username : usernameList) {
+            SysRoleUser sr = new SysRoleUser();
+            sr.setUserName(username);
+            sr.setRoleId(roleId);
+            list.add(sr);
+
+        }
+        sysRoleMapper.addRoleUserRelation(list);
+
+
+    }
+
+
+
     /**
      * @Description:  删除角色用户关系
      * @Author: 王斌
      * @Date: 2019/11/4
      */
     public void delRoleUserRelation(String roleId, String userList) throws Exception {
-
         sysRoleMapper.delRoleUserRelation(roleId,userList);
 
     }
+
+
 
 }

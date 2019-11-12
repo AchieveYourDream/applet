@@ -1,5 +1,6 @@
 package com.kute.appletmanage;
 
+import com.github.pagehelper.PageHelper;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 import java.net.UnknownHostException;
+import java.util.Properties;
+
 @SpringBootApplication(scanBasePackages = {"com.kute"})
 @MapperScan(basePackages = "com.kute.**.dao")
 @EnableEurekaClient
@@ -41,5 +44,17 @@ public class AppletManageApplication {
         jedisConnectionFactory.setDatabase(2);
         return template;
 
+    }
+
+    @Bean
+    public PageHelper pageHelper(){
+        PageHelper pageHelper = new PageHelper();
+        Properties properties = new Properties();
+        properties.setProperty("offsetAsPageNum","true");
+        properties.setProperty("rowBoundsWithCount","true");
+        properties.setProperty("reasonable","true");
+        properties.setProperty("dialect","mysql");    //配置mysql数据库的方言
+        pageHelper.setProperties(properties);
+        return pageHelper;
     }
 }

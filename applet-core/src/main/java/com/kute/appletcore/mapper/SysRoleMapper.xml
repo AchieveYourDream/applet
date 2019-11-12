@@ -117,8 +117,15 @@
            and dsna.attribute_value = so.function_code
          order by so.operation_code
     </select>
-
-
+    <!--添加用户角色关系-->
+    <insert id="addRoleUserRelation"  parameterType="java.util.List" >
+        insert into sys_role_user (role_id, user_name)
+        <foreach collection="userList" item="line" open="" separator="union all" close="">
+            select
+            #{line.roleId}, #{line.userName}
+            from dual
+        </foreach>
+    </insert>
 
     <!-- 删除当前角色的菜单权限列表 -->
     <delete id="delRoleUserRelation" parameterType="string">

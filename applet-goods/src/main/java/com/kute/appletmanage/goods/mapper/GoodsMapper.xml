@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kute.appletcore.dao.GoodsMapper">
+<mapper namespace="com.kute.appletmanage.goods.dao.GoodsMapper">
 
     <!-- 获取小程序商品列表 根据服装风格-->
     <select id="selectAppGoodsListByStyle"  parameterType="string" resultType="com.kute.appletcore.entity.AppGoods">
@@ -8,7 +8,7 @@
             where  s.parameter_code='goods_img')||DETAIL_MODEL_ONE DETAIL_MODEL_ONE, DETAILS_INTRO_URL,fabric_name
         from app_goods s
        where s.style_type=#{value}
-        and s.up_off_shielf='Y'
+        and s.up_off_shelf='Y'
         and s.delete_flag='N'
         order by s.app_index_order
     </select>
@@ -19,7 +19,7 @@
             where  s.parameter_code='goods_img')||DETAIL_MODEL_ONE DETAIL_MODEL_ONE, DETAILS_INTRO_URL,fabric_name
         from app_goods s
        where 1=1
-        and s.up_off_shielf='Y'
+        and s.up_off_shelf='Y'
 		and s.main_style=#{main_style}
 		<if test="sub_style != null and sub_style !=''">
 			and s.sub_style=#{sub_style}
@@ -57,10 +57,17 @@
 
 	<!--获取首页APP显示品类及数量-->
 	<select id="getAppMainShowTypeAndNum"  resultType="com.kute.appletcore.entity.SysParameterDefine">
-		select spd.parameter_code,spd.parameter_name,spc.parameter_value description  from sys_parameter_define spd, sys_parameter_config spc
-		where  spd.parameter_code=spc.parameter_code
-		and spd.parameter_type='app_show_type_and_num'
-		order by spd.show_order
+		SELECT
+			spd.parameter_code,
+			spd.parameter_name,
+			spc.parameter_value description
+		FROM
+			sys_parameter_define spd
+			INNER JOIN sys_parameter_config spc ON spd.parameter_code = spc.parameter_code
+		WHERE
+			spd.parameter_type = 'app_show_type_and_num'
+		ORDER BY
+			spd.show_order
 	</select>
 
 
@@ -80,7 +87,7 @@
 		fabric_name
 		from app_goods s
 		where 1 = 1
-		and s.up_off_shielf = 'Y'
+		and s.up_off_shelf = 'Y'
 		and s.main_style = #{main_style}
 		and s.APP_INDEX_SHOW='Y'
 		and s.delete_flag='N'

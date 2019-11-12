@@ -3,6 +3,8 @@ package com.kute.appletmanage.security.impl;
 
 import com.kute.appletcore.dao.SysUserMapper;
 import com.kute.appletcore.entity.SysUser;
+import com.kute.appletcore.jwt.JWTTokenUtil;
+import com.kute.appletcore.jwt.JWTUserDetails;
 import com.kute.appletcore.util.JsonUtil;
 import com.kute.appletcore.util.MD5Util;
 import com.kute.appletcore.util.RSAUtil;
@@ -10,8 +12,6 @@ import com.kute.appletcore.util.tree.TreeNode;
 import com.kute.appletcore.util.tree.TreeNodeVO;
 import com.kute.appletcore.vo.ResponseResult;
 import com.kute.appletmanage.security.dao.SecurityMapper;
-import com.kute.appletmanage.security.jwt.JWTTokenUtil;
-import com.kute.appletmanage.security.jwt.JWTUserDetails;
 import com.kute.appletmanage.security.service.SecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -83,8 +83,9 @@ public class SecurityServiceImpl implements SecurityService {
            String loginToken = JWTTokenUtil.generateToken(secret, expiration, new JWTUserDetails(sysUser.getUsername()));
            map.put("username", sysUser.getUsername());
            map.put("Authorization", loginToken);
-           map.put("bootstrapSkin", sysUser.getSkin());
+           map.put("lastname", sysUser.getLastname());
            map.put("realname", sysUser.getRealname());
+           map.put("headPortrait", sysUser.getHeadPortrait());
        }
 
         return new ResponseResult(loginStatus,loginMessage,map);

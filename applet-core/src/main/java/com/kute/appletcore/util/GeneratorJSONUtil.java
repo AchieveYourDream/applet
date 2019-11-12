@@ -54,7 +54,7 @@ public class GeneratorJSONUtil {
 		try {
 
 			String pkg = "com.kute.appletcore.entity.";
-			String cla = "SysRole";
+			String cla = "AppMember";
 			GeneratorJSONUtil.general(pkg + cla);
 		} catch (Exception e) {
 			e.printStackTrace();

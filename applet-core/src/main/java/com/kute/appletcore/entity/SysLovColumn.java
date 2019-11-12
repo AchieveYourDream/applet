@@ -13,8 +13,6 @@ public class SysLovColumn {
 
     private String returnTextFlag;
 
-    private String display;
-
     public String getLovCode() {
         return lovCode;
     }
@@ -63,11 +61,4 @@ public class SysLovColumn {
         this.returnTextFlag = returnTextFlag;
     }
 
-    public String getDisplay() {
-        return display;
-    }
-
-    public void setDisplay(String display) {
-        this.display = display;
-    }
 }

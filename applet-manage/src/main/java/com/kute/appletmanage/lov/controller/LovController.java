@@ -4,7 +4,6 @@ import com.kute.appletcore.entity.SysLovColumn;
 import com.kute.appletcore.entity.SysLovDefine;
 import com.kute.appletcore.enumeration.EnumResultType;
 import com.kute.appletcore.util.ApplicationConstant;
-import com.kute.appletcore.util.JsonUtil;
 import com.kute.appletcore.vo.LovCountVO;
 import com.kute.appletcore.vo.ResponseResult;
 import com.kute.appletcore.vo.SysLovVO;
@@ -90,9 +89,8 @@ public class LovController {
     @ApiImplicitParams({@ApiImplicitParam(name = "viewName", value = "视图名称", paramType = "query", required = true),
             @ApiImplicitParam(name = "lovCode", value = "值列表名称", paramType = "query", required = true)})
     @RequestMapping(value = "getLovColumnList", method = RequestMethod.GET)
-    public ResponseResult getLovColumnList(@RequestParam(value = "viewName") String viewName,
-                                           @RequestParam(value = "lovCode") String lovCode) throws Exception {
-        List<SysLovColumn> slcList = lovService.getLovColumnList(viewName, lovCode);
+    public ResponseResult getLovColumnList(@RequestParam(value = "viewName") String viewName) throws Exception {
+        List<SysLovColumn> slcList = lovService.getLovColumnList(viewName);
 
         ResponseResult result = new ResponseResult();
         result.setCode(EnumResultType.SUCCESS.toString());
@@ -127,7 +125,7 @@ public class LovController {
     @ApiOperation(value = "保存LOV信息")
     @ApiImplicitParams({@ApiImplicitParam(name = "slVO", value = "值列表对象[SysLovVO]", paramType = "body", dataType = "SysLovVO", required = true)})
     @RequestMapping(value = "saveLovInfo", method = RequestMethod.POST)
-    public ResponseResult saveLovInfo( SysLovVO slVO) throws Exception {
+    public ResponseResult saveLovInfo( @RequestBody  SysLovVO slVO) throws Exception {
         lovService.saveLovInfo(slVO.getSld(), slVO.getSlcList());
 
         ResponseResult result = new ResponseResult();
@@ -145,20 +143,13 @@ public class LovController {
     @RequestMapping(value = "getLovDataList", method = RequestMethod.GET)
     public ResponseResult getLovDataList(@RequestParam(value = "lovCode") String lovCode) throws Exception {
         SysLovDefine sld = lovService.getLovDefineInfo(lovCode); //获取值列表
-        List<SysLovColumn> slcList = lovService.getLovColumnList("", lovCode);//获取 子值列表list
-        List<Map<String, Object>> dataList = lovService.getLovViewColumnList(sld.getViewName());//获取视图数据
+        List<SysLovColumn> slcList = lovService.getLovColumnList( lovCode);//获取 子值列表list
         LovCountVO vo = new LovCountVO();
         vo.setSlcList(slcList);
-        vo.setDataStr(JsonUtil.getJSONFromObjectList(dataList).toLowerCase());
-
-//		String returnValueColumn = "";
-//		String returnTextColumn = "";
-
         for (SysLovColumn slc : vo.getSlcList()) {
             if ("Y".equals(slc.getReturnValueFlag())) {
                 vo.setReturnValueColumn(slc.getColumnName());
             }
-
             if ("Y".equals(slc.getReturnTextFlag())) {
                 vo.setReturnTextColumn(slc.getColumnName());
             }
@@ -180,7 +171,7 @@ public class LovController {
         List<Map<String, Object>> dataList = lovService.getLovViewColumnList(sld.getViewName());//获取视图数据
         //map中的key全部变成小写
 
-        List<Map<String, Object>> returnData = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> returnData = new ArrayList<>();
         if (dataList != null && !dataList.isEmpty()) {
             for (Map<String, Object> map : dataList) {
                 Map<String, Object> resultMap = new HashMap<>();

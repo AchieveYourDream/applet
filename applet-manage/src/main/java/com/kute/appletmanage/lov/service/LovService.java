@@ -19,10 +19,7 @@ public interface LovService {
      * 删除值列项
      */
     void removeLovDefine(String lovCode) throws Exception;
-    /**
-     * 删除值列表
-     */
-    void removeLovColumnList(String lovCode) throws Exception;
+
     /**
      * 获取值列表定义信息
      */
@@ -31,9 +28,8 @@ public interface LovService {
     /**
      * 获取值列表视图字段列表
      * @param viewName 视图名称
-     * @param lovCode  值列表编码
      */
-    List<SysLovColumn> getLovColumnList(String viewName, String lovCode) throws Exception;
+    List<SysLovColumn> getLovColumnList(String viewName) throws Exception;
 
     List<Map<String, Object>> getLovViewColumnList(String viewName) throws Exception;
     /**

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletweb.member.dao.MemberWebMapper">
+
+    <!--获取会员收货地址-->
+    <select id="selectCusAddressList" resultType="com.kute.appletcore.entity.AppCusAddress" parameterType="String">
+    select ID, MEMBER_ID, PROVINCE, CITY, COUNTY, STREET, IS_DEFAULT, ATTRIBUTE1, ATTRIBUTE2,
+    ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5, PROVINCE_NAME, CITY_NAME, COUNTY_NAME, CREATE_DATE,
+    UPDATE_DATE
+    from APP_CUS_ADDRESS
+    where MEMBER_ID=#{value}
+  </select>
+    <!--将原来的默认收货地址设置为非默认-->
+    <update id="updateAddressDefault" parameterType="String">
+        update APP_CUS_ADDRESS
+        set IS_DEFAULT='N'
+        where MEMBER_ID=#{value}
+        and IS_DEFAULT='Y'
+    </update>
+
+    <!--设置默认收货地址-->
+    <update id="setAddressDefault" parameterType="String">
+        update APP_CUS_ADDRESS
+        set IS_DEFAULT='Y'
+        where id=#{value}
+    </update>
+</mapper>

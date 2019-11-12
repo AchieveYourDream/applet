@@ -26,6 +26,8 @@
         <module>applet-goods</module>
         <module>applet-eureka</module>
         <module>applet-gateway</module>
+        <module>applet-static</module>
+        <module>applet-manage</module>
     </modules>
 
     <dependencies>
@@ -54,7 +56,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
 
 
         <!-- lombok -->
@@ -117,6 +118,19 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <!--分页-->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>4.1.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.0</version>
+        </dependency>
+
 
     </dependencies>
 

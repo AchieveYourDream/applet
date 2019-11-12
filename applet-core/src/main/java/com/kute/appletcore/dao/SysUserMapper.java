@@ -8,5 +8,9 @@ public interface SysUserMapper {
 
     List<SysUser> selectAll();
 
-    SysUser selectUserByUserName(String username);
+    int updateByPrimaryKey(SysUser record);
+
+    int  deleteByPrimaryKey(String userName);
+
+    SysUser selectUserByUserName(String userName);
 }

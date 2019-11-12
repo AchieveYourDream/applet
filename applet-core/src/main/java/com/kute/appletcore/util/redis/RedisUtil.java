@@ -35,7 +35,7 @@ public class RedisUtil {
      */
     public void remove(final String... keys) {
         for (String key : keys) {
-            remove(applicationName+"_"+key);
+            remove(applicationName+":"+key);
         }
     }
 
@@ -47,7 +47,7 @@ public class RedisUtil {
     public void removePattern(final String pattern) {
         Set<Serializable> keys = redisTemplate.keys(pattern);
         if (keys.size() > 0)
-            redisTemplate.delete(applicationName+"_"+keys);
+            redisTemplate.delete(applicationName+":"+keys);
     }
 
     /**
@@ -57,7 +57,7 @@ public class RedisUtil {
      */
     public void remove(final String key) {
         if (exists(key)) {
-            redisTemplate.delete(applicationName+"_"+key);
+            redisTemplate.delete(applicationName+":"+key);
         }
     }
 
@@ -68,7 +68,7 @@ public class RedisUtil {
      * @return
      */
     public boolean exists(final String key) {
-        return redisTemplate.hasKey(applicationName+"_"+key);
+        return redisTemplate.hasKey(applicationName+":"+key);
     }
 
     /**
@@ -81,7 +81,7 @@ public class RedisUtil {
         Object result = null;
         redisTemplate.setValueSerializer(new StringRedisSerializer());
         ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-        result = operations.get(applicationName+"_"+key);
+        result = operations.get(applicationName+":"+key);
         if (result == null) {
             return null;
         }
@@ -99,7 +99,7 @@ public class RedisUtil {
         boolean result = false;
         try {
             ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
-            operations.set(applicationName+"_"+key, value);
+            operations.set(applicationName+":"+key, value);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,8 +119,8 @@ public class RedisUtil {
         try {
             ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
 
-            operations.set(applicationName+"_"+key, value);
-            redisTemplate.expire(applicationName+"_"+key, expireTime, TimeUnit.MINUTES);
+            operations.set(applicationName+":"+key, value);
+            redisTemplate.expire(applicationName+":"+key, expireTime, TimeUnit.MINUTES);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +131,7 @@ public class RedisUtil {
     public boolean hmset(String key, Map<String, String> value) {
         boolean result = false;
         try {
-            redisTemplate.opsForHash().putAll(applicationName+"_"+key, value);
+            redisTemplate.opsForHash().putAll(applicationName+":"+key, value);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -142,7 +142,7 @@ public class RedisUtil {
     public Map<String, String> hmget(String key) {
         Map<String, String> result = null;
         try {
-            result = redisTemplate.opsForHash().entries(applicationName+"_"+key);
+            result = redisTemplate.opsForHash().entries(applicationName+":"+key);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -26,7 +26,10 @@
     <result column="ATTRIBUTE5" property="attribute5" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from APP_MEMBER
+  update APP_MEMBER
+    set
+      DELETE_STATUS = 'Y',
+      LAST_UPDATE_DATE =now()
     where MEMBER_TEL = #{memberTel,jdbcType=VARCHAR}
   </delete>
   <insert id="insert" parameterType="com.kute.appletcore.entity.AppMember" >
@@ -38,12 +41,12 @@
       CREATE_DATE, LAST_UPDATE_DATE, BIRTHDAY, 
       ATTRIBUTE2, ATTRIBUTE3, ATTRIBUTE4, 
       ATTRIBUTE5)
-    values (#{memberTel,jdbcType=VARCHAR}, #{memberSource,jdbcType=VARCHAR}, #{memberType,jdbcType=VARCHAR}, 
+    values (#{memberTel,jdbcType=VARCHAR}, #{memberSource,jdbcType=VARCHAR}, #{memberType,jdbcType=VARCHAR},
       #{memberLevel,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{referrerName,jdbcType=VARCHAR}, 
-      #{referrerMobilephone,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=VARCHAR}, #{storeCode,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{lastUpdateDate,jdbcType=TIMESTAMP}, #{birthday,jdbcType=VARCHAR}, 
+      #{referrerMobilephone,jdbcType=VARCHAR},'N', #{storeCode,jdbcType=VARCHAR},
+      now(), now(), #{birthday,jdbcType=VARCHAR},
       #{attribute2,jdbcType=VARCHAR}, #{attribute3,jdbcType=VARCHAR}, #{attribute4,jdbcType=VARCHAR}, 
       #{attribute5,jdbcType=VARCHAR})
   </insert>
@@ -63,8 +66,7 @@
       REFERRER_MOBILEPHONE = #{referrerMobilephone,jdbcType=VARCHAR},
       DELETE_STATUS = #{deleteStatus,jdbcType=VARCHAR},
       STORE_CODE = #{storeCode,jdbcType=VARCHAR},
-      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
-      LAST_UPDATE_DATE = #{lastUpdateDate,jdbcType=TIMESTAMP},
+      LAST_UPDATE_DATE = now(),
       BIRTHDAY = #{birthday,jdbcType=VARCHAR},
       ATTRIBUTE2 = #{attribute2,jdbcType=VARCHAR},
       ATTRIBUTE3 = #{attribute3,jdbcType=VARCHAR},

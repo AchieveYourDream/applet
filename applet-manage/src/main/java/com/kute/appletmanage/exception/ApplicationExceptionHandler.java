@@ -26,8 +26,8 @@ public class ApplicationExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseResult handleException(Exception e) {
-        System.out.println(e.getMessage());
-        logger.info(e.getMessage());
+        System.out.println(e);
+        logger.info(e.toString());
         ResponseResult result = new ResponseResult();
         result.setCode("E");
         result.setData(e.getMessage());

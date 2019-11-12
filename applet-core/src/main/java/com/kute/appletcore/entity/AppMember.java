@@ -1,7 +1,5 @@
 package com.kute.appletcore.entity;
 
-import java.util.Date;
-
 public class AppMember {
     private String memberTel;
 
@@ -33,9 +31,9 @@ public class AppMember {
 
     private String storeCode;
 
-    private Date createDate;
+    private String  createDate;
 
-    private Date lastUpdateDate;
+    private String lastUpdateDate;
 
     private String birthday;
 
@@ -167,19 +165,19 @@ public class AppMember {
         this.storeCode = storeCode;
     }
 
-    public Date getCreateDate() {
+    public String getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(String createDate) {
         this.createDate = createDate;
     }
 
-    public Date getLastUpdateDate() {
+    public String getLastUpdateDate() {
         return lastUpdateDate;
     }
 
-    public void setLastUpdateDate(Date lastUpdateDate) {
+    public void setLastUpdateDate(String lastUpdateDate) {
         this.lastUpdateDate = lastUpdateDate;
     }
 

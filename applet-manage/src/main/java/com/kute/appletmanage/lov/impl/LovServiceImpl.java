@@ -57,15 +57,10 @@ public class LovServiceImpl implements LovService {
      */
     public void removeLovDefine(String lovCode) throws Exception {
         sysLovDefineMapper.deleteByPrimaryKey(lovCode);
-    }
-
-    /**
-     * 删除值列表
-     */
-    public void removeLovColumnList(String lovCode) throws Exception {
         lovMapper.removeLovColumnList(lovCode);
-    }
 
+
+    }
 
     /**
      * 获取值列表定义信息
@@ -78,21 +73,15 @@ public class LovServiceImpl implements LovService {
      * 获取值列表视图字段列表
      *
      * @param viewName 视图名称
-     * @param lovCode  值列表编码
      */
-    public List<SysLovColumn> getLovColumnList(String viewName, String lovCode) throws Exception {
-        Map<String, Object> parameterMap = new HashMap<>();
-        parameterMap.put("schema", schema);
-        parameterMap.put("viewName", viewName);
-        parameterMap.put("lovCode", lovCode);
+    public List<SysLovColumn> getLovColumnList(String viewName) throws Exception {
 
-        List<SysLovColumn> slcList = null;
-        slcList = lovMapper.getLovColumnList(parameterMap);
-        /*if (lovCode != null && !"".equals(lovCode)) {
-            slcList = lovMapper.getLovColumnList(parameterMap);
-        } else {
-            slcList = lovMapper.getLovViewColumnList(parameterMap);
-        }*/
+        List<SysLovColumn> slcList = lovMapper.getLovColumnList(viewName);
+//        if (lovCode != null && !"".equals(lovCode)) {
+//            slcList = lovMapper.getLovColumnList(parameterMap);
+//        } else {
+//            slcList = lovMapper.getLovViewColumnList(parameterMap);
+//        }
 
         return slcList;
     }
