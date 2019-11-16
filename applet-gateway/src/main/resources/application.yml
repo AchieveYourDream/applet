@@ -36,7 +36,6 @@ spring:
 #            - Path=/apo/wangb
 #          filters:
 #            - IgnoreTestGlobalFilter  #在本路由启用跳过全局过滤器
-
 eureka:
   client:
     service-url:

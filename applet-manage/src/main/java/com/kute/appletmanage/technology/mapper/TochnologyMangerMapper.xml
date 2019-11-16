@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.technology.dao.TechnologyMangerMapper">
+
+
+    <!--获取数据结构第一层结构树-->
+    <select id="getDataStructNodeTree" parameterType="string" resultType="com.kute.appletcore.util.tree.TreeNodeVO">
+
+			select
+		  dsn.node_code,
+		  dsn.parent_node_code,
+		  dsn.node_name
+		from
+		  sys_data_struct_node dsn
+		where dsn.struct_code = 'app_goods'
+		  and dsn.parent_node_code='G'
+		order by dsn.node_code,dsn.display_order
+
+    </select>
+
+
+    <!--获取工艺节点树-->
+    <select id="getTechnologyNodeTree" parameterType="string" resultType="com.kute.appletcore.util.tree.TreeNodeVO">
+
+			select
+		  atn.node_code,
+		  atn.parent_node_code,
+		  atn.node_name
+		from
+		  app_technology_node atn
+		order by atn.node_code
+
+    </select>
+
+
+
+    <delete id="removeTechnologyNodeAttributeListByNodeCode"  >
+    delete from app_technology_attribute
+    where node_code =#{nodeCode}
+    </delete>
+
+    <delete id="deleteTechnologyNodeByNodeCode"  >
+    delete from app_technology_node
+    where node_code =#{nodeCode}
+    </delete>
+
+
+
+
+    <!-- 获取工艺列表 -->
+    <select id="getTechnologyList" resultType="com.kute.appletcore.entity.AppTechnologyAttribute">
+        select id, node_code, technology_name, factory_code, description, is_default, is_zw,
+        technology_img, technology_price, technology_style
+        from app_technology_attribute
+        where node_code=#{nodeCode}
+        <if test="search != null and search !=''">
+            <![CDATA[${search}]]>
+        </if>
+        order by create_date desc
+    </select>
+
+    <!-- 将所有节点下的工艺设置成非默认 -->
+    <update id="updateTechnologyIsDefault" >
+    update app_technology_attribute
+    set
+      is_default = 'N'
+    where node_code = #{nodeCode}
+  </update>
+    <update id="updateTechnologyDefault" >
+    update app_technology_attribute
+    set
+      is_default = 'Y'
+    where node_code = #{nodeCode}
+    and  id=#{technologyId}
+  </update>
+
+
+<!--获取一个节点下面的默认工艺数量-->
+    <select id="selectDefaultNum"  resultType="java.lang.Integer" >
+    select count(1)
+    from app_technology_attribute
+    where node_code=#{nodeCode}
+    and is_default='Y'
+  </select>
+
+
+</mapper>

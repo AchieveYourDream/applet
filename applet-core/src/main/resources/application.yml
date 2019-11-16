@@ -1,5 +1,3 @@
-server:
-  port: 8083
 swagger:
   enable: true
 mybatis:
@@ -7,10 +5,8 @@ mybatis:
   configuration:
       map-underscore-to-camel-case: true
 spring:
-  jackson:
-    default-property-inclusion: non_null
-  application:
-    name: applet-web
+  profiles:
+     active: dev
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://172.16.77.26:3306/applet?useUnicode=true&characterEncoding=utf-8
@@ -22,35 +18,12 @@ spring:
    user:
      name: wb
      password: 123456
-  redis:
-   database: 15
-   host: 172.16.7.71
-   port: 6379
-   password:
-   # 连接超时时间，单位毫秒
-   timeout: 30000
-   pool:
-     # 最大连接数，如果为-1则不限制
-     max-active: 8
-     # 最大阻塞等待时间，如果为-1则不限制
-     max-wait: -1
-     #最大空闲连接
-     max-idle: 8
-     #最小空闲连接
-     min-idle: 1
-
 eureka:
   client:
     service-url:
       defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:7001/eureka/
-  instance:
-  #注册名称
-    instance-id: applet-web
   #注册显示ip
     prefer-ip-address: true
-info:
- app.name: applet-web
- company.name: wangbin
 jwt:
   secret: JWT_SECRET
   expiration: 86400

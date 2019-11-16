@@ -11,6 +11,8 @@ mybatis:
   configuration:
       map-underscore-to-camel-case: true
 spring:
+  jackson:
+    default-property-inclusion: non_null
   application:
     name: applet-goods
   datasource:
@@ -40,7 +42,7 @@ info:
 applet:
   imgSavePath: /home/image/
   qrcodePath: /home/image/
-#logging:
-#  level:
-#    root : info
+jwt:
+  secret: JWT_SECRET
+  expiration: 86400
 

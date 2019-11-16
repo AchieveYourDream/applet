@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletcore.dao.SysFabricMapper">
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.SysFabric">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="yarn" jdbcType="VARCHAR" property="yarn" />
+    <result column="flower" jdbcType="VARCHAR" property="flower" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="similar" jdbcType="VARCHAR" property="similar" />
+    <result column="proportion" jdbcType="VARCHAR" property="proportion" />
+    <result column="image_name" jdbcType="VARCHAR" property="imageName" />
+    <result column="image_path" jdbcType="VARCHAR" property="imagePath" />
+    <result column="replacecode" jdbcType="VARCHAR" property="replacecode" />
+    <result column="repertory" jdbcType="INTEGER" property="repertory" />
+    <result column="stockcode" jdbcType="VARCHAR" property="stockcode" />
+    <result column="create_date" jdbcType="DATE" property="createDate" />
+    <result column="last_update_date" jdbcType="DATE" property="lastUpdateDate" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    update sys_fabric
+        set
+          status = 'R',
+    where code = #{code}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.SysFabric">
+    insert into sys_fabric ( code, category,
+      color, component, brand,
+      yarn, flower, status,
+      similar, proportion, image_name,
+      image_path, replacecode, repertory,
+      stockcode, create_date, last_update_date
+      )
+    values ( #{code,jdbcType=VARCHAR}, #{category,jdbcType=VARCHAR},
+      #{color,jdbcType=VARCHAR}, #{component,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR},
+      #{yarn,jdbcType=VARCHAR}, #{flower,jdbcType=VARCHAR}, 'Y',
+      #{similar,jdbcType=VARCHAR}, #{proportion,jdbcType=VARCHAR}, #{imageName,jdbcType=VARCHAR},
+      #{imagePath,jdbcType=VARCHAR}, #{replacecode,jdbcType=VARCHAR}, #{repertory,jdbcType=INTEGER},
+      #{stockcode,jdbcType=VARCHAR}, now(), now()
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.SysFabric">
+    update sys_fabric
+    set code = #{code,jdbcType=VARCHAR},
+      category = #{category,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      yarn = #{yarn,jdbcType=VARCHAR},
+      flower = #{flower,jdbcType=VARCHAR},
+      similar = #{similar,jdbcType=VARCHAR},
+      proportion = #{proportion,jdbcType=VARCHAR},
+      image_name = #{imageName,jdbcType=VARCHAR},
+      image_path = #{imagePath,jdbcType=VARCHAR},
+      replacecode = #{replacecode,jdbcType=VARCHAR},
+      repertory = #{repertory,jdbcType=INTEGER},
+      stockcode = #{stockcode,jdbcType=VARCHAR},
+      last_update_date = now()
+    where code = #{code}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, code, category, color, component, brand, yarn, flower, status, similar,
+    proportion, image_name, image_path, replacecode, repertory, stockcode, create_date,
+    last_update_date
+    from sys_fabric
+    where code = #{code}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, code, category, color, component, brand, yarn, flower, status, similar,
+    proportion, image_name, image_path, replacecode, repertory, stockcode, create_date,
+    last_update_date
+    from sys_fabric
+  </select>
+
+</mapper>

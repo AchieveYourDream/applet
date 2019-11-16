@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppTechnologyAttributeMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppTechnologyAttribute" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="node_code" property="nodeCode" jdbcType="VARCHAR" />
+    <result column="technology_name" property="technologyName" jdbcType="VARCHAR" />
+    <result column="factory_code" property="factoryCode" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="is_default" property="isDefault" jdbcType="VARCHAR" />
+    <result column="is_zw" property="isZw" jdbcType="VARCHAR" />
+    <result column="technology_img" property="technologyImg" jdbcType="VARCHAR" />
+    <result column="technology_price" property="technologyPrice" jdbcType="VARCHAR" />
+    <result column="technology_style" property="technologyStyle" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from app_technology_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppTechnologyAttribute" >
+    insert into app_technology_attribute (id, node_code, technology_name, 
+      factory_code, description, is_default, 
+      is_zw, technology_img, technology_price, 
+      technology_style,create_date,last_update_date)
+    values (#{id,jdbcType=INTEGER}, #{nodeCode,jdbcType=VARCHAR}, #{technologyName,jdbcType=VARCHAR}, 
+      #{factoryCode,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{isDefault,jdbcType=VARCHAR}, 
+      #{isZw,jdbcType=VARCHAR}, #{technologyImg,jdbcType=VARCHAR}, #{technologyPrice,jdbcType=VARCHAR}, 
+      #{technologyStyle,jdbcType=VARCHAR},now(),now())
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppTechnologyAttribute" >
+    update app_technology_attribute
+    set node_code = #{nodeCode,jdbcType=VARCHAR},
+      technology_name = #{technologyName,jdbcType=VARCHAR},
+      factory_code = #{factoryCode,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=VARCHAR},
+      is_zw = #{isZw,jdbcType=VARCHAR},
+      technology_img = #{technologyImg,jdbcType=VARCHAR},
+      technology_price = #{technologyPrice,jdbcType=VARCHAR},
+      technology_style = #{technologyStyle,jdbcType=VARCHAR},
+      last_update_date = now()
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, node_code, technology_name, factory_code, description, is_default, is_zw, 
+    technology_img, technology_price, technology_style
+    from app_technology_attribute
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, node_code, technology_name, factory_code, description, is_default, is_zw, 
+    technology_img, technology_price, technology_style
+    from app_technology_attribute
+  </select>
+</mapper>

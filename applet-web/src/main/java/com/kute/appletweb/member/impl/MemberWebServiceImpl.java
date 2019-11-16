@@ -9,7 +9,6 @@ import com.kute.appletcore.jwt.JWTTokenUtil;
 import com.kute.appletcore.jwt.JWTUserDetails;
 import com.kute.appletcore.util.AccountValidatorUtil;
 import com.kute.appletcore.util.ApplicationConstant;
-import com.kute.appletcore.util.RandomUtil;
 import com.kute.appletcore.util.UUIDUtil;
 import com.kute.appletcore.util.redis.RedisUtil;
 import com.kute.appletcore.vo.ResponseResult;
@@ -62,6 +61,7 @@ public class MemberWebServiceImpl implements MemberWebService {
                 if (merber == null) {
                     AppMember am = new AppMember();
                     am.setMemberTel(username);
+                    am.setMemberSource("web");
                     appMemberMapper.insert(am);
                 }
                 String access_token = JWTTokenUtil.generateToken(secret, expiration, new JWTUserDetails(username));
@@ -89,7 +89,8 @@ public class MemberWebServiceImpl implements MemberWebService {
 
         ResponseResult result = new ResponseResult();
         if (!username.equals("") && AccountValidatorUtil.isMobile(username)) {
-            String number = RandomUtil.generateRandomCode("number", 6);
+//            String number = RandomUtil.generateRandomCode("number", 6);
+            String number ="123456";
 //            String vars = "{\"code\":\"" + number + "\"}";
 //            String appId = "12858";
 //            String appKey = "5e1f6aa019d2dd869b5a8bb1c887f413";

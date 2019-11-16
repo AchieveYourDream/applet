@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppSizeMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppSize" >
+    <id column="size_Id" property="sizeId" jdbcType="INTEGER" />
+    <result column="body_type" property="bodyType" jdbcType="VARCHAR" />
+    <result column="chest_circle" property="chestCircle" jdbcType="DECIMAL" />
+    <result column="combo_code" property="comboCode" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="h_yi_chang" property="hYiChang" jdbcType="DECIMAL" />
+    <result column="hip_circle" property="hipCircle" jdbcType="DECIMAL" />
+    <result column="jian_width" property="jianWidth" jdbcType="DECIMAL" />
+    <result column="waist_circle" property="waistCircle" jdbcType="DECIMAL" />
+    <result column="eur_code" property="eurCode" jdbcType="VARCHAR" />
+    <result column="q_yi_chang" property="qYiChang" jdbcType="DECIMAL" />
+    <result column="xiu_chang" property="xiuChang" jdbcType="DECIMAL" />
+    <result column="xiu_fei" property="xiuFei" jdbcType="DECIMAL" />
+    <result column="xiu_kou" property="xiuKou" jdbcType="DECIMAL" />
+    <result column="category_id" property="categoryId" jdbcType="VARCHAR" />
+    <result column="height" property="height" jdbcType="DECIMAL" />
+    <result column="cn_code" property="cnCode" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="DATE" />
+    <result column="update_date" property="updateDate" jdbcType="DATE" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+     update app_size set
+     delete_flag='Y',
+     update_date=now()
+    where size_Id = #{sizeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppSize" >
+    insert into app_size (size_Id, body_type, chest_circle, 
+      combo_code, delete_flag, h_yi_chang, 
+      hip_circle, jian_width, waist_circle, 
+      eur_code, q_yi_chang, xiu_chang, 
+      xiu_fei, xiu_kou, category_id, 
+      height, cn_code, create_date, 
+      update_date)
+    values (#{sizeId,jdbcType=INTEGER}, #{bodyType,jdbcType=VARCHAR}, #{chestCircle,jdbcType=DECIMAL}, 
+      #{comboCode,jdbcType=VARCHAR}, 'N', #{hYiChang,jdbcType=DECIMAL},
+      #{hipCircle,jdbcType=DECIMAL}, #{jianWidth,jdbcType=DECIMAL}, #{waistCircle,jdbcType=DECIMAL}, 
+      #{eurCode,jdbcType=VARCHAR}, #{qYiChang,jdbcType=DECIMAL}, #{xiuChang,jdbcType=DECIMAL}, 
+      #{xiuFei,jdbcType=DECIMAL}, #{xiuKou,jdbcType=DECIMAL}, #{categoryId,jdbcType=VARCHAR}, 
+      #{height,jdbcType=DECIMAL}, #{cnCode,jdbcType=VARCHAR}, now(),now())
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppSize" >
+    update app_size
+    set
+      cn_code=#{cnCode},
+      chest_circle = #{chestCircle,jdbcType=DECIMAL},
+      combo_code = #{comboCode,jdbcType=VARCHAR},
+      h_yi_chang = #{hYiChang,jdbcType=DECIMAL},
+      hip_circle = #{hipCircle,jdbcType=DECIMAL},
+      jian_width = #{jianWidth,jdbcType=DECIMAL},
+      waist_circle = #{waistCircle,jdbcType=DECIMAL},
+      q_yi_chang = #{qYiChang,jdbcType=DECIMAL},
+      xiu_chang = #{xiuChang,jdbcType=DECIMAL},
+      xiu_fei = #{xiuFei,jdbcType=DECIMAL},
+      xiu_kou = #{xiuKou,jdbcType=DECIMAL},
+      height = #{height,jdbcType=DECIMAL},
+      update_date = now()
+    where size_Id = #{sizeId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select size_Id, body_type, chest_circle, combo_code, delete_flag, h_yi_chang, hip_circle, 
+    jian_width, waist_circle, eur_code, q_yi_chang, xiu_chang, xiu_fei, xiu_kou, category_id, 
+    height, cn_code, create_date, update_date
+    from app_size
+    where size_Id = #{sizeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select size_Id, body_type, chest_circle, combo_code, delete_flag, h_yi_chang, hip_circle, 
+    jian_width, waist_circle, eur_code, q_yi_chang, xiu_chang, xiu_fei, xiu_kou, category_id, 
+    height, cn_code, create_date, update_date
+    from app_size
+  </select>
+</mapper>
