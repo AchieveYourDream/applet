@@ -79,6 +79,13 @@ public class AppSize {
     private String categoryId;
 
     /**
+    * @Description: 大类名称
+    * @Author: 王斌
+    * @Date: 2019/11/18
+    */
+
+    private String categoryName;
+    /**
      * 身高
      */
     private BigDecimal height;
@@ -176,6 +183,14 @@ public class AppSize {
      */
     public void setDeleteFlag(String deleteFlag) {
         this.deleteFlag = deleteFlag;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     /**

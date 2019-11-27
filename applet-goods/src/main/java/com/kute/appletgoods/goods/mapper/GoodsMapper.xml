@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletgoods.goods.dao.GoodsMapper">
+
+    <!--获取小程序商品列表 根据品类-->
+    <select id="selectAppGoodsListByCategory"  parameterType="string" resultType="com.kute.appletcore.entity.AppGoods">
+        select  GOODS_ID,GOODS_NAME,GOODS_NAME_EN,GOODS_SELL_PRICE,(select  s.parameter_value  from sys_parameter_config s
+            where  s.parameter_code='goods_img')||DETAIL_MODEL_ONE DETAIL_MODEL_ONE, DETAILS_INTRO_URL,fabric_name
+        from app_goods s
+       where s.main_style=#{value}
+        and s.up_off_shelf='Y'
+        and s.delete_flag='N'
+        order by s.app_index_order
+    </select>
+
+    <!--获取商品主品类下拉选 -->
+    <select id="getMainSelectInfo"  resultType="com.kute.appletcore.vo.GoodsMenu">
+		select s.node_code code ,s.node_name name   from sys_data_struct_node s
+		where s.struct_code='app_goods'
+		and s.parent_node_code='G'
+		and s.enabled_flag='Y'
+		 order  by   s.display_order
+		</select>
+
+
+	<!--获取首页APP显示品类及数量-->
+	<select id="getAppMainShowTypeAndNum"  resultType="com.kute.appletcore.entity.SysParameterDefine">
+		SELECT
+			spd.parameter_code,
+			spd.parameter_name,
+			spc.parameter_value description
+		FROM
+			sys_parameter_define spd
+			INNER JOIN sys_parameter_config spc ON spd.parameter_code = spc.parameter_code
+		WHERE
+			spd.parameter_type = 'app_show_type_and_num'
+		ORDER BY
+			spd.show_order
+	</select>
+
+
+
+
+	<!-- 获取小程序前台展示商品数据-->
+	<select id="selectAppMainShowGoods"  parameterType="Map" resultType="com.kute.appletcore.entity.AppGoods">
+		select GOODS_ID,
+		GOODS_NAME,
+		GOODS_NAME_EN,
+		GOODS_SELL_PRICE,
+		CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'fabric_img'), DETAIL_MODEL_ONE )   detailModelOne,
+		DETAILS_INTRO_URL,
+		fabric_name
+		from app_goods s
+		where 1 = 1
+		and s.up_off_shelf ='Y'
+		and s.main_style = #{main_style}
+		and s.APP_INDEX_SHOW='Y'
+		and s.delete_flag='N'
+
+		order by s.app_index_order
+		LIMIT 0, #{quantity}
+
+	</select>
+</mapper>

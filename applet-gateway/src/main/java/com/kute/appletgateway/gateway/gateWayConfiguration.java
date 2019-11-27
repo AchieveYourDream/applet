@@ -22,8 +22,23 @@ public class gateWayConfiguration {
                         .uri("lb://applet-manage")
                 )
                 //商品信息(需要验证token)
-                .route("goodsRouter", r -> r.path("/api/goods/**")
+                .route("goodsRouter", r -> r.path("/goods/**")
                         .uri("lb://applet-goods")
+                )
+                //小程序登陆接口
+                .route("appletLoginRouter", r -> r.path("/api/login")
+                        .filters(f -> f.filter(new IgnoreTestGlobalFilterFactor()))
+                        .uri("lb://applet-web")
+                )
+                //小程序获取登陆验证码
+                .route("verificationRouter", r -> r.path("/api/getVerificationCode")
+                        .filters(f -> f.filter(new IgnoreTestGlobalFilterFactor()))
+                        .uri("lb://applet-web")
+                )
+
+                //web(需要验证token)
+                .route("webRouter", r -> r.path("/api/**")
+                        .uri("lb://applet-web")
                 )
                 //咨询信息(无需验证token)
                 .route("informationRouter", r -> r.path("/appInformation/**")
@@ -40,16 +55,7 @@ public class gateWayConfiguration {
                         .filters(f -> f.filter(new IgnoreTestGlobalFilterFactor()))
                         .uri("lb://applet-manage")
                 )
-                //小程序登陆接口
-                .route("appletLoginRouter", r -> r.path("/api/login")
-                        .filters(f -> f.filter(new IgnoreTestGlobalFilterFactor()))
-                        .uri("lb://applet-web")
-                )
-                //小程序获取登陆验证码
-                .route("verificationRouter", r -> r.path("/api/getVerificationCode")
-                        .filters(f -> f.filter(new IgnoreTestGlobalFilterFactor()))
-                        .uri("lb://applet-web")
-                )
+
                 //静态接口
                 .route("staticRouter", r -> r.path("/static/**")
                         .filters(f -> f.filter(new IgnoreTestGlobalFilterFactor()))

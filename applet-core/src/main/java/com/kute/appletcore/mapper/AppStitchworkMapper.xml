@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppStitchWorkMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppStitchWork" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="stitch_work_name" property="stitchWorkName" jdbcType="VARCHAR" />
+    <result column="factory_code" property="factoryCode" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="stitch_work_img" property="stitchWorkImg" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from app_stitchwork
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppStitchWork" >
+    insert into app_stitchwork ( stitch_work_name, factory_code,
+      description, stitch_work_img)
+    values ( #{stitchWorkName,jdbcType=VARCHAR}, #{factoryCode,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{stitchWorkImg,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppStitchWork" >
+    update app_stitchwork
+    set stitch_work_name = #{stitchWorkName,jdbcType=VARCHAR},
+      factory_code = #{factoryCode,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      stitch_work_img = #{stitchWorkImg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, stitch_work_name, factory_code, description, stitch_work_img
+    from app_stitchwork
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, stitch_work_name, factory_code, description, stitch_work_img
+    from app_stitchwork
+  </select>
+</mapper>

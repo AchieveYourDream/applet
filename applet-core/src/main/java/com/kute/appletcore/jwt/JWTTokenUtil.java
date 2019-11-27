@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -152,26 +151,26 @@ public class JWTTokenUtil implements Serializable {
     }
 
 
-    public static void main(String[] args) {
-
-   String token  = generateToken("JWT_SECRET","3200", new JWTUserDetails( "wangbin"));
-        System.out.println(token);
-
-
-//      boolean s=  validateToken("JWT_SECRET","eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1NTYzNTM2MTYsInN1YiI6IndhbmdiaW4iLCJjcmVhdGVkIjoxNTU2MzUyNjE2OTE4fQ.VW7avKg9wxeZcUuphNDLnv0mY2XZ-zci6vhilBAvPvAlul0rb9EONLjgMgy9g20xqQyR41GZspOyJB_dw_bvWw");
-//        System.out.println(s);
-
-       Date o=  Jwts.parser().setSigningKey("JWT_SECRET").parseClaimsJws(token).getBody().getExpiration();;
-
-
-        System.out.println(o);
-        System.out.println(o.getTime());
-
-        System.out.println(new Date().getTime());
-        System.out.println(o.getTime()-new Date().getTime() );
-
-
-        System.out.println(  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1556521051)));
-
-    }
+//    public static void main(String[] args) {
+//
+//   String token  = generateToken("JWT_SECRET","3200", new JWTUserDetails( "wangbin"));
+//        System.out.println(token);
+//
+//
+////      boolean s=  validateToken("JWT_SECRET","eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE1NTYzNTM2MTYsInN1YiI6IndhbmdiaW4iLCJjcmVhdGVkIjoxNTU2MzUyNjE2OTE4fQ.VW7avKg9wxeZcUuphNDLnv0mY2XZ-zci6vhilBAvPvAlul0rb9EONLjgMgy9g20xqQyR41GZspOyJB_dw_bvWw");
+////        System.out.println(s);
+//
+//       Date o=  Jwts.parser().setSigningKey("JWT_SECRET").parseClaimsJws(token).getBody().getExpiration();;
+//
+//
+//        System.out.println(o);
+//        System.out.println(o.getTime());
+//
+//        System.out.println(new Date().getTime());
+//        System.out.println(o.getTime()-new Date().getTime() );
+//
+//
+//        System.out.println(  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1556521051)));
+//
+//    }
 }

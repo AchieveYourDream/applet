@@ -1,6 +1,8 @@
 package com.kute.appletcore.entity;
 
 
+import java.math.BigDecimal;
+
 public class AppGoods {
     private Integer goodsId;
 
@@ -24,7 +26,7 @@ public class AppGoods {
 
     private String subStyle;
 
-    private Integer goodsSellPrice;
+    private BigDecimal goodsSellPrice;
 
     private String designerId;
 
@@ -79,6 +81,52 @@ public class AppGoods {
     private String mainStyle;
 
     private String fabricName;
+
+    private BigDecimal xfPrice;
+    private BigDecimal xkPrice;
+    private BigDecimal mjPrice;
+    private String liningType;
+
+
+    public BigDecimal getGoodsSellPrice() {
+        return goodsSellPrice;
+    }
+
+    public void setGoodsSellPrice(BigDecimal goodsSellPrice) {
+        this.goodsSellPrice = goodsSellPrice;
+    }
+
+    public BigDecimal getXfPrice() {
+        return xfPrice;
+    }
+
+    public void setXfPrice(BigDecimal xfPrice) {
+        this.xfPrice = xfPrice;
+    }
+
+    public BigDecimal getXkPrice() {
+        return xkPrice;
+    }
+
+    public void setXkPrice(BigDecimal xkPrice) {
+        this.xkPrice = xkPrice;
+    }
+
+    public BigDecimal getMjPrice() {
+        return mjPrice;
+    }
+
+    public void setMjPrice(BigDecimal mjPrice) {
+        this.mjPrice = mjPrice;
+    }
+
+    public String getLiningType() {
+        return liningType;
+    }
+
+    public void setLiningType(String liningType) {
+        this.liningType = liningType;
+    }
 
     public Integer getGoodsId() {
         return goodsId;
@@ -166,14 +214,6 @@ public class AppGoods {
 
     public void setSubStyle(String subStyle) {
         this.subStyle = subStyle;
-    }
-
-    public Integer getGoodsSellPrice() {
-        return goodsSellPrice;
-    }
-
-    public void setGoodsSellPrice(Integer goodsSellPrice) {
-        this.goodsSellPrice = goodsSellPrice;
     }
 
     public String getDesignerId() {

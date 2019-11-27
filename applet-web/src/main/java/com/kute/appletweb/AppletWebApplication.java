@@ -16,8 +16,8 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
-@SpringBootApplication(scanBasePackages = {"com.kute"})
-@MapperScan(basePackages = "com.kute.**.dao")
+@SpringBootApplication(scanBasePackages = {"com.kute.appletweb","com.kute.appletcore"})
+@MapperScan(basePackages = {"com.kute.appletweb.**.dao","com.kute.appletcore.**.dao"})
 @EnableEurekaClient
 @EnableDiscoveryClient
 @EnableCaching

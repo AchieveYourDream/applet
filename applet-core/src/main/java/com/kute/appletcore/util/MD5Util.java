@@ -32,23 +32,23 @@ public class MD5Util {
 		}
 	}
 
-	public static void main(String[] args) {
-		String s = new String("123456");
-		System.out.println("原始：" + s);
-//		System.out.println("MD5：" + MD5("00000000222"+"|"+"1000.0"+"|"+"1512633320002"+"|"+"32E5CF6F27BD42E2B8599EDE601D5602"));
-//		System.out.println("ecb65cbdcdaff7150b7750ee1376f8bb".equalsIgnoreCase(MD5("00000013"+"|"+"1000.0"+"|"+"1512633320002"+"|"+"32E5CF6F27BD42E2B8599EDE601D5602")));
-		
-		
-		
-		String  Numbers ="PDC2MSW000181207004";
-		long timestamp=System.currentTimeMillis();
-		String Token =
-		MD5Util.MD5(Numbers +"|"+ timestamp +"|"+"32E5CF6F27BD42E2B8599EDE601D5602");
-				System.out.println(timestamp);
-				System.out.println(Token);
-
-			System.out.println(MD5Util.MD5("03102197"+"||"+"32E5CF6F27BD42E2B8599EDE601D5602"));
-		
-	}
+//	public static void main(String[] args) {
+//		String s = new String("123456");
+//		System.out.println("原始：" + s);
+////		System.out.println("MD5：" + MD5("00000000222"+"|"+"1000.0"+"|"+"1512633320002"+"|"+"32E5CF6F27BD42E2B8599EDE601D5602"));
+////		System.out.println("ecb65cbdcdaff7150b7750ee1376f8bb".equalsIgnoreCase(MD5("00000013"+"|"+"1000.0"+"|"+"1512633320002"+"|"+"32E5CF6F27BD42E2B8599EDE601D5602")));
+//
+//
+//
+//		String  Numbers ="PDC2MSW000181207004";
+//		long timestamp=System.currentTimeMillis();
+//		String Token =
+//		MD5Util.MD5(Numbers +"|"+ timestamp +"|"+"32E5CF6F27BD42E2B8599EDE601D5602");
+//				System.out.println(timestamp);
+//				System.out.println(Token);
+//
+//			System.out.println(MD5Util.MD5("03102197"+"||"+"32E5CF6F27BD42E2B8599EDE601D5602"));
+//
+//	}
 
 }

@@ -37,9 +37,7 @@ eureka:
 info:
  app.name: applet-goods
  company.name: wangbin
-applet:
-  imgSavePath: /home/image/
-  qrcodePath: /home/image/
+
 #logging:
 #  level:
 #    root : info

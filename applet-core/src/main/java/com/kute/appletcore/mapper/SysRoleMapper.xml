@@ -90,7 +90,7 @@
                     and dsn.node_code = srr.menu_code
                 )
          where dsn.struct_code = #{structCode}
-           and dsn.enabled_flag = 'Y'
+           and dsn.enabled_flag ='Y'
         ORDER BY dsn.display_order
     </select>
 

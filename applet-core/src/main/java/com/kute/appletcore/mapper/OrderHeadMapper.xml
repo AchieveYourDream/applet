@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.OrderHeadMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.OrderHead" >
+    <id column="head_id" property="headId" jdbcType="INTEGER" />
+    <result column="packagecode" property="packagecode" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="order_type" property="orderType" jdbcType="INTEGER" />
+    <result column="sizecategory_id" property="sizecategoryId" jdbcType="VARCHAR" />
+    <result column="pay_status" property="payStatus" jdbcType="VARCHAR" />
+    <result column="order_price" property="orderPrice" jdbcType="DECIMAL" />
+    <result column="order_reality_price" property="orderRealityPrice" jdbcType="DECIMAL" />
+    <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <result column="pay_price" property="payPrice" jdbcType="DECIMAL" />
+    <result column="member_name" property="memberName" jdbcType="VARCHAR" />
+    <result column="member_tel" property="memberTel" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="street" property="street" jdbcType="VARCHAR" />
+    <result column="pay_num" property="payNum" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_head
+    where head_id = #{headId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.OrderHead" >
+    insert into order_head (head_id, packagecode, member_id, 
+      create_date, order_type, sizecategory_id, 
+      pay_status, order_price, order_reality_price, 
+      pay_type, pay_date, pay_price, 
+      member_name, member_tel, province, 
+      city, county, street,pay_num
+      )
+    values (#{headId,jdbcType=INTEGER}, #{packagecode,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{orderType,jdbcType=INTEGER}, #{sizecategoryId,jdbcType=VARCHAR}, 
+      #{payStatus,jdbcType=VARCHAR}, #{orderPrice,jdbcType=DECIMAL}, #{orderRealityPrice,jdbcType=DECIMAL}, 
+      #{payType,jdbcType=VARCHAR}, #{payDate,jdbcType=TIMESTAMP}, #{payPrice,jdbcType=DECIMAL}, 
+      #{memberName,jdbcType=VARCHAR}, #{memberTel,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR},#{payNum}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.OrderHead" >
+    update order_head
+    set packagecode = #{packagecode,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      order_type = #{orderType,jdbcType=INTEGER},
+      sizecategory_id = #{sizecategoryId,jdbcType=VARCHAR},
+      pay_status = #{payStatus,jdbcType=VARCHAR},
+      order_price = #{orderPrice,jdbcType=DECIMAL},
+      order_reality_price = #{orderRealityPrice,jdbcType=DECIMAL},
+      pay_type = #{payType,jdbcType=VARCHAR},
+      pay_date = #{payDate,jdbcType=TIMESTAMP},
+      pay_price = #{payPrice,jdbcType=DECIMAL},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      member_tel = #{memberTel,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      street = #{street,jdbcType=VARCHAR},
+      pay_num=#{payNum}
+    where head_id = #{headId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select head_id, packagecode, member_id, create_date, order_type, sizecategory_id, 
+    pay_status, order_price, order_reality_price, pay_type, pay_date, pay_price, member_name, 
+    member_tel, province, city, county, street,pay_num
+    from order_head
+    where head_id = #{headId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select head_id, packagecode, member_id, create_date, order_type, sizecategory_id, 
+    pay_status, order_price, order_reality_price, pay_type, pay_date, pay_price, member_name, 
+    member_tel, province, city, county, street,pay_num
+    from order_head
+  </select>
+</mapper>

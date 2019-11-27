@@ -1,14 +1,13 @@
 package com.kute.appletcore.util;
 
-import java.security.SecureRandom;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+import java.security.SecureRandom;
 
 @SuppressWarnings("all")
 public class DESUtil {
@@ -89,13 +88,13 @@ public class DESUtil {
         return cipher.doFinal(data);
     }
     
-	public static void main(String[] args) throws Exception {
-		String data = "welcome";
-        String key = "KUTESMART_DES_KEY";
-        System.out.println("data=" + data);
-        System.out.println("key=" + key);
-        System.err.println(encrypt(data, key));
-        System.err.println(decrypt(encrypt(data, key), key));
-	}
+//	public static void main(String[] args) throws Exception {
+//		String data = "welcome";
+//        String key = "KUTESMART_DES_KEY";
+//        System.out.println("data=" + data);
+//        System.out.println("key=" + key);
+//        System.err.println(encrypt(data, key));
+//        System.err.println(decrypt(encrypt(data, key), key));
+//	}
 
 }

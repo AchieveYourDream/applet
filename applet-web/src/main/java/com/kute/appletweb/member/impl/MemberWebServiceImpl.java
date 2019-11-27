@@ -9,7 +9,6 @@ import com.kute.appletcore.jwt.JWTTokenUtil;
 import com.kute.appletcore.jwt.JWTUserDetails;
 import com.kute.appletcore.util.AccountValidatorUtil;
 import com.kute.appletcore.util.ApplicationConstant;
-import com.kute.appletcore.util.UUIDUtil;
 import com.kute.appletcore.util.redis.RedisUtil;
 import com.kute.appletcore.vo.ResponseResult;
 import com.kute.appletweb.member.dao.MemberWebMapper;
@@ -125,7 +124,6 @@ public class MemberWebServiceImpl implements MemberWebService {
      * 插入收获地址
      */
     public int insetMemberAddress(AppCusAddress address) throws Exception {
-        address.setId(UUIDUtil.getUUID());
         return appCusAddressMapper.insert(address);
     }
 

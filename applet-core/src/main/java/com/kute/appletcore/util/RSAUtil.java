@@ -1,17 +1,11 @@
 package com.kute.appletcore.util;
 
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PrivateKey;
-import java.security.PublicKey;
-import java.security.SecureRandom;
-import java.security.spec.PKCS8EncodedKeySpec;
-import java.security.spec.X509EncodedKeySpec;
+import org.apache.commons.codec.binary.Base64;
 
 import javax.crypto.Cipher;
-
-import org.apache.commons.codec.binary.Base64;
+import java.security.*;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 public class RSAUtil {
 
@@ -92,19 +86,19 @@ public class RSAUtil {
 		return keyf.generatePrivate(priPKCS8);
 	} 
 	
-	public static void main(String[] args) throws Exception {
-		generateKey();
-		
-		String text = String.valueOf(System.currentTimeMillis());
-		String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCaRK5+eYawMv4PdumYSeHf3YZdSQ9e9o4NFY7N+GyfsRu/P0vCOB8ZSLyQUzyaTLHAeT9IBK2nmhGjSMgqKfqPskdvjUi4CuvIr3lmJgmeDtrsCVoo1khMrn7p2tiaG5fiZTMf78Nl5gsPrXXFRRSGUnPe1RC8MHZyE5JMluAn+wIDAQAB";
-		String privateKey = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJpErn55hrAy/g926ZhJ4d/dhl1JD172jg0Vjs34bJ+xG78/S8I4HxlIvJBTPJpMscB5P0gEraeaEaNIyCop+o+yR2+NSLgK68iveWYmCZ4O2uwJWijWSEyufuna2Jobl+JlMx/vw2XmCw+tdcVFFIZSc97VELwwdnITkkyW4Cf7AgMBAAECgYEAgtGRQ1EcxVhIl6aYCntEnslFAuBMt5PO/At28PUkb/sJc5FiVg2vWYqT1LOxJYu6BGUNI65L8F+3a0bx7sdwYI9VN471/PhLgZvNnsJyZl7CoJD+mxEQ75/hS0c6v8BXR60b6CAz//h73qHn/QSFp5LAAQ2EttftsiKGDe38PKECQQDO6YR4bhGBorS5C1D8ftMJqPM4ySjjCtTwzx/supvw3AS/xVQKmASX4ybrIZBIIGIh84UBRbLkcQ2H8lfFyCIrAkEAvt3rzJrhSOsP4nEcb3nBPqtLIMR2S1w8N9NO053R992IqBRZOlYc3a/jpaRgfQyzwm3X5HzcEYgBr8xEhoi5cQJAOwOXaNHb5GGHsg9sNdfmUScC1/tn0fnQ6i3pKRfASl42bIvXgH4DMV70RrP39tplotFV6hr6/vTPqyqPpjWCqQJAGawh3khqyvMLFOsf5wKacoJ5vXOPcb17QAsFDEOrDUrX6buq8MTKZysUVKBSdh9yQlGh+1KsCxOfHnU8NlhHkQJBAL8WQxYvsiMh5ER1WHi3fCjPghL4AYWoFrsoBpQ5C95ZPjlzD3QFUXU1G7eddDJdpBo20EZxW0cpD1Mp1GwCEqA=";
-	
-		String encryptText = encrypt(text, publicKey);
-		String decryptText = decrypt(encryptText, privateKey);
-		
-		System.out.println("原文：" + text);	
-		System.out.println("加密：" + encryptText);
-		System.out.println("解密：" + decryptText);
-	}
+//	public static void main(String[] args) throws Exception {
+//		generateKey();
+//
+//		String text = String.valueOf(System.currentTimeMillis());
+//		String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCaRK5+eYawMv4PdumYSeHf3YZdSQ9e9o4NFY7N+GyfsRu/P0vCOB8ZSLyQUzyaTLHAeT9IBK2nmhGjSMgqKfqPskdvjUi4CuvIr3lmJgmeDtrsCVoo1khMrn7p2tiaG5fiZTMf78Nl5gsPrXXFRRSGUnPe1RC8MHZyE5JMluAn+wIDAQAB";
+//		String privateKey = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJpErn55hrAy/g926ZhJ4d/dhl1JD172jg0Vjs34bJ+xG78/S8I4HxlIvJBTPJpMscB5P0gEraeaEaNIyCop+o+yR2+NSLgK68iveWYmCZ4O2uwJWijWSEyufuna2Jobl+JlMx/vw2XmCw+tdcVFFIZSc97VELwwdnITkkyW4Cf7AgMBAAECgYEAgtGRQ1EcxVhIl6aYCntEnslFAuBMt5PO/At28PUkb/sJc5FiVg2vWYqT1LOxJYu6BGUNI65L8F+3a0bx7sdwYI9VN471/PhLgZvNnsJyZl7CoJD+mxEQ75/hS0c6v8BXR60b6CAz//h73qHn/QSFp5LAAQ2EttftsiKGDe38PKECQQDO6YR4bhGBorS5C1D8ftMJqPM4ySjjCtTwzx/supvw3AS/xVQKmASX4ybrIZBIIGIh84UBRbLkcQ2H8lfFyCIrAkEAvt3rzJrhSOsP4nEcb3nBPqtLIMR2S1w8N9NO053R992IqBRZOlYc3a/jpaRgfQyzwm3X5HzcEYgBr8xEhoi5cQJAOwOXaNHb5GGHsg9sNdfmUScC1/tn0fnQ6i3pKRfASl42bIvXgH4DMV70RrP39tplotFV6hr6/vTPqyqPpjWCqQJAGawh3khqyvMLFOsf5wKacoJ5vXOPcb17QAsFDEOrDUrX6buq8MTKZysUVKBSdh9yQlGh+1KsCxOfHnU8NlhHkQJBAL8WQxYvsiMh5ER1WHi3fCjPghL4AYWoFrsoBpQ5C95ZPjlzD3QFUXU1G7eddDJdpBo20EZxW0cpD1Mp1GwCEqA=";
+//
+//		String encryptText = encrypt(text, publicKey);
+//		String decryptText = decrypt(encryptText, privateKey);
+//
+//		System.out.println("原文：" + text);
+//		System.out.println("加密：" + encryptText);
+//		System.out.println("解密：" + decryptText);
+//	}
 	
 }

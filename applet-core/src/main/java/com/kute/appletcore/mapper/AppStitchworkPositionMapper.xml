@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppStitchWorkPositionMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppStitchWorkPosition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="position_name" property="positionName" jdbcType="VARCHAR" />
+    <result column="position_img" property="positionImg" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="factory_code" property="factoryCode" jdbcType="VARCHAR" />
+    <result column="category_code" property="categoryCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from app_stitchwork_position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppStitchWorkPosition" >
+    insert into app_stitchwork_position ( position_name, position_img,
+      description, factory_code, category_code
+      )
+    values ( #{positionName,jdbcType=VARCHAR}, #{positionImg,jdbcType=VARCHAR},
+      #{description,jdbcType=VARCHAR}, #{factoryCode,jdbcType=VARCHAR}, #{categoryCode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppStitchWorkPosition" >
+    update app_stitchwork_position
+    set position_name = #{positionName,jdbcType=VARCHAR},
+      position_img = #{positionImg,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      factory_code = #{factoryCode,jdbcType=VARCHAR},
+      category_code = #{categoryCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, position_name, position_img, description, factory_code, category_code
+    from app_stitchwork_position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, position_name, position_img, description, factory_code, category_code
+    from app_stitchwork_position
+  </select>
+</mapper>

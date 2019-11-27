@@ -245,7 +245,7 @@ public class HttpClientUtil {
 		}
 	}
 	
-	public static void main(String[] args) throws Exception {
+//	public static void main(String[] args) throws Exception {
 //		// GET
 //		HttpClientRequest requestGet = new HttpClientRequest();
 //		requestGet.setRequestUrl("https://xls.magicmanufactory.com:7778/tsp-api/api/public/test/testQueryParameter?name=aizheng");
@@ -261,20 +261,20 @@ public class HttpClientUtil {
 //		System.out.println("--------------------------------------------------");
 //		
 		// POST
-		String json = "{\"token\":\"0DAB4E29DEB3477E9FB2CC73C0F1D358\",\"data\":\"{\"SerType\":\"GetAll\",\"dataJson\":\"{\"ItemCode\":\"SS0005\",\"WhsCode\":\"SS0005\"}\",\"DocType\":\"OMS_Style\"}\",\"message\":\"\",\"status\":-1}";
-		
-		HttpClientRequest requestPost = new HttpClientRequest();
-		requestPost.setRequestUrl("http://nena.3322.org:8081/api/Interact");
-		requestPost.setRequestMehtod(HttpClientConstant.REQUEST_METHOD_POST);
-		requestPost.setRequestHeaders(null);
-		requestPost.setRequestBody(json);
-		requestPost.setRequestParams(null);
-		requestPost.setContentType(HttpClientConstant.CONTENT_TYPE_JSON);
-		
-		HttpClientResponse responePost = sendHttpRequest(requestPost);
-		System.out.println(responePost.getResponseCode());
-		System.out.println(responePost.getResponseData());
-		System.out.println("--------------------------------------------------");
+//		String json = "{\"token\":\"0DAB4E29DEB3477E9FB2CC73C0F1D358\",\"data\":\"{\"SerType\":\"GetAll\",\"dataJson\":\"{\"ItemCode\":\"SS0005\",\"WhsCode\":\"SS0005\"}\",\"DocType\":\"OMS_Style\"}\",\"message\":\"\",\"status\":-1}";
+//
+//		HttpClientRequest requestPost = new HttpClientRequest();
+//		requestPost.setRequestUrl("http://nena.3322.org:8081/api/Interact");
+//		requestPost.setRequestMehtod(HttpClientConstant.REQUEST_METHOD_POST);
+//		requestPost.setRequestHeaders(null);
+//		requestPost.setRequestBody(json);
+//		requestPost.setRequestParams(null);
+//		requestPost.setContentType(HttpClientConstant.CONTENT_TYPE_JSON);
+//
+//		HttpClientResponse responePost = sendHttpRequest(requestPost);
+//		System.out.println(responePost.getResponseCode());
+//		System.out.println(responePost.getResponseData());
+//		System.out.println("--------------------------------------------------");
 //		
 //		// HEADER
 //		Map<String, String> headerMap = new HashMap<String, String>();
@@ -317,5 +317,5 @@ public class HttpClientUtil {
 //		    throw new Exception("调用小酷传递退货单状态失败");
 //		}
 		
-	}
+//	}
 }

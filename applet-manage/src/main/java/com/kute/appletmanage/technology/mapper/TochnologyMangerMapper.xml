@@ -63,13 +63,13 @@
     <update id="updateTechnologyIsDefault" >
     update app_technology_attribute
     set
-      is_default = 'N'
+      is_default ='N'
     where node_code = #{nodeCode}
   </update>
     <update id="updateTechnologyDefault" >
     update app_technology_attribute
     set
-      is_default = 'Y'
+      is_default ='Y'
     where node_code = #{nodeCode}
     and  id=#{technologyId}
   </update>

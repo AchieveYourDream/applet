@@ -4,9 +4,9 @@
 
     <!--获取会员收货地址-->
     <select id="selectCusAddressList" resultType="com.kute.appletcore.entity.AppCusAddress" parameterType="String">
-    select ID, MEMBER_ID, PROVINCE, CITY, COUNTY, STREET, IS_DEFAULT, ATTRIBUTE1, ATTRIBUTE2,
+    select ID, MEMBER_ID, PROVINCE, CITY, COUNTY, STREET, IS_DEFAULT,  NAME, PHONE_NUMBER,
     ATTRIBUTE3, ATTRIBUTE4, ATTRIBUTE5, PROVINCE_NAME, CITY_NAME, COUNTY_NAME, CREATE_DATE,
-    UPDATE_DATE
+    UPDATE_DATE,POST_CODE
     from APP_CUS_ADDRESS
     where MEMBER_ID=#{value}
   </select>

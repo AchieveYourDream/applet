@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @SuppressWarnings("all")
@@ -29,9 +30,9 @@ public class MemberWebController {
 	 */
 	@ApiOperation(value = "登录")
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public ResponseResult login(@RequestParam String  username,@RequestParam String verificationCode ) throws Exception {
+	public ResponseResult login(@RequestBody  Map<String,String >  param ) throws Exception {
 		ResponseResult result =null;
-		result = memberWebService.login(  username, verificationCode );
+		result = memberWebService.login(param.get("username"), param.get("verificationCode"));
 
 		return result;
 	}
@@ -52,6 +53,7 @@ public class MemberWebController {
 	@ApiOperation(value = "获取会员收货地址列表")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "member_id", value = "会员id", paramType = "query", dataType = "String", required = true),
+			@ApiImplicitParam(name = "Authorization", value = "令牌", paramType = "header", dataType = "String", required = true),
 	})
 	@GetMapping(value = "selectCusAddressList")
 	public ResponseResult selectCusAddressList(@Param("member_id") String  member_id) throws Exception {
@@ -64,6 +66,10 @@ public class MemberWebController {
 
 	@ApiOperation(value = "插入收获地址")
 	@PostMapping(value = "insetMemberAddress")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "addredd", value = "会员信息", paramType = "body", dataType = "AppCusAddress", required = true),
+			@ApiImplicitParam(name = "Authorization", value = "令牌", paramType = "header", dataType = "String", required = true),
+	})
 	public ResponseResult insetMemberAddress(@RequestBody AppCusAddress addredd) throws Exception {
 		ResponseResult result =new ResponseResult();
 		memberWebService.insetMemberAddress(addredd);
@@ -75,6 +81,10 @@ public class MemberWebController {
 
 	@ApiOperation(value = "修改收货地址")
 	@PutMapping(value = "updateMemberAddress")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "addredd", value = "会员信息", paramType = "body", dataType = "AppCusAddress", required = true),
+			@ApiImplicitParam(name = "Authorization", value = "令牌", paramType = "header", dataType = "String", required = true),
+	})
 	public ResponseResult updateMemberAddress(@RequestBody AppCusAddress addredd) throws Exception {
 		ResponseResult result =new ResponseResult();
 		memberWebService.updateMemberAddress(addredd);
@@ -87,6 +97,7 @@ public class MemberWebController {
 	@ApiOperation(value = " 删除收获地址")
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "address_id", value = "地址ID", paramType = "query", dataType = "String", required = true),
+			@ApiImplicitParam(name = "Authorization", value = "令牌", paramType = "header", dataType = "String", required = true),
 	})
 	@DeleteMapping(value = "deleteMemberAddress")
 	public ResponseResult deleteMemberAddress(@Param("address_id") String  address_id) throws Exception {
@@ -102,6 +113,7 @@ public class MemberWebController {
 	@ApiImplicitParams({
 			@ApiImplicitParam(name = "member_id", value = "会员id", paramType = "query", dataType = "String", required = true),
 			@ApiImplicitParam(name = "address_id", value = "地址ID", paramType = "query", dataType = "String", required = true),
+			@ApiImplicitParam(name = "Authorization", value = "令牌", paramType = "header", dataType = "String", required = true),
 	})
 	@PutMapping(value = "updateAddressDefault")
 	public ResponseResult updateAddressDefault(@Param("member_id") String  member_id,@Param("address_id") String  address_id) throws Exception {

@@ -4,38 +4,39 @@ import java.util.Date;
 
 public class AppCusAddress {
     private String id;
-
+    //手机号
     private String memberId;
-
+    //省id
     private String province;
-
+    //城市
     private String city;
-
+    //区
     private String county;
-
+    //详细信息
     private String street;
-
     private String isDefault;
-
-    private String attribute1;
-
-    private String attribute2;
-
+    //姓名
+    private String name;
+    //收货人手机号
+    private String phoneNumber;
     private String attribute3;
-
     private String attribute4;
-
     private String attribute5;
-
     private String provinceName;
-
     private String cityName;
-
     private String countyName;
-
     private Date createDate;
-
     private Date updateDate;
+    //邮政编码
+    private String postCode;
+
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
 
     public String getId() {
         return id;
@@ -93,20 +94,20 @@ public class AppCusAddress {
         this.isDefault = isDefault;
     }
 
-    public String getAttribute1() {
-        return attribute1;
+    public String getName() {
+        return name;
     }
 
-    public void setAttribute1(String attribute1) {
-        this.attribute1 = attribute1;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getAttribute2() {
-        return attribute2;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setAttribute2(String attribute2) {
-        this.attribute2 = attribute2;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getAttribute3() {

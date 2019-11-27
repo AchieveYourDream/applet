@@ -28,7 +28,7 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
   update APP_MEMBER
     set
-      DELETE_STATUS = 'Y',
+      DELETE_STATUS ='Y',
       LAST_UPDATE_DATE =now()
     where MEMBER_TEL = #{memberTel,jdbcType=VARCHAR}
   </delete>
@@ -45,7 +45,7 @@
       #{memberLevel,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{referrerName,jdbcType=VARCHAR}, 
-      #{referrerMobilephone,jdbcType=VARCHAR},'N', #{storeCode,jdbcType=VARCHAR},
+      #{referrerMobilephone,jdbcType=VARCHAR},'0', #{storeCode,jdbcType=VARCHAR},
       now(), now(), #{birthday,jdbcType=VARCHAR},
       #{attribute2,jdbcType=VARCHAR}, #{attribute3,jdbcType=VARCHAR}, #{attribute4,jdbcType=VARCHAR}, 
       #{attribute5,jdbcType=VARCHAR})

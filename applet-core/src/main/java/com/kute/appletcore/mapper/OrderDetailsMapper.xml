@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.OrderDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.OrderDetails" >
+    <id column="line_id" property="lineId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="cloth_id" property="clothId" jdbcType="INTEGER" />
+    <result column="cloth_style" property="clothStyle" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="fabric_code" property="fabricCode" jdbcType="VARCHAR" />
+    <result column="style" property="style" jdbcType="INTEGER" />
+    <result column="actual_amount" property="actualAmount" jdbcType="DOUBLE" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+    <result column="lining_type" property="liningType" jdbcType="VARCHAR" />
+    <result column="process_price" property="processPrice" jdbcType="DECIMAL" />
+    <result column="process_actual_price" property="processActualPrice" jdbcType="DECIMAL" />
+    <result column="technology_code" property="technologyCode" jdbcType="VARCHAR" />
+    <result column="delivery_date" property="deliveryDate" jdbcType="VARCHAR" />
+    <result column="delivery_code" property="deliveryCode" jdbcType="VARCHAR" />
+    <result column="final_delivery_date" property="finalDeliveryDate" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="syscode" property="syscode" jdbcType="VARCHAR" />
+    <result column="warehouse_date" property="warehouseDate" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="discount_price" property="discountPrice" jdbcType="DECIMAL" />
+    <result column="price_retail" property="priceRetail" jdbcType="DECIMAL" />
+    <result column="start_production_date" property="startProductionDate" jdbcType="TIMESTAMP" />
+    <result column="push_factory_date" property="pushFactoryDate" jdbcType="TIMESTAMP" />
+    <result column="push_factory_state" property="pushFactoryState" jdbcType="VARCHAR" />
+    <result column="push_factory_message" property="pushFactoryMessage" jdbcType="VARCHAR" />
+    <result column="bonus_price" property="bonusPrice" jdbcType="DECIMAL" />
+    <result column="gift_card_price" property="giftCardPrice" jdbcType="DECIMAL" />
+    <result column="head_id" property="giftCardPrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_details
+    where line_id = #{lineId}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.OrderDetails" >
+    insert into order_details (line_id, order_id, cloth_id, 
+      cloth_style, amount, price, 
+      fabric_code, style, actual_amount, 
+      size, lining_type, process_price, 
+      process_actual_price, technology_code, delivery_date, 
+      delivery_code, final_delivery_date, status, 
+      syscode, warehouse_date, is_delete, 
+      discount_price, price_retail, start_production_date, 
+      push_factory_date, push_factory_state, push_factory_message, 
+      bonus_price, gift_card_price,head_id)
+    values (#{lineId}, #{orderId}, #{clothId}, 
+      #{clothStyle}, #{amount}, #{price}, 
+      #{fabricCode}, #{style}, #{actualAmount,jdbcType=DOUBLE}, 
+      #{size}, #{liningType}, #{processPrice}, 
+      #{processActualPrice}, #{technologyCode}, #{deliveryDate}, 
+      #{deliveryCode}, #{finalDeliveryDate}, #{status}, 
+      #{syscode}, #{warehouseDate}, #{isDelete}, 
+      #{discountPrice}, #{priceRetail}, #{startProductionDate}, 
+      #{pushFactoryDate}, #{pushFactoryState}, #{pushFactoryMessage}, 
+      #{bonusPrice}, #{giftCardPrice},#{headId})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.OrderDetails" >
+    update order_details
+    set order_id = #{orderId},
+      cloth_id = #{clothId},
+      cloth_style = #{clothStyle},
+      amount = #{amount},
+      price = #{price},
+      fabric_code = #{fabricCode},
+      style = #{style},
+      actual_amount = #{actualAmount,jdbcType=DOUBLE},
+      size = #{size},
+      lining_type = #{liningType},
+      process_price = #{processPrice},
+      process_actual_price = #{processActualPrice},
+      technology_code = #{technologyCode},
+      delivery_date = #{deliveryDate},
+      delivery_code = #{deliveryCode},
+      final_delivery_date = #{finalDeliveryDate},
+      status = #{status},
+      syscode = #{syscode},
+      warehouse_date = #{warehouseDate},
+      is_delete = #{isDelete},
+      discount_price = #{discountPrice},
+      price_retail = #{priceRetail},
+      start_production_date = #{startProductionDate},
+      push_factory_date = #{pushFactoryDate},
+      push_factory_state = #{pushFactoryState},
+      push_factory_message = #{pushFactoryMessage},
+      bonus_price = #{bonusPrice},
+      gift_card_price = #{giftCardPrice},
+      head_id=#{headId}
+    where line_id = #{lineId}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select line_id, order_id, cloth_id, cloth_style, amount, price, fabric_code, style, 
+    actual_amount, size, lining_type, process_price, process_actual_price, technology_code, 
+    delivery_date, delivery_code, final_delivery_date, status, syscode, warehouse_date, 
+    is_delete, discount_price, price_retail, start_production_date, push_factory_date, 
+    push_factory_state, push_factory_message, bonus_price, gift_card_price,head_id
+    from order_details
+    where line_id = #{lineId}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select line_id, order_id, cloth_id, cloth_style, amount, price, fabric_code, style, 
+    actual_amount, size, lining_type, process_price, process_actual_price, technology_code, 
+    delivery_date, delivery_code, final_delivery_date, status, syscode, warehouse_date, 
+    is_delete, discount_price, price_retail, start_production_date, push_factory_date, 
+    push_factory_state, push_factory_message, bonus_price, gift_card_price,head_id
+    from order_details
+  </select>
+
+
+</mapper>

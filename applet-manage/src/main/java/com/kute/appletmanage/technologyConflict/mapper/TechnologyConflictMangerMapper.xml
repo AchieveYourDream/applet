@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.technologyConflict.dao.TechnologyConflictMangerMapper">
+
+    <!-- 获取工艺冲突列表 -->
+    <select id="getTechnologyConflictList" resultType="com.kute.appletcore.entity.SysTechnologyConflict">
+        select id, A_Technology_code, A_Technology_name, B_Technology_code, B_Technology_name  from sys_technology_conflict
+        where 1=1
+        <if test="_parameter != null and _parameter !=''">
+            <![CDATA[${_parameter}]]>
+        </if>
+    </select>
+
+    <!-- 获取工艺下拉选列表-->
+    <select id="getTechnologyList" resultType="java.util.HashMap">
+            select factory_code as id , CONCAT(factory_code,"-",technology_name) as text
+            from app_technology_attribute  where CONCAT(factory_code,"-",technology_name)   LIKE CONCAT('%',#{search},'%')
+    </select>
+
+    <!-- 根据工艺冲突名获取工艺冲突信息 -->
+    <select id="getTechnologyConflictInfoByTechnologyConflictCode" parameterType="com.kute.appletcore.entity.SysTechnologyConflict" resultType="com.kute.appletcore.entity.SysTechnologyConflict">
+          select id, A_Technology_code, A_Technology_name, B_Technology_code, B_Technology_name
+          from sys_technology_conflict
+          where A_Technology_code = #{aTechnologyCode}
+          and  B_Technology_code = #{bTechnologyCode}
+    </select>
+
+
+
+</mapper>

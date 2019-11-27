@@ -18,7 +18,7 @@
             AND sdsn.node_code = dsna2.node_code
         WHERE
             sdsn.struct_code = 'app_information'
-            AND enabled_flag = 'Y'
+            AND enabled_flag ='Y'
         ORDER BY
             sdsn.display_order
 	  

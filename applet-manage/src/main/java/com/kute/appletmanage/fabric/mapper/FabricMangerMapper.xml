@@ -14,9 +14,9 @@
         yarn,
         flower,
         CASE
-        WHEN STATUS = 'Y' THEN
+        WHEN STATUS ='Y' THEN
         '启用'
-        WHEN STATUS = 'N' THEN
+        WHEN STATUS ='N' THEN
         '禁用' ELSE '删除'
         END AS STATUS,
         similar,

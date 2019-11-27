@@ -101,7 +101,7 @@
 			          from
 			            sys_data_struct_node dsn
 			        where dsn.struct_code = #{structCode}
-			          and dsn.enabled_flag = 'Y'
+			          and dsn.enabled_flag ='Y'
 			          start with parent_node_code = #{parentCode}
 					connect by prior node_code = parent_node_code
 					order by dsn.display_order
@@ -115,7 +115,7 @@
 		from
 		  sys_data_struct_node dsn
 		where dsn.struct_code = #{structCode}
-		  and dsn.enabled_flag = 'Y'
+		  and dsn.enabled_flag ='Y'
 		order by dsn.node_code,dsn.display_order
 		
     </select>
@@ -135,7 +135,7 @@
     from
     sys_data_struct_node dsn
     where dsn.struct_code = #{structCode}
-    and dsn.enabled_flag = 'Y'
+    and dsn.enabled_flag ='Y'
     start with parent_node_code = #{parentCode}
     connect by prior node_code = parent_node_code
     order by dsn.display_order
@@ -150,7 +150,7 @@
     from
     sys_data_struct_node dsn
     where dsn.struct_code = #{structCode}
-    and dsn.enabled_flag = 'Y'
+    and dsn.enabled_flag ='Y'
    and   parent_node_code = #{parentCode}
     order by dsn.display_order
     </select>
@@ -162,7 +162,7 @@
           from
             sys_data_struct_node dsn
         where dsn.struct_code = #{structCode}
-          and dsn.enabled_flag = 'Y'
+          and dsn.enabled_flag ='Y'
           and dsn.parent_node_code = #{parentCode}
         order by dsn.display_order
     </select> -->

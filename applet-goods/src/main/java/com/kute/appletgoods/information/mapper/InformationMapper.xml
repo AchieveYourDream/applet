@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletgoods.information.dao.InformationMapper">
+
+
+    <!-- 获取资讯信息品类格局列表 -->
+    <select id="selectAppInformationList"  resultType="com.kute.appletcore.vo.InformationVO">
+      SELECT
+            sdsn.node_code,
+            dsna1.attribute_value chinese_name,
+            dsna2.attribute_value english_name
+        FROM
+            sys_data_struct_node sdsn
+            LEFT JOIN sys_data_struct_node_attribute dsna1 ON sdsn.struct_code = dsna1.struct_code
+            AND dsna1.attribute_code = 'chinese_name'
+            AND sdsn.node_code = dsna1.node_code
+            LEFT JOIN sys_data_struct_node_attribute dsna2 ON sdsn.struct_code = dsna2.struct_code
+            AND dsna2.attribute_code = 'english_name'
+            AND sdsn.node_code = dsna2.node_code
+        WHERE
+            sdsn.struct_code = 'app_information'
+            AND enabled_flag ='Y'
+        ORDER BY
+            sdsn.display_order
+    </select>
+
+    <!-- 根据所传递品类返回改品类下面所有资讯详情-->
+    <select id="selectAllByUseModule" resultType="com.kute.appletcore.entity.AppInformation" >
+    select  CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'information_img'), show_pic ) showPic, TITLE, CONTENT, ISVISIBLE, DETAIL_URL
+        from APP_INFORMATION
+        where USE_MODULE=#{value}
+        and ISVISIBLE='Y'
+        order by SHOW_ORDER
+  </select>
+
+
+    <!-- 获取banner轮播图信息 -->
+    <select id="selectByBanner" resultType="com.kute.appletcore.entity.AppInformation" >
+      select  CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'information_img'), show_pic ) showPic,  TITLE, CONTENT,  DETAIL_URL
+        from APP_INFORMATION
+        where 1=1
+        and IS_BANNER_SHOW='Y'
+        order by SHOW_ORDER
+  </select>
+
+    <!-- 修改资讯管理照片 -->
+    <update id="updateInformationImage" parameterType="Map">
+	        update app_information
+	           set show_pic=#{show_pic}
+	         where 1 = 1
+	           and information_id = #{information_id}
+	 </update>
+
+
+    <!--获取往期-->
+    <select id="getHistoryInfo"  parameterType="String" resultType="java.util.HashMap">
+        select CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'information_img'), show_pic ) showPic,
+              detail_url
+              from app_information ai
+             where ai.use_module = #{type}
+             order by create_date desc
+
+    </select>
+</mapper>

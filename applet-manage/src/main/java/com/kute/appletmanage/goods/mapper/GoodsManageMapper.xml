@@ -46,10 +46,14 @@
 		 ,delete_date
 		 ,dsn1.node_name main_style
 		 ,fabric_name
+		 ,xf_price
+		 ,xk_price
+		 ,mj_price
+		 ,lining_type
 		 from app_goods ag
 		 LEFT JOIN sys_data_struct_node dsn1  on ag.main_style=dsn1.node_code and dsn1.struct_code='app_goods'
 		 LEFT JOIN sys_data_struct_node dsn2  on  ag.sub_style=dsn2.node_code and dsn2.struct_code='app_goods'
-		 LEFT JOIN sys_data_dict_item ddi     on  ag.style_type=ddi.item_code and  ddi.type_code='app_goos_style'
+		 LEFT JOIN sys_data_dict_item ddi     on  ag.style_type=ddi.item_code and  ddi.type_code='app_goods_style'
 		 where 1=1
 		 and delete_flag='N'
 	         <if test="_parameter != null and _parameter !=''">  
@@ -62,7 +66,7 @@
    <!-- 删除商品 -->
 	 <update id="deleteGoodsById" parameterType="string">
 	        update app_Goods
-	           set delete_flag = 'Y'
+	           set delete_flag ='Y'
 	               ,delete_date=now()
 	         where 1 = 1
 	           and goods_id = #{goodsId}

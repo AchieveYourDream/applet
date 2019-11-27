@@ -1,9 +1,9 @@
 package com.kute.appletcore.util;
 
-import java.io.UnsupportedEncodingException;
-
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+
+import java.io.UnsupportedEncodingException;
 
 @SuppressWarnings("all")
 public class Base64Util {
@@ -43,9 +43,9 @@ public class Base64Util {
 		return result;
 	}
 
-	public static void main(String[] args) {
-		System.out.println(encode("welcome"));
-		System.out.println(decode(encode("welcome")));
-	}
+//	public static void main(String[] args) {
+//		System.out.println(encode("welcome"));
+//		System.out.println(decode(encode("welcome")));
+//	}
 
 }
