@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/app/system/fabric/")
-@Api(value = "UserController", tags = " 系统模块-面料管理")
+@Api(value = "FabricController", tags = " 系统模块-面料管理")
 public class FabricMangerController {
 
     @Autowired

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -33,8 +34,8 @@ public class GoodsManageController {
      * 获取商品子品类下拉选
      */
     @RequestMapping(value = "getSubSelectInfo", method = RequestMethod.POST)
-    public ResponseResult getSubSelectInfo(String node_code) throws Exception {
-        return new ResponseResult("S", "", goodsManageService.getSubSelectInfo(node_code));
+    public ResponseResult getSubSelectInfo(String nodeCode) throws Exception {
+        return new ResponseResult("S", "", goodsManageService.getSubSelectInfo(nodeCode));
 
 
     }
@@ -97,5 +98,15 @@ public class GoodsManageController {
     public ResponseResult selectAppGoodsByPk(@RequestParam("goodsId") String goodsId) throws Exception {
             AppGoods ag = goodsManageService.selectAppGoodsByPk(goodsId);
             return new ResponseResult("S", "保存成功",ag);
+    }
+
+    /**
+     * - 获取面料根据大类
+     */
+    @GetMapping(value = "getFabricByCategory")
+    public  List<Map> getFabricByCategory(String category, String search) throws Exception {
+        List<Map> list = goodsManageService.getFabricByCategory( category, search.toUpperCase());
+        return list;
+
     }
 }

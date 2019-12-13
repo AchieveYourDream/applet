@@ -13,7 +13,7 @@
 		from
 		  sys_data_struct_node dsn
 		where dsn.struct_code = 'app_goods'
-		  and dsn.parent_node_code='G'
+		  and dsn.parent_node_code in ('G','M','W')
 		order by dsn.node_code,dsn.display_order
 
     </select>
@@ -28,7 +28,7 @@
 		  atn.node_name
 		from
 		  app_technology_node atn
-		order by atn.node_code
+		order atn.display_order
 
     </select>
 

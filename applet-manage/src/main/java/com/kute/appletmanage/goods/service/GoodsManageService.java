@@ -4,8 +4,10 @@ package com.kute.appletmanage.goods.service;
 import com.github.pagehelper.PageInfo;
 import com.kute.appletcore.entity.AppGoods;
 import com.kute.appletcore.vo.SelectVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsManageService {
 
@@ -62,7 +64,7 @@ public interface GoodsManageService {
      *
      * @throws Exception
      */
-    int updateGoodsStatus(String goodsId, String upOffShelf) throws Exception;
+    int updateGoodsStatus(@Param("goodsId")String goodsId, @Param("upOffShelf")String upOffShelf) throws Exception;
 
     /**
      * 根据商品ID获取商品详情
@@ -70,5 +72,10 @@ public interface GoodsManageService {
      * @throws Exception
      */
     AppGoods selectAppGoodsByPk(String goods_id) throws Exception;
+
+    /**
+     * - 获取面料根据大类
+     */
+    List<Map> getFabricByCategory(@Param("category")String category, @Param("search")String search);
 
 }

@@ -2,7 +2,9 @@ package com.kute.appletgoods.goods.dao;
 
 import com.kute.appletcore.entity.AppGoods;
 import com.kute.appletcore.entity.SysParameterDefine;
+import com.kute.appletcore.util.tree.TreeNodeVO;
 import com.kute.appletcore.vo.GoodsMenu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -13,7 +15,7 @@ import java.util.Map;
      * @param appid
      * @return
      */
-    List<AppGoods> selectAppGoodsListByCategory(String category);
+    List<AppGoods> selectAppGoodsListByCategory(@Param("category") String category ,@Param("subStyle")  String subStyle,@Param("flag") String flag);
 
 
     /**
@@ -35,6 +37,12 @@ import java.util.Map;
      *
      */
     List<AppGoods> selectAppMainShowGoods(Map map);
+
+
+     /**
+      * 获取商品菜单树
+      */
+     List<TreeNodeVO> getGoodsNodeTree() throws Exception;
     
 
 }

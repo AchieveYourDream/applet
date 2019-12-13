@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.AppLiningMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.AppLining" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="category" property="category" jdbcType="VARCHAR" />
+    <result column="lining_code" property="liningCode" jdbcType="VARCHAR" />
+    <result column="lining_name" property="liningName" jdbcType="VARCHAR" />
+    <result column="display_order" property="displayOrder" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from app_lining
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.AppLining" >
+    insert into app_lining (category, lining_code,
+      lining_name,display_order)
+    values ( #{category,jdbcType=VARCHAR}, #{liningCode,jdbcType=VARCHAR},
+      #{liningName,jdbcType=VARCHAR},#{displayOrder})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppLining" >
+    update app_lining
+    set category = #{category,jdbcType=VARCHAR},
+      lining_code = #{liningCode,jdbcType=VARCHAR},
+      lining_name = #{liningName,jdbcType=VARCHAR},
+      display_order = #{displayOrder,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultType="com.kute.appletcore.entity.AppLining" parameterType="java.lang.Integer" >
+      select id, category, lining_code, lining_name,node_name categoryName,al.display_order
+        from app_lining al
+        INNER JOIN sys_data_struct_node dsn  on  al.category=dsn.node_code and  dsn.struct_code='app_goods'
+         where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultType="com.kute.appletcore.entity.AppLining">
+    select id, category, lining_code, lining_name,display_order
+    from app_lining
+  </select>
+</mapper>

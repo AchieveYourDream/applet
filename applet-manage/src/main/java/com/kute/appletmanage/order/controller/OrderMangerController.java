@@ -40,6 +40,15 @@ public class OrderMangerController {
 
         return dataMap;
     }
+
+    /**
+     * 获取订单详情列表
+     */
+    @ApiOperation(value = "获取订单详情列表")
+    @RequestMapping(value = "getOrderList", method = RequestMethod.GET)
+    public ResponseResult getOrderDetailsList(String infoId) throws Exception {
+        return new ResponseResult("S","", orderMangerService.getOrderDetailsList(infoId));
+    }
     /**
      * 获取订单工艺和刺绣
      */

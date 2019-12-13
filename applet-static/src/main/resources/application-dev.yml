@@ -30,4 +30,5 @@ info:
  app.name: applet-static
  company.name: wangbin
 applet:
-  imgSavePath: /home/testImage/
+  imgSavePath: E:\images\
+#  imgSavePath: /home/testImage/

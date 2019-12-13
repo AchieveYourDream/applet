@@ -10,14 +10,13 @@ import java.util.List;
  * @Date
  **/
 public class OrderHeadVO extends OrderHead {
+    private List<OrderInfoVO> infolist;
 
-    private List<OrderLine> Linelist;
-
-    public List<OrderLine> getLinelist() {
-        return Linelist;
+    public List<OrderInfoVO> getInfolist() {
+        return infolist;
     }
 
-    public void setLinelist(List<OrderLine> linelist) {
-        Linelist = linelist;
+    public void setInfolist(List<OrderInfoVO> infolist) {
+        this.infolist = infolist;
     }
 }

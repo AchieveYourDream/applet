@@ -16,7 +16,7 @@ public class OrderDetailsVO  extends OrderHead {
      * @Date: 2019/11/20
      */
 
-    private Integer headId;
+    private Integer infoId;
 
     /**
      * 订单ID
@@ -173,12 +173,13 @@ public class OrderDetailsVO  extends OrderHead {
         this.clothName = clothName;
     }
 
-    public Integer getHeadId() {
-        return headId;
+
+    public Integer getInfoId() {
+        return infoId;
     }
 
-    public void setHeadId(Integer headId) {
-        this.headId = headId;
+    public void setInfoId(Integer infoId) {
+        this.infoId = infoId;
     }
 
     public Integer getLineId() {

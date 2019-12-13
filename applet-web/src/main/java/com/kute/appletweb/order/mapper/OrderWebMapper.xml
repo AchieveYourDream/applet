@@ -4,7 +4,7 @@
 
     <!--根据大类获取面料信息-->
     <select id="selectFabricListByCategory" resultType="com.kute.appletcore.entity.SysFabric" parameterType="String">
-          SELECT
+         SELECT
             id,
             CODE,
             category,
@@ -14,11 +14,36 @@
             yarn,
             flower,
             image_name,
-            CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'fabric_img'), image_path )  as imagePath
+            CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'fabric_img' ), image_path ) AS imagePath
         FROM
-            sys_fabric
-        WHERE category LIKE "%#{category}%"
-	AND STATUS ='N'
+            sys_fabric sf
+        WHERE
+            sf.CODE = ( SELECT fabric_name FROM app_goods WHERE goods_id = #{goodsId} )
+            AND STATUS = 'N' UNION
+        SELECT
+            id,
+            CODE,
+            category,
+            color,
+            component,
+            brand,
+            yarn,
+            flower,
+            image_name,
+            CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'fabric_img' ), image_path ) AS imagePath
+        FROM
+            sys_fabric w
+        WHERE
+            FIND_IN_SET(
+                w.CODE,(
+                SELECT
+                    fabric_list
+                FROM
+                    app_goods
+                WHERE
+                    goods_id = #{goodsId}
+                ))
+            AND STATUS = 'N'
   </select>
 
 
@@ -34,11 +59,11 @@
 
 
     <!--根据大类获取工艺节点-->
-    <select id="selectTechnologyTreeListByCategory" resultType="com.kute.appletcore.entity.AppTechnologyNode" parameterType="String">
+    <select id="selectTechnologyTreeListByCategory" resultType="com.kute.appletcore.vo.AppTechnologyNodeVO" parameterType="String">
           select id,
              node_code,
              node_name,
-             description,
+             description
         from app_technology_node
         where parent_node_code = #{category}
         and  enabled_flag='Y'
@@ -60,17 +85,11 @@
         from app_technology_attribute
 
         where node_code=#{category}
-        <if test="technologyArray != null and technologyArray !=''">
-            and factory_code not in (
-            select B_Technology_code from sys_technology_conflict
-            where B_Technology_code in(${technologyArray})
-            )
-        </if>
     </select>
 
 
     <!--根据大类获取刺绣位置-->
-    <select id="selectStitchWorkPositionByCategory" resultType="com.kute.appletcore.entity.AppStitchWorkPosition">
+    <select id="selectStitchWorkPositionByCategory" resultType="com.kute.appletcore.vo.AppStitchWorkVO">
         select id,
         position_name,
         CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'position_img'), position_img ) positionImg,
@@ -98,16 +117,28 @@
       create_date, order_type, sizecategory_id,
       order_price, order_reality_price,
       member_name, member_tel, province,
-      city, county, street
+      city, county, street,pay_type
       )
     values ( #{packagecode}, #{memberId},
-      #{createDate,jdbcType=TIMESTAMP}, #{orderType}, #{sizecategoryId},
+     now(), #{orderType}, #{sizecategoryId},
        #{orderPrice}, #{orderRealityPrice},
       #{memberName}, #{memberTel}, #{province},
-      #{city}, #{county}, #{street}
+      #{city}, #{county}, #{street},'DZF'
       )
   </insert>
 
+    <insert id="insertOrderInfo" useGeneratedKeys="true" keyProperty="infoId" parameterType="com.kute.appletcore.vo.OrderInfoVO">
+            insert into order_info ( cloth_name, cloth_id,
+              cloth_style, amount, price,
+              fabric_code, actual_amount, lining_type,
+              is_delete, packagecode, syscode,cloth_category,order_id
+              )
+            values (#{clothName}, #{clothId},
+              #{clothStyle}, #{amount}, #{price},
+              #{fabricCode}, #{actualAmount}, #{liningType},
+              #{isDelete}, #{packagecode,jdbcType=INTEGER}, #{syscode},#{cloth_category},#{orderId}
+              )
+        </insert>
 
     <!--插入订单行信息-->
     <insert id="insertOrderLine" useGeneratedKeys="true" keyProperty="lineId" parameterType="com.kute.appletcore.vo.OrderLine">
@@ -122,9 +153,6 @@
                 actual_amount,
                 size,
                 lining_type,
-                delivery_date,
-                delivery_code,
-                final_delivery_date,
                 STATUS,
                 warehouse_date,
                 is_delete,
@@ -133,18 +161,17 @@
                 start_production_date,
                 bonus_price,
                 gift_card_price,
-                head_id
+                info_id
             )
             VALUES
                 (#{clothId},#{clothName},
             #{clothStyle}, #{amount}, #{price},
-            #{fabricCode}, #{style}, #{actualAmount,jdbcType=DOUBLE},
+            #{fabricCode}, #{style}, #{actualAmount},
             #{size}, #{liningType},
-            #{deliveryDate},
-            #{deliveryCode}, #{finalDeliveryDate}, #{status},
+             #{status},
             #{warehouseDate},0,
             #{discountPrice}, #{priceRetail}, #{startProductionDate},
-            #{bonusPrice}, #{giftCardPrice},#{headId})
+            #{bonusPrice}, #{giftCardPrice},#{infoId})
     </insert>
 
 
@@ -170,6 +197,142 @@
             from dual
         </foreach>
     </insert>
+
+
+    <!-- 获取订单列表根据客户手机号 -->
+    <select id="getOrderListByMemberTel" resultType="com.kute.appletcore.vo.OrderListVO">
+        SELECT
+            oi.info_id,
+            oh.packagecode,
+            oi.actual_amount,
+            oi.price,
+            oi.fabric_code,
+            oi.amount,
+            oh.pay_status,
+            CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'goods_img'), ag.detail_model_one )   detailModelOne ,
+            CONCAT( sf.color, sf.component, sf.flower ) fabricName
+        FROM
+            order_info oi
+            INNER JOIN order_head oh ON oi.packagecode = oh.packagecode
+            LEFT JOIN app_goods ag ON oi.cloth_id = ag.goods_id
+            LEFT JOIN sys_fabric sf ON oi.fabric_code = sf.CODE
+        where  1=1
+        and  oh.member_id=#{memberTel}
+        <if test="orderState != null and orderState != ''">
+          and    oh.pay_status=#{orderState}
+        </if>
+        ORDER BY
+            oh.create_date DESC
+    </select>
+    <!--更改支付状态-->
+    <update id="updateOrderPayState" >
+            update order_head
+             set  pay_status='YZF'
+             and  pay_date=now()
+             and  pay_num=#{payMessage}
+             where packagecode=#{packagecode}
+    </update>
+
+
+     <!--检查工艺冲突-->
+    <select id="checkTechnologyConflict"   resultType="com.kute.appletcore.entity.SysTechnologyConflict">
+        SELECT * FROM sys_technology_conflict stc
+            where  stc.A_Technology_code=#{technologyCode}
+         and  stc.B_Technology_code in
+        <foreach item="code" collection="arrayList" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+
+
+    </select>
+
+
+  <!--获取要推送的订单-->
+    <select id="selectByPrimaryKey" resultType="com.kute.appletcore" parameterType="java.lang.Integer" >
+    select head_id, packagecode, member_id, create_date, order_type, sizecategory_id,
+    pay_status, order_price, order_reality_price, pay_type, pay_date, pay_price, member_name,
+    member_tel, province, city, county, street, pay_num
+    from order_head
+    where head_id = #{headId,jdbcType=INTEGER}
+  </select>
+
+
+
+    <!--根据infoid 获取订单详情-->
+    <select id="selectOrderDetailByInfoId" resultType="com.kute.appletcore.entity.OrderDetails">
+         select line_id, cloth_name, cloth_id, amount, price, fabric_code,
+            actual_amount, size, lining_type, info_id
+            from order_details
+        where info_id = #{infoId}
+    </select>
+
+    <!--根据Lineid 获取订单工艺详情-->
+    <select id="selectOrderTechnologyByLineId" resultType="com.kute.appletcore.entity.OrderTechnology">
+       SELECT
+            order_detail_id,
+            technology_id,
+            content,
+            price,
+            IF (ISNULL( ata.technology_style), 'A', ata.technology_style )   technology_type
+        FROM
+            order_technology ot
+            LEFT JOIN app_technology_attribute ata ON ot.technology_id = ata.factory_code
+        WHERE
+            ot.order_detail_id= #{lineId}
+    </select>
+
+
+    <!--根据lineId 获取订单刺绣详情-->
+    <select id="selectOrderStitchWorkByLineId" resultType="com.kute.appletcore.entity.OrderStitchWork">
+       select  *  from  order_stitch_work  os
+        where os.order_detail_id= #{lineId}
+    </select>
+    <!--根据lineId 获取订单尺寸详情-->
+    <select id="selectOrderSizeByLineId" resultType="com.kute.appletcore.entity.AppSizeSub">
+       SELECT
+          BLECODE,DEFAULTVALUE
+        FROM
+            app_size_sub asz
+            INNER JOIN app_size_main asm ON asm.ID = asz.SIZESTANDARDID
+        WHERE
+            asm.ORDENTYPE = '223134'
+            AND asm.SPECHEIGHT =(
+            SELECT
+                CONCAT( cn_code, body_type )
+            FROM
+                app_size
+            WHERE
+                size_id = #{sizeId}
+            )
+            AND asm.AREAID = '223201'
+	  AND asz.SINGLECLOTHINGID =#{category}
+	  order by  ass.SEQUENCENO
+    </select>
+
+
+     <!--订单更改推送状态-->
+    <update id="updateOrderPushState"   >
+    update order_info
+    set
+      push_factory_date = now(),
+      <if test="deliveryDate != null and deliveryDate != ''">
+          delivery_date =STR_TO_DATE(#{deliveryDate}, '%Y-%m-%d')
+      </if>
+      push_factory_state = #{pushFactoryState},
+      push_factory_message = #{pushFactoryMessage}
+
+
+    where info_id = #{infoId}
+  </update>
+
+    <!--根据商品ID获取商品详情-->
+    <select id="selectGoodsInfoByGoodsId" resultType="com.kute.appletcore.entity.AppGoods">
+    select GOODS_ID, DELETE_FLAG, CREATE_DATE, GOODS_DESCRIPTION, GOODS_NAME, IS_HOT,
+    IS_NEW_PRODUCT, UP_OFF_SHELF, GOODS_NAME_EN, STYLE_TYPE, SUB_STYLE, GOODS_SELL_PRICE,
+    DESIGNER_ID, IS_SUIT, CUSTOM_FLAG, APP_INDEX_SHOW,FABRIC_NAME,XF_PRICE,XK_PRICE,MJ_PRICE,LINING_TYPE
+    from APP_GOODS
+    where GOODS_ID=#{goodsId}
+  </select>
 
 
 </mapper>

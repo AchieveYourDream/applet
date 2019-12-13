@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.OrderHead" >
     <id column="head_id" property="headId" jdbcType="INTEGER" />
     <result column="packagecode" property="packagecode" jdbcType="VARCHAR" />
-    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="member_id" property="memberId" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="order_type" property="orderType" jdbcType="INTEGER" />
     <result column="sizecategory_id" property="sizecategoryId" jdbcType="VARCHAR" />
@@ -32,20 +32,20 @@
       pay_status, order_price, order_reality_price, 
       pay_type, pay_date, pay_price, 
       member_name, member_tel, province, 
-      city, county, street,pay_num
-      )
-    values (#{headId,jdbcType=INTEGER}, #{packagecode,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
+      city, county, street, 
+      pay_num)
+    values (#{headId,jdbcType=INTEGER}, #{packagecode,jdbcType=VARCHAR}, #{memberId,jdbcType=VARCHAR}, 
       #{createDate,jdbcType=TIMESTAMP}, #{orderType,jdbcType=INTEGER}, #{sizecategoryId,jdbcType=VARCHAR}, 
       #{payStatus,jdbcType=VARCHAR}, #{orderPrice,jdbcType=DECIMAL}, #{orderRealityPrice,jdbcType=DECIMAL}, 
       #{payType,jdbcType=VARCHAR}, #{payDate,jdbcType=TIMESTAMP}, #{payPrice,jdbcType=DECIMAL}, 
       #{memberName,jdbcType=VARCHAR}, #{memberTel,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
-      #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR},#{payNum}
-      )
+      #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, 
+      #{payNum,jdbcType=VARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.OrderHead" >
     update order_head
     set packagecode = #{packagecode,jdbcType=VARCHAR},
-      member_id = #{memberId,jdbcType=INTEGER},
+      member_id = #{memberId,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       order_type = #{orderType,jdbcType=INTEGER},
       sizecategory_id = #{sizecategoryId,jdbcType=VARCHAR},
@@ -61,20 +61,20 @@
       city = #{city,jdbcType=VARCHAR},
       county = #{county,jdbcType=VARCHAR},
       street = #{street,jdbcType=VARCHAR},
-      pay_num=#{payNum}
+      pay_num = #{payNum,jdbcType=VARCHAR}
     where head_id = #{headId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select head_id, packagecode, member_id, create_date, order_type, sizecategory_id, 
     pay_status, order_price, order_reality_price, pay_type, pay_date, pay_price, member_name, 
-    member_tel, province, city, county, street,pay_num
+    member_tel, province, city, county, street, pay_num
     from order_head
     where head_id = #{headId,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select head_id, packagecode, member_id, create_date, order_type, sizecategory_id, 
     pay_status, order_price, order_reality_price, pay_type, pay_date, pay_price, member_name, 
-    member_tel, province, city, county, street,pay_num
+    member_tel, province, city, county, street, pay_num
     from order_head
   </select>
 </mapper>

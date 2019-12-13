@@ -50,15 +50,15 @@ public class GeneratorJSONUtil {
 		fw.close();
 	}
 	
-//	public static void main(String[] args) {
-//		try {
-//
-//			String pkg = "com.kute.appletcore.entity.";
-//			String cla = "AppGoods";
-//			GeneratorJSONUtil.general(pkg + cla);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
+	public static void main(String[] args) {
+		try {
+
+			String pkg = "com.kute.appletcore.entity.";
+			String cla = "AppLining";
+			GeneratorJSONUtil.general(pkg + cla);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

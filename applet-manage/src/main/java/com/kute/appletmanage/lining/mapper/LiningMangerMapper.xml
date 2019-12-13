@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kute.appletmanage.lining.dao.LiningMangerMapper">
+
+    <!-- 获取衬类型列表 -->
+    <select id="getLiningList" resultType="com.kute.appletcore.entity.AppLining">
+        select id, category, lining_code, lining_name,node_name categoryName,al.display_order
+        from app_lining al
+        INNER JOIN sys_data_struct_node dsn on al.category=dsn.node_code and dsn.struct_code='app_goods'
+        where 1=1
+        <if test="_parameter != null and _parameter !=''">
+            and ( lining_name Like '%${_parameter}%' or lining_name Like '%${node_name}%')
+        </if>
+        order by category,al.display_order
+    </select>
+
+    <!-- 根据衬类型名获取衬类型信息 -->
+    <select id="getLiningInfoByLiningCode" resultType="com.kute.appletcore.entity.AppLining">
+            select id, category, lining_code, lining_name,display_order
+            from app_lining al
+             where category = #{category,jdbcType=INTEGER}
+            and lining_code = #{liningCode}
+    </select>
+
+    <!-- 根据品类获取衬类型 -->
+    <select id="getLiningListByCategory" resultType="java.util.Map">
+            select  lining_code, lining_name
+            from app_lining al
+             where category = #{category}
+             order by display_order
+    </select>
+
+</mapper>

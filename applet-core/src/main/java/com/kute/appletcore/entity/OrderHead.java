@@ -17,7 +17,7 @@ public class OrderHead {
     /**
      * 下单用户ID
      */
-    private Integer memberId;
+    private String memberId;
 
     /**
      * 创建时间
@@ -95,20 +95,9 @@ public class OrderHead {
     private String street;
 
     /**
-    * @Description: 支付流水号
-    * @Author: 王斌
-    * @Date: 2019/11/21
-    */
+     * 流水号
+     */
     private String payNum;
-
-
-    public String getPayNum() {
-        return payNum;
-    }
-
-    public void setPayNum(String payNum) {
-        this.payNum = payNum;
-    }
 
     /**
      * 主键
@@ -146,7 +135,7 @@ public class OrderHead {
      * 下单用户ID
      * @return member_id 下单用户ID
      */
-    public Integer getMemberId() {
+    public String getMemberId() {
         return memberId;
     }
 
@@ -154,7 +143,7 @@ public class OrderHead {
      * 下单用户ID
      * @param memberId 下单用户ID
      */
-    public void setMemberId(Integer memberId) {
+    public void setMemberId(String memberId) {
         this.memberId = memberId;
     }
 
@@ -396,5 +385,21 @@ public class OrderHead {
      */
     public void setStreet(String street) {
         this.street = street;
+    }
+
+    /**
+     * 流水号
+     * @return pay_num 流水号
+     */
+    public String getPayNum() {
+        return payNum;
+    }
+
+    /**
+     * 流水号
+     * @param payNum 流水号
+     */
+    public void setPayNum(String payNum) {
+        this.payNum = payNum;
     }
 }

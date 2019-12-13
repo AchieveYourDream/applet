@@ -42,7 +42,7 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:7001/eureka/
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.16.77.26:7001/eureka/
   #注册显示ip
     prefer-ip-address: true
 jwt:

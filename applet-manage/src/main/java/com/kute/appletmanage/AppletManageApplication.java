@@ -43,7 +43,6 @@ public class AppletManageApplication {
         LettuceConnectionFactory jedisConnectionFactory = (LettuceConnectionFactory) template.getConnectionFactory();
         jedisConnectionFactory.setDatabase(2);
         return template;
-
     }
 
     @Bean

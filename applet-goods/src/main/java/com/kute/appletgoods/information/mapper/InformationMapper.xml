@@ -8,7 +8,8 @@
       SELECT
             sdsn.node_code,
             dsna1.attribute_value chinese_name,
-            dsna2.attribute_value english_name
+            dsna2.attribute_value english_name,
+            dsna3.attribute_value img_path
         FROM
             sys_data_struct_node sdsn
             LEFT JOIN sys_data_struct_node_attribute dsna1 ON sdsn.struct_code = dsna1.struct_code
@@ -17,6 +18,9 @@
             LEFT JOIN sys_data_struct_node_attribute dsna2 ON sdsn.struct_code = dsna2.struct_code
             AND dsna2.attribute_code = 'english_name'
             AND sdsn.node_code = dsna2.node_code
+             LEFT JOIN sys_data_struct_node_attribute dsna3 ON sdsn.struct_code = dsna3.struct_code
+            AND dsna3.attribute_code = 'img_path'
+            AND sdsn.node_code = dsna3.node_code
         WHERE
             sdsn.struct_code = 'app_information'
             AND enabled_flag ='Y'

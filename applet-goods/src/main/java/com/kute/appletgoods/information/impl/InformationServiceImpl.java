@@ -31,9 +31,9 @@ public class InformationServiceImpl  implements InformationService {
     public ResponseResult selectAppInformationList( ) throws Exception{
        ResponseResult result=new  ResponseResult();
         List<InformationVO> list = informationMapper.selectAppInformationList();
-            for(InformationVO vo:list) {
-                vo.setList(informationMapper.selectAllByUseModule(vo.getNodeCode()));
-            }
+//            for(InformationVO vo:list) {
+//                vo.setList(informationMapper.selectAllByUseModule(vo.getNodeCode()));
+//            }
        result.setCode(EnumResultType.SUCCESS.toString());
        result.setData(list);
          return result;

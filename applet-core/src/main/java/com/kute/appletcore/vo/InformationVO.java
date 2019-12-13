@@ -10,6 +10,15 @@ public class InformationVO {
     private String englishName;
    private List<AppInformation> list;
     private String nodeCode;
+    private String imgPath;
+
+    public String getImgPath() {
+        return imgPath;
+    }
+
+    public void setImgPath(String imgPath) {
+        this.imgPath = imgPath;
+    }
 
     public String getChineseName() {
         return chineseName;

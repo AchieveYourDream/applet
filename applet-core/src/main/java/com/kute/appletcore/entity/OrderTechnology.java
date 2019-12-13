@@ -42,6 +42,22 @@ public class OrderTechnology {
     private BigDecimal price;
 
 
+    /**
+    * @Description: 工艺类型
+    * @Author: 王斌
+    * @Date: 2019/12/13
+    */
+
+    private String technologyType;
+
+    public String getTechnologyType() {
+        return technologyType;
+    }
+
+    public void setTechnologyType(String technologyType) {
+        this.technologyType = technologyType;
+    }
+
     public String getTechnologyName() {
         return technologyName;
     }

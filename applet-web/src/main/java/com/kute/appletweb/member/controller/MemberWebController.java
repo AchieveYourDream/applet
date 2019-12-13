@@ -32,7 +32,7 @@ public class MemberWebController {
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public ResponseResult login(@RequestBody  Map<String,String >  param ) throws Exception {
 		ResponseResult result =null;
-		result = memberWebService.login(param.get("username"), param.get("verificationCode"));
+		result = memberWebService.login(param.get("username"), param.get("verificationCode"),param.get("code"));
 
 		return result;
 	}

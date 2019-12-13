@@ -6,6 +6,7 @@
     <result column="order_detail_id" property="orderDetailId" jdbcType="INTEGER" />
     <result column="technology_id" property="technologyId" jdbcType="INTEGER" />
     <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="technology_type" property="technologyType" jdbcType="VARCHAR" />
     <result column="price" property="price" jdbcType="DECIMAL" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -14,25 +15,26 @@
   </delete>
   <insert id="insert" parameterType="com.kute.appletcore.entity.OrderTechnology" >
     insert into order_technology (id, order_detail_id, technology_id, 
-      content, price)
+      content, price,technology_type)
     values (#{id,jdbcType=INTEGER}, #{orderDetailId,jdbcType=INTEGER}, #{technologyId,jdbcType=INTEGER}, 
-      #{content,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL})
+      #{content,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL},#{technologyType})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.OrderTechnology" >
     update order_technology
     set order_detail_id = #{orderDetailId,jdbcType=INTEGER},
       technology_id = #{technologyId,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
+      technology_type = #{technologyType,jdbcType=VARCHAR},
       price = #{price,jdbcType=DECIMAL}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select id, order_detail_id, technology_id, content, price
+    select id, order_detail_id, technology_id, content, price,technology_type
     from order_technology
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
-    select id, order_detail_id, technology_id, content, price
+    select id, order_detail_id, technology_id, content, price,technology_type
     from order_technology
   </select>
 </mapper>

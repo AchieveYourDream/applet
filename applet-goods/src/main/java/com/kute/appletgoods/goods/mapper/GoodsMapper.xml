@@ -2,25 +2,54 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kute.appletgoods.goods.dao.GoodsMapper">
 
+
+		<!--获取商品主品类下拉选 -->
+		<select id="getMainSelectInfo"  resultType="com.kute.appletcore.vo.GoodsMenu">
+			select s.node_code code ,s.node_name name   from sys_data_struct_node s
+			where s.struct_code='app_goods'
+			and s.parent_node_code in ('M','W')
+			and s.enabled_flag='Y'
+			 order  by   s.display_order
+		</select>
+
     <!--获取小程序商品列表 根据品类-->
-    <select id="selectAppGoodsListByCategory"  parameterType="string" resultType="com.kute.appletcore.entity.AppGoods">
-        select  GOODS_ID,GOODS_NAME,GOODS_NAME_EN,GOODS_SELL_PRICE,(select  s.parameter_value  from sys_parameter_config s
-            where  s.parameter_code='goods_img')||DETAIL_MODEL_ONE DETAIL_MODEL_ONE, DETAILS_INTRO_URL,fabric_name
+    <select id="selectAppGoodsListByCategory"  resultType="com.kute.appletcore.entity.AppGoods">
+        select  GOODS_ID,GOODS_NAME,GOODS_NAME_EN,GOODS_SELL_PRICE,CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img') ,DETAIL_MODEL_ONE)  DETAIL_MODEL_ONE,
+         DETAILS_INTRO_URL,fabric_name,custom_flag
         from app_goods s
-       where s.main_style=#{value}
+       where s.main_style=#{category}
         and s.up_off_shelf='Y'
         and s.delete_flag='N'
+		and s.custom_flag=#{flag}
+        <if test="subStyle != null and subStyle != ''">
+			and  sub_style=#{subStyle}
+		</if>
         order by s.app_index_order
     </select>
 
-    <!--获取商品主品类下拉选 -->
-    <select id="getMainSelectInfo"  resultType="com.kute.appletcore.vo.GoodsMenu">
-		select s.node_code code ,s.node_name name   from sys_data_struct_node s
-		where s.struct_code='app_goods'
-		and s.parent_node_code='G'
-		and s.enabled_flag='Y'
-		 order  by   s.display_order
-		</select>
+	<!--获取商品菜单树-->
+	<select id="getGoodsNodeTree"  resultType="com.kute.appletcore.util.tree.TreeNodeVO">
+		SELECT
+			dsn.node_code,
+			dsn.parent_node_code,
+			dsn.node_name,
+		IF
+			(
+				ISNULL( sna.attribute_value ),
+				'',
+			CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'information_img' ), sna.attribute_value )) nodeUrl
+		FROM
+			sys_data_struct_node dsn
+			LEFT JOIN sys_data_struct_node_attribute sna ON sna.attribute_code = 'url'
+			AND sna.node_code = dsn.node_code
+			AND sna.struct_code = dsn.struct_code
+		WHERE
+			dsn.struct_code = 'app_goods'
+		ORDER BY
+			dsn.display_order,
+			node_code
+
+    </select>
 
 
 	<!--获取首页APP显示品类及数量-->
@@ -47,9 +76,10 @@
 		GOODS_NAME,
 		GOODS_NAME_EN,
 		GOODS_SELL_PRICE,
-		CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'fabric_img'), DETAIL_MODEL_ONE )   detailModelOne,
+		CONCAT((SELECT parameter_value FROM sys_parameter_config  WHERE parameter_code = 'goods_img'), DETAIL_MODEL_ONE )   detailModelOne,
 		DETAILS_INTRO_URL,
-		fabric_name
+		fabric_name,
+		custom_flag
 		from app_goods s
 		where 1 = 1
 		and s.up_off_shelf ='Y'

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kute.appletcore.dao.OrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.kute.appletcore.entity.OrderInfo" >
+    <id column="info_id" property="infoId" jdbcType="INTEGER" />
+    <result column="cloth_name" property="clothName" jdbcType="VARCHAR" />
+    <result column="cloth_id" property="clothId" jdbcType="VARCHAR" />
+    <result column="cloth_style" property="clothStyle" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="fabric_code" property="fabricCode" jdbcType="VARCHAR" />
+    <result column="actual_amount" property="actualAmount" jdbcType="DOUBLE" />
+    <result column="lining_type" property="liningType" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="VARCHAR" />
+    <result column="packagecode" property="packagecode" jdbcType="VARCHAR" />
+    <result column="syscode" property="syscode" jdbcType="VARCHAR" />
+    <result column="push_factory_date" property="pushFactoryDate" jdbcType="TIMESTAMP" />
+    <result column="push_factory_state" property="pushFactoryState" jdbcType="VARCHAR" />
+    <result column="push_factory_message" property="pushFactoryMessage" jdbcType="VARCHAR" />
+    <result column="start_production_date" property="startProductionDate" jdbcType="TIMESTAMP" />
+    <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+    <result column="delivery_date" property="deliveryDate" jdbcType="TIMESTAMP" />
+    <result column="delivery_code" property="deliveryCode" jdbcType="VARCHAR" />
+    <result column="warehouse_date" property="warehouseDate" jdbcType="VARCHAR" />
+    <result column="final_delivery_date" property="finalDeliveryDate" jdbcType="TIMESTAMP" />
+    <result column="bonus_price" property="bonusPrice" jdbcType="DECIMAL" />
+    <result column="gift_card_price" property="giftCardPrice" jdbcType="DECIMAL" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_info
+    where info_id = #{infoId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kute.appletcore.entity.OrderInfo" >
+    insert into order_info (info_id, cloth_name, cloth_id, 
+      cloth_style, amount, price, 
+      fabric_code, actual_amount, lining_type, 
+      is_delete, packagecode, syscode, 
+      push_factory_date, push_factory_state, push_factory_message, 
+      start_production_date, order_id, delivery_date, 
+      delivery_code, warehouse_date, final_delivery_date, 
+      bonus_price, gift_card_price)
+    values (#{infoId,jdbcType=INTEGER}, #{clothName,jdbcType=VARCHAR}, #{clothId,jdbcType=VARCHAR}, 
+      #{clothStyle,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{price,jdbcType=DECIMAL}, 
+      #{fabricCode,jdbcType=VARCHAR}, #{actualAmount,jdbcType=DOUBLE}, #{liningType,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=VARCHAR}, #{packagecode,jdbcType=VARCHAR}, #{syscode,jdbcType=VARCHAR}, 
+      #{pushFactoryDate,jdbcType=TIMESTAMP}, #{pushFactoryState,jdbcType=VARCHAR}, #{pushFactoryMessage,jdbcType=VARCHAR}, 
+      #{startProductionDate,jdbcType=TIMESTAMP}, #{orderId,jdbcType=VARCHAR}, #{deliveryDate,jdbcType=TIMESTAMP}, 
+      #{deliveryCode,jdbcType=VARCHAR}, #{warehouseDate,jdbcType=VARCHAR}, #{finalDeliveryDate,jdbcType=TIMESTAMP}, 
+      #{bonusPrice,jdbcType=DECIMAL}, #{giftCardPrice,jdbcType=DECIMAL})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.OrderInfo" >
+    update order_info
+    set cloth_name = #{clothName,jdbcType=VARCHAR},
+      cloth_id = #{clothId,jdbcType=VARCHAR},
+      cloth_style = #{clothStyle,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      price = #{price,jdbcType=DECIMAL},
+      fabric_code = #{fabricCode,jdbcType=VARCHAR},
+      actual_amount = #{actualAmount,jdbcType=DOUBLE},
+      lining_type = #{liningType,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=VARCHAR},
+      packagecode = #{packagecode,jdbcType=VARCHAR},
+      syscode = #{syscode,jdbcType=VARCHAR},
+      push_factory_date = #{pushFactoryDate,jdbcType=TIMESTAMP},
+      push_factory_state = #{pushFactoryState,jdbcType=VARCHAR},
+      push_factory_message = #{pushFactoryMessage,jdbcType=VARCHAR},
+      start_production_date = #{startProductionDate,jdbcType=TIMESTAMP},
+      order_id = #{orderId,jdbcType=VARCHAR},
+      delivery_date = #{deliveryDate,jdbcType=TIMESTAMP},
+      delivery_code = #{deliveryCode,jdbcType=VARCHAR},
+      warehouse_date = #{warehouseDate,jdbcType=VARCHAR},
+      final_delivery_date = #{finalDeliveryDate,jdbcType=TIMESTAMP},
+      bonus_price = #{bonusPrice,jdbcType=DECIMAL},
+      gift_card_price = #{giftCardPrice,jdbcType=DECIMAL}
+    where info_id = #{infoId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select info_id, cloth_name, cloth_id, cloth_style, amount, price, fabric_code, actual_amount, 
+    lining_type, is_delete, packagecode, syscode, push_factory_date, push_factory_state, 
+    push_factory_message, start_production_date, order_id, delivery_date, delivery_code, 
+    warehouse_date, final_delivery_date, bonus_price, gift_card_price
+    from order_info
+    where info_id = #{infoId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select info_id, cloth_name, cloth_id, cloth_style, amount, price, fabric_code, actual_amount, 
+    lining_type, is_delete, packagecode, syscode, push_factory_date, push_factory_state, 
+    push_factory_message, start_production_date, order_id, delivery_date, delivery_code, 
+    warehouse_date, final_delivery_date, bonus_price, gift_card_price
+    from order_info
+  </select>
+</mapper>

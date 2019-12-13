@@ -6,7 +6,7 @@
 		<select id="getMainSelectInfo"  resultType="com.kute.appletcore.vo.SelectVO">
 		select s.node_code code ,s.node_name name from sys_data_struct_node s
 		where s.struct_code='app_goods'
-		and s.parent_node_code='G'
+		and s.parent_node_code in ('M','W')
 		and s.enabled_flag='Y'
 		order by  s.display_order
 		</select>
@@ -50,10 +50,12 @@
 		 ,xk_price
 		 ,mj_price
 		 ,lining_type
+		 ,al.lining_name
 		 from app_goods ag
 		 LEFT JOIN sys_data_struct_node dsn1  on ag.main_style=dsn1.node_code and dsn1.struct_code='app_goods'
 		 LEFT JOIN sys_data_struct_node dsn2  on  ag.sub_style=dsn2.node_code and dsn2.struct_code='app_goods'
 		 LEFT JOIN sys_data_dict_item ddi     on  ag.style_type=ddi.item_code and  ddi.type_code='app_goods_style'
+		 LEFT JOIN app_lining al     on  al.category=ag.main_style and al.lining_code=ag.lining_type
 		 where 1=1
 		 and delete_flag='N'
 	         <if test="_parameter != null and _parameter !=''">  
@@ -79,5 +81,26 @@
 	         where 1 = 1
 	           and goods_id = #{goodsId}
 	 </update>
+	<!--获取面料根据大类-->
+	<select id="getFabricByCategory" resultType="java.util.Map">
+		SELECT code id ,code text FROM `sys_fabric`
+		where category=#{category}
+		and code Like '%${search}%'
+		limit 0,10
+	</select>
+
+	<!--根据商品ID获取商品详情-->
+	<select id="selectAppGoodsById"  resultType="com.kute.appletcore.entity.AppGoods" >
+    select GOODS_ID, DELETE_FLAG, CREATE_DATE, GOODS_DESCRIPTION, GOODS_NAME, IS_HOT,
+    IS_NEW_PRODUCT, UP_OFF_SHELF, GOODS_NAME_EN, STYLE_TYPE, SUB_STYLE, GOODS_SELL_PRICE,
+    DESIGNER_ID, IS_SUIT, CUSTOM_FLAG, APP_INDEX_SHOW, APP_INDEX_ORDER, DETAILS_INTRO_URL,
+    DETAIL_MODEL_ONE, DETAIL_MODEL_TWO, DETAIL_MODEL_THREE, GOODS_IMAGE1, GOODS_IMAGE2,
+    GOODS_IMAGE3, GOODS_IMAGE4, GOODS_DETAIL_IMAGE1, GOODS_DETAIL_IMAGE2, GOODS_DETAIL_IMAGE3,
+    GOODS_DETAIL_IMAGE4, GOODS_DETAIL_IMAGE5, GOODS_DETAIL_IMAGE6, GOODS_DETAIL_IMAGE7,
+    GOODS_DETAIL_IMAGE8, GOODS_DETAIL_IMAGE9, GOODS_DETAIL_IMAGE10, NEED_DETAIL_GENERATE,
+    DELETE_DATE, MAIN_STYLE, FABRIC_NAME,XF_PRICE,XK_PRICE,MJ_PRICE,LINING_TYPE,FABRIC_LIST
+    from APP_GOODS
+    where GOODS_ID=#{goodsId}
+	</select>
 	
 </mapper>

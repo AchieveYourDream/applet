@@ -86,7 +86,25 @@ public class AppGoods {
     private BigDecimal xkPrice;
     private BigDecimal mjPrice;
     private String liningType;
+    private String liningName;
 
+    private String fabricList;
+
+    public String getLiningName() {
+        return liningName;
+    }
+
+    public void setLiningName(String liningName) {
+        this.liningName = liningName;
+    }
+
+    public String getFabricList() {
+        return fabricList;
+    }
+
+    public void setFabricList(String fabricList) {
+        this.fabricList = fabricList;
+    }
 
     public BigDecimal getGoodsSellPrice() {
         return goodsSellPrice;

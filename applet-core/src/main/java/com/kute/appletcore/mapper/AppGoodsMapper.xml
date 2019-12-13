@@ -19,7 +19,7 @@
       GOODS_DETAIL_IMAGE6, GOODS_DETAIL_IMAGE7, GOODS_DETAIL_IMAGE8, 
       GOODS_DETAIL_IMAGE9, GOODS_DETAIL_IMAGE10, 
       NEED_DETAIL_GENERATE, MAIN_STYLE,
-      FABRIC_NAME,XF_PRICE,XK_PRICE,MJ_PRICE,LINING_TYPE)
+      FABRIC_NAME,XF_PRICE,XK_PRICE,MJ_PRICE,LINING_TYPE,FABRIC_LIST)
     values ( 'N', now(),
       #{goodsDescription}, #{goodsName}, #{isHot}, 
       #{isNewProduct}, #{upOffShelf}, #{goodsNameEn},
@@ -33,7 +33,7 @@
       #{goodsDetailImage6}, #{goodsDetailImage7}, #{goodsDetailImage8}, 
       #{goodsDetailImage9}, #{goodsDetailImage10}, 
       #{needDetailGenerate},#{mainStyle},
-      #{fabricName},#{xfPrice},#{xkPrice},#{mjPrice},#{liningType})
+      #{fabricName},#{xfPrice},#{xkPrice},#{mjPrice},#{liningType},#{fabricList})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppGoods" >
     update APP_GOODS
@@ -76,20 +76,88 @@
       XF_PRICE = #{xkPrice},
       XK_PRICE = #{xkPrice},
       MJ_PRICE = #{mjPrice},
-      LINING_TYPE = #{liningType}
+      LINING_TYPE = #{liningType},
+      FABRIC_LIST=#{fabricList}
     where GOODS_ID = #{goodsId}
   </update>
   <select id="selectByPrimaryKey" resultType="com.kute.appletcore.entity.AppGoods"  >
-    select GOODS_ID, DELETE_FLAG, CREATE_DATE, GOODS_DESCRIPTION, GOODS_NAME, IS_HOT, 
-    IS_NEW_PRODUCT, UP_OFF_SHELF, GOODS_NAME_EN, STYLE_TYPE, SUB_STYLE, GOODS_SELL_PRICE,
-    DESIGNER_ID, IS_SUIT, CUSTOM_FLAG, APP_INDEX_SHOW, APP_INDEX_ORDER, DETAILS_INTRO_URL, 
-    DETAIL_MODEL_ONE, DETAIL_MODEL_TWO, DETAIL_MODEL_THREE, GOODS_IMAGE1, GOODS_IMAGE2, 
-    GOODS_IMAGE3, GOODS_IMAGE4, GOODS_DETAIL_IMAGE1, GOODS_DETAIL_IMAGE2, GOODS_DETAIL_IMAGE3, 
-    GOODS_DETAIL_IMAGE4, GOODS_DETAIL_IMAGE5, GOODS_DETAIL_IMAGE6, GOODS_DETAIL_IMAGE7, 
-    GOODS_DETAIL_IMAGE8, GOODS_DETAIL_IMAGE9, GOODS_DETAIL_IMAGE10, NEED_DETAIL_GENERATE, 
-    DELETE_DATE, MAIN_STYLE, FABRIC_NAME,XF_PRICE,XK_PRICE,MJ_PRICE,LINING_TYPE
-    from APP_GOODS
-    where GOODS_ID = #{goodsId}
+   SELECT
+	GOODS_ID,
+	DELETE_FLAG,
+	CREATE_DATE,
+	GOODS_DESCRIPTION,
+	GOODS_NAME,
+	IS_HOT,
+	IS_NEW_PRODUCT,
+	UP_OFF_SHELF,
+	GOODS_NAME_EN,
+	STYLE_TYPE,
+	SUB_STYLE,
+	GOODS_SELL_PRICE,
+	DESIGNER_ID,
+	IS_SUIT,
+	CUSTOM_FLAG,
+	APP_INDEX_SHOW,
+	APP_INDEX_ORDER,
+	DETAILS_INTRO_URL,
+IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	 CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), DETAIL_MODEL_ONE )) DETAIL_MODEL_ONE,
+IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), GOODS_IMAGE1 )) GOODS_IMAGE1,
+IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), GOODS_DETAIL_IMAGE1 )) GOODS_DETAIL_IMAGE1,
+IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), GOODS_DETAIL_IMAGE2 )) GOODS_DETAIL_IMAGE2,
+IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), GOODS_DETAIL_IMAGE3 )) GOODS_DETAIL_IMAGE3,
+IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), GOODS_DETAIL_IMAGE4 )) GOODS_DETAIL_IMAGE4,
+IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), GOODS_DETAIL_IMAGE5 )) GOODS_DETAIL_IMAGE6,
+	IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), GOODS_DETAIL_IMAGE7 )) GOODS_DETAIL_IMAGE7,
+	IF
+	(
+		ISNULL( DETAIL_MODEL_ONE ),
+		'',
+	CONCAT(( SELECT parameter_value FROM sys_parameter_config WHERE parameter_code = 'goods_img' ), GOODS_DETAIL_IMAGE8 )) GOODS_DETAIL_IMAGE8,
+	NEED_DETAIL_GENERATE,
+	DELETE_DATE,
+	MAIN_STYLE,
+	FABRIC_NAME,
+	XF_PRICE,
+	XK_PRICE,
+	MJ_PRICE,
+	LINING_TYPE,
+	FABRIC_LIST
+FROM
+	APP_GOODS
+WHERE
+	 GOODS_ID = #{goodsId}
   </select>
   <select id="selectAll" resultType="com.kute.appletcore.entity.AppGoods" >
     select GOODS_ID, DELETE_FLAG, CREATE_DATE, GOODS_DESCRIPTION, GOODS_NAME, IS_HOT, 

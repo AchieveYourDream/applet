@@ -6,10 +6,9 @@
     <select id="getOrderList" resultType="com.kute.appletcore.vo.OrderDetailsVO">
         SELECT
         oh.head_id,
-        packagecode,
+        oh.packagecode,
         member_id,
         create_date,
-        order_type,
         sizecategory_id,
         ddi2.item_name as payStatus,
         order_price,
@@ -24,41 +23,29 @@
         city,
         county,
         street,
-        line_id,
-        order_id,
-        cloth_id,
-        cloth_name,
-        ddi.item_name as clothStyle,
-        amount,
-        price,
-        fabric_code,
-        style,
-        actual_amount,
-        size,
-        lining_type,
-        process_price,
-        process_actual_price,
-        technology_code,
+        oi.info_id,
+        oi.order_id,
+        oi.cloth_id,
+        oi.cloth_name,
+        oi.amount,
+        oi.price,
+        oi.fabric_code,
+        oi.actual_amount,
+        oi.lining_type,
         delivery_date,
         delivery_code,
         final_delivery_date,
         ddi1.item_name as status,
-        syscode,
+        oi.syscode,
         warehouse_date,
-        is_delete,
-        discount_price,
-        price_retail,
+        oi.is_delete,
         start_production_date,
         push_factory_date,
         push_factory_state,
-        push_factory_message,
-        bonus_price,
-        gift_card_price
-        FROM
-        order_details od
-        LEFT JOIN order_head oh ON od.head_id = oh.packagecode
-        left join sys_data_dict_item ddi on od.cloth_style=ddi.item_code  and  ddi.type_code='app_goods_style'
-        left join sys_data_dict_item ddi1 on od.status=ddi1.item_code  and  ddi1.type_code='order_status'
+        push_factory_message
+        from  order_info oi
+        inner JOIN order_head oh ON oi.packagecode = oh.packagecode
+        left join sys_data_dict_item ddi1 on oi.status=ddi1.item_code  and  ddi1.type_code='order_status'
         left join sys_data_dict_item ddi2 on oh.pay_status=ddi2.item_code  and  ddi2.type_code='pay_status'
 
         <if test="search != null and search !=''">
@@ -67,6 +54,28 @@
         order by create_date desc
     </select>
 
+
+
+    <!--获取订单信息详情-->
+    <select id="getOrderDetailsList" resultType="com.kute.appletcore.entity.OrderDetails">
+            SELECT
+            line_id,
+            cloth_name,
+            cloth_id,
+            amount,
+            price,
+            fabric_code,
+            actual_amount,
+            size,
+            al.lining_name lining_type
+        FROM
+            order_details od
+            LEFT JOIN app_lining al ON cloth_id = al.category
+            AND lining_type = al.lining_code
+        WHERE
+            info_id = #{infoId}
+
+    </select>
 
     <!--根据订单ID获取订单工艺-->
        <select id="getOrderTechnologyListById" resultType="com.kute.appletcore.entity.OrderTechnology">

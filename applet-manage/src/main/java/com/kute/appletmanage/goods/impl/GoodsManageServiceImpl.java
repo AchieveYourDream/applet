@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -101,8 +102,15 @@ public class GoodsManageServiceImpl implements GoodsManageService {
      * @
      */
     public AppGoods selectAppGoodsByPk(String goodsId) {
-        return appGoodsMapper.selectByPrimaryKey(goodsId);
+        return goodsManageMapper.selectAppGoodsById(goodsId);
     }
 
+
+    /**
+     * - 获取面料根据大类
+     */
+    public List<Map> getFabricByCategory(String category,String search){
+        return  goodsManageMapper.getFabricByCategory(category,search);
+    }
 }
 

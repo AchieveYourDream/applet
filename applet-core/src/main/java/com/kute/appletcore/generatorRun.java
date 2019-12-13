@@ -1,6 +1,8 @@
 package com.kute.appletcore;
 
 
+import org.mybatis.generator.api.ShellRunner;
+
 /**
  * @Description: 用于生成带注释的实体类
  * @Author: 王斌
@@ -8,9 +10,9 @@ package com.kute.appletcore;
  */
 public class generatorRun {
 
-//    public static void main(String[] args) {
-//        args = new String[]{"-configfile", "E:\\IdeaWorkSpace\\applet\\applet-core\\src\\main\\resources\\mybatis\\generatorConfig.xml", "-overwrite"};
-//        ShellRunner.main(args);
-//
-//    }
+    public static void main(String[] args) {
+        args = new String[]{"-configfile", "E:\\IdeaWorkSpace\\applet\\applet-core\\src\\main\\resources\\mybatis\\generatorConfig.xml", "-overwrite"};
+        ShellRunner.main(args);
+
+    }
 }

@@ -7,3 +7,20 @@ eureka:
   instance:
   #注册名称
     instance-id: applet-web
+  #注册显示ip
+    prefer-ip-address: true
+info:
+ app.name: applet-web
+ company.name: wangbin
+wx:
+  appid: wxb8259763cc7c72b1
+  secret: e28202d54ce7cd3a52c737d33141b6e6
+  grant_type: client_credential
+  mchId:
+  payUrl:
+  key:
+  notify: https://172.16.77.26:9527/api/pay/notifyWeiXinPay
+
+bl:
+  pushFactory: http://172.16.77.105/rest/bxpp
+

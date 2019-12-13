@@ -40,7 +40,7 @@
       REFERRER_MOBILEPHONE, DELETE_STATUS, STORE_CODE, 
       CREATE_DATE, LAST_UPDATE_DATE, BIRTHDAY, 
       ATTRIBUTE2, ATTRIBUTE3, ATTRIBUTE4, 
-      ATTRIBUTE5)
+      ATTRIBUTE5,OPEN_ID)
     values (#{memberTel,jdbcType=VARCHAR}, #{memberSource,jdbcType=VARCHAR}, #{memberType,jdbcType=VARCHAR},
       #{memberLevel,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
       #{sex,jdbcType=VARCHAR}, #{height,jdbcType=VARCHAR}, #{weight,jdbcType=VARCHAR}, 
@@ -48,7 +48,7 @@
       #{referrerMobilephone,jdbcType=VARCHAR},'0', #{storeCode,jdbcType=VARCHAR},
       now(), now(), #{birthday,jdbcType=VARCHAR},
       #{attribute2,jdbcType=VARCHAR}, #{attribute3,jdbcType=VARCHAR}, #{attribute4,jdbcType=VARCHAR}, 
-      #{attribute5,jdbcType=VARCHAR})
+      #{attribute5,jdbcType=VARCHAR},#{openId} )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.kute.appletcore.entity.AppMember" >
     update APP_MEMBER

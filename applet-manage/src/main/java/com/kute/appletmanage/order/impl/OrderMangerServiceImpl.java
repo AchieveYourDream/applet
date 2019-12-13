@@ -2,6 +2,7 @@ package com.kute.appletmanage.order.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.kute.appletcore.entity.OrderDetails;
 import com.kute.appletcore.vo.OrderDetailsVO;
 import com.kute.appletcore.vo.ResponseResult;
 import com.kute.appletmanage.order.dao.OrderMangerMapper;
@@ -35,6 +36,13 @@ public class OrderMangerServiceImpl implements OrderMangerService {
         return new PageInfo<>(list);
     }
 
+
+    /**
+     * 获取订单详情列表
+     */
+   public  List<OrderDetails> getOrderDetailsList(String infoId) throws Exception{
+      return orderMangerMapper.getOrderDetailsList(infoId);
+    }
     /**
      * 获取订单工艺和刺绣
      */

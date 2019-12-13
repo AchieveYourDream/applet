@@ -9,7 +9,7 @@ public interface MemberWebService {
     /**
      * 登录
      */
-    public ResponseResult login(String  username,String verificationCode ) throws Exception;
+    public ResponseResult login(String  username,String verificationCode,String code) throws Exception;
 
     /**
      * 获取验证码

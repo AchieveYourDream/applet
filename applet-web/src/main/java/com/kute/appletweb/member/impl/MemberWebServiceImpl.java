@@ -10,6 +10,7 @@ import com.kute.appletcore.jwt.JWTUserDetails;
 import com.kute.appletcore.util.AccountValidatorUtil;
 import com.kute.appletcore.util.ApplicationConstant;
 import com.kute.appletcore.util.redis.RedisUtil;
+import com.kute.appletcore.util.weixin.WeChatUtil;
 import com.kute.appletcore.vo.ResponseResult;
 import com.kute.appletweb.member.dao.MemberWebMapper;
 import com.kute.appletweb.member.service.MemberWebService;
@@ -20,6 +21,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class MemberWebServiceImpl implements MemberWebService {
@@ -31,6 +33,12 @@ public class MemberWebServiceImpl implements MemberWebService {
 
     @Value("${jwt.expiration}")
     private String expiration;
+    //小程序appid
+    @Value("${wx.appid}")
+    private String wxAppId;
+    //小程序secret
+    @Value("${wx.secret}")
+    private String wxSecret;
     @Autowired
     MemberWebMapper memberWebMapper;
 
@@ -51,7 +59,7 @@ public class MemberWebServiceImpl implements MemberWebService {
     /**
      * 登录
      */
-    public ResponseResult login(String  username,String verificationCode ) throws Exception {
+    public ResponseResult login(String  username,String verificationCode,String code ) throws Exception {
         ResponseResult result = new ResponseResult();
         String smsv = redisUtil.get(username);
         if (smsv != null && smsv.equals(verificationCode)) {
@@ -61,6 +69,15 @@ public class MemberWebServiceImpl implements MemberWebService {
                     AppMember am = new AppMember();
                     am.setMemberTel(username);
                     am.setMemberSource("web");
+                    WeChatUtil wx=new WeChatUtil();
+                    Map<String,String> map=wx.getOpenId(code);
+                    if(map.get("code").equals("S")){
+                        am.setOpenId(map.get("info"));
+                    }else{
+                        result.setCode("W");
+                        result.setInfo(map.get("info"));
+                        return result;
+                    }
                     appMemberMapper.insert(am);
                 }
                 String access_token = JWTTokenUtil.generateToken(secret, expiration, new JWTUserDetails(username));

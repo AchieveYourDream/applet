@@ -13,15 +13,14 @@
     <!--将原来的默认收货地址设置为非默认-->
     <update id="updateAddressDefault" parameterType="String">
         update APP_CUS_ADDRESS
-        set IS_DEFAULT='N'
+        set IS_DEFAULT='0'
         where MEMBER_ID=#{value}
-        and IS_DEFAULT='Y'
     </update>
 
     <!--设置默认收货地址-->
     <update id="setAddressDefault" parameterType="String">
         update APP_CUS_ADDRESS
-        set IS_DEFAULT='Y'
+        set IS_DEFAULT='1'
         where id=#{value}
     </update>
 </mapper>

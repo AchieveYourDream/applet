@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 /**
  * 提供精确计算的工具类
  *
- * @author xiaqing
+ * @author 王斌
  * @date 2017/11/25.
  */
 public class DecimalUtil {

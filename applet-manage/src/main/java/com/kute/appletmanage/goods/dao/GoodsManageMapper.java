@@ -5,6 +5,7 @@ import com.kute.appletcore.vo.SelectVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GoodsManageMapper {
 
@@ -38,6 +39,12 @@ public interface GoodsManageMapper {
      * @throws Exception
      */
     int deleteGoodsById(String goodsId);
+    /**
+     * 删除商品
+     *
+     * @throws Exception
+     */
+    AppGoods selectAppGoodsById(String goodsId);
 
     /**
      * - 上架下架商品
@@ -45,6 +52,10 @@ public interface GoodsManageMapper {
      * @throws Exception
      */
     int updateGoodsStatus(@Param("goodsId") String goodsId,@Param("upOffShelf") String upOffShelf);
+    /**
+     * - 获取面料根据大类
+     */
+    List<Map> getFabricByCategory(@Param("category")String category,@Param("search")String search);
 
 
 }
